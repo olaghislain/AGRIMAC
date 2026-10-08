@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e0e3e1",
+                        "inverse-primary": "#83d89f",
+                        "on-tertiary-container": "#d9dcda",
+                        "surface-dim": "#dbd9d9",
+                        "primary-fixed": "#9ff5b9",
+                        "surface-variant": "#e4e2e2",
+                        "outline-variant": "#bec9be",
+                        "on-tertiary-fixed": "#181c1b",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#00210e",
+                        "inverse-surface": "#303030",
+                        "on-surface-variant": "#3f4941",
+                        "tertiary": "#454948",
+                        "on-secondary-container": "#5b6900",
+                        "on-primary-container": "#98edb2",
+                        "secondary": "#586400",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#414b00",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#bcd14a",
+                        "primary": "#00542d",
+                        "primary-container": "#106e3f",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container-low": "#f5f3f3",
+                        "secondary-container": "#d5ea60",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "surface-container": "#efeded",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#191e00",
+                        "primary-fixed-dim": "#83d89f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#00522c",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed": "#d8ed63",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "surface-tint": "#0d6c3e",
+                        "tertiary-container": "#5d6160",
+                        "on-surface": "#1b1c1c",
+                        "surface-bright": "#fbf9f8",
+                        "outline": "#6f7a70",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-desktop": "40px",
+                        "gutter": "24px",
+                        "container-padding-mobile": "16px",
+                        "section-gap": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #F4F7F5; } /* Minimalist corporate background as per guide */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="w-72 h-screen fixed left-0 top-0 shadow-sm dark:shadow-none bg-surface-container-lowest dark:bg-surface flex flex-col py-base z-50">
+<div class="px-6 mb-8 flex items-center justify-between mt-4">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">AGRIMAC</span>
+</div>
+<div class="px-6 mb-6 flex items-center gap-4">
+<img alt="Koffi Agbodan, Agriculteur" class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of an African farmer, confident expression, outdoors in a modern agricultural setting, bright natural light, crisp focus, sovereign minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtf9dBK5lfZ-I7mjnjA8nYQ55SHKiuUWVUWY-05q53BfEkDeE9aa_hc1dPyPILrZaxvzHN5GIBvL_wlbtcZE7Msi_uyP-KQf4x4TVLGiDqSMPILElsPZ3JPwb_rsHIS6J0XiY3lpE39Gz4G1qwIMpDmaI6s6BEr0Xo4292aPlPR-0ecQvKixRGnNDnaVXYfEKhMuE0ptrQwrMV8KwBkM6NMYj3QU95nDcnSToj07FPHxQhtJzeNoWe"/>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Koffi Agbodan</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Agriculteur</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">dashboard</span> <span class="font-label-sm text-label-sm">Tableau de bord</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">search</span> <span class="font-label-sm text-label-sm">Rechercher</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">assignment</span> <span class="font-label-sm text-label-sm">Mes demandes</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">forum</span> <span class="font-label-sm text-label-sm">Messagerie</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">payments</span> <span class="font-label-sm text-label-sm">Paiements</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">star</span> <span class="font-label-sm text-label-sm">Avis &amp; évaluations</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">favorite</span> <span class="font-label-sm text-label-sm">Favoris</span></a></li>
+<li><a class="flex items-center gap-3 bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-xl px-4 py-3 mx-2 scale-[0.98] transition-transform duration-200" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications</span> <span class="font-label-sm text-label-sm">Notifications</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">person</span> <span class="font-label-sm text-label-sm">Mon profil</span></a></li>
+<li><a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">settings</span> <span class="font-label-sm text-label-sm">Paramètres</span></a></li>
+</ul>
+</div>
+<div class="mt-auto px-4 mb-4">
+<button class="w-full flex justify-center items-center gap-2 bg-surface-container-low text-primary font-label-sm text-label-sm py-3 rounded-xl border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">swap_horiz</span> Mode simplifié
+            </button>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mt-2 hover:bg-surface-container transition-all duration-200 rounded-xl" href="#"><span class="material-symbols-outlined">support_agent</span> <span class="font-label-sm text-label-sm">Besoin d'aide ?</span></a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-72 flex-1 flex flex-col min-h-screen relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-container-desktop py-4 h-20 bg-transparent z-40 sticky top-0 backdrop-blur-md">
+<div>
+<!-- Empty div to push trailing actions to right as search is 'on_left' but not specified in UI detail, keeping layout balance -->
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-high rounded-full p-2 transition-colors focus:border-primary ring-1 ring-transparent focus:ring-primary"><span class="material-symbols-outlined">language</span></button>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">FR</span>
+</div>
+</header>
+<!-- Page Content -->
+<div class="px-container-desktop py-8 max-w-[1000px] mx-auto w-full">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background mb-2">Centre de Notifications</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Restez informé sur vos activités agricoles.</p>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-container flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">done_all</span> Tout marquer comme lu
+                </button>
+</div>
+<!-- Bento Grid Layout for Notifications -->
+<div class="space-y-section-gap">
+<!-- Today Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span> Aujourd'hui
+                    </h2>
+<div class="grid grid-cols-1 gap-4">
+<!-- Notification Card 1: Devis reçu (High Priority) -->
+<div class="bg-surface-container-lowest rounded-[24px] p-6 flex items-start gap-6 shadow-sm border border-surface-variant hover:shadow-md transition-shadow relative overflow-hidden group cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">request_quote</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-sm text-label-sm text-on-background text-base">Nouveau devis reçu</h3>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Il y a 2h</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-3">Tracteur AgriCorp a répondu à votre demande de location pour la Moissonneuse-Batteuse JD-X.</p>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm py-2 px-4 rounded-lg hover:bg-primary-container transition-colors inline-block">Consulter le devis</button>
+</div>
+<div class="w-2 h-2 rounded-full bg-error-container self-center"></div> <!-- Unread indicator -->
+</div>
+<!-- Notification Card 2: Paiement -->
+<div class="bg-surface-container-lowest rounded-[24px] p-6 flex items-start gap-6 shadow-sm border border-surface-variant hover:shadow-md transition-shadow group cursor-pointer opacity-80">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-sm text-label-sm text-on-background text-base">Paiement confirmé</h3>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">10:45</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Votre paiement de 450€ pour l'intervention de semence a été traité avec succès.</p>
+</div>
+</div>
+<!-- Notification Card 3: Message -->
+<div class="bg-surface-container-lowest rounded-[24px] p-6 flex items-start gap-6 shadow-sm border border-surface-variant hover:shadow-md transition-shadow relative overflow-hidden group cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-tertiary-container/10 flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-sm text-label-sm text-on-background text-base">Nouveau message</h3>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">08:12</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Jean Dupont (Technicien) : "Je serai sur votre parcelle nord vers 14h pour l'inspection."</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-error-container self-center"></div>
+</div>
+</div>
+</section>
+<!-- Yesterday Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-2 text-surface-variant">
+<span class="w-2 h-2 rounded-full bg-outline-variant inline-block"></span> Hier
+                    </h2>
+<div class="grid grid-cols-1 gap-4 opacity-75 hover:opacity-100 transition-opacity">
+<!-- Notification Card 4: Rappel -->
+<div class="bg-surface-container-lowest rounded-[24px] p-6 flex items-start gap-6 shadow-sm border border-surface-variant hover:shadow-md transition-shadow group cursor-pointer">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">event</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-sm text-label-sm text-on-background text-base">Rappel d'intervention</h3>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Hier, 18:00</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">N'oubliez pas l'intervention d'épandage prévue demain à 06:00 sur la parcelle B.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

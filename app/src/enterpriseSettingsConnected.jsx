@@ -1,0 +1,13 @@
+import React, { useEffect, useState } from 'react';
+import { Check, LoaderCircle, ShieldCheck } from 'lucide-react';
+import { api } from './api/client';
+import { notify } from './ui';
+
+export function EnterpriseSettingsConnected() {
+  const [settings, setSettings] = useState(null); const [error, setError] = useState(''); const [saving, setSaving] = useState(false);
+  useEffect(() => { api.get('/users/me/preferences').then(setSettings).catch(reason => setError(reason.message)); }, []);
+  const save = async () => { setSaving(true); try { await api.patch('/users/me/preferences', settings); notify('Paramètres enregistrés.'); } catch (reason) { notify(reason.message, 'error'); } finally { setSaving(false); } };
+  if (error) return <main className="enterprise-feature-page"><div className="feature-error-state"><b>Paramètres indisponibles</b><small>{error}</small></div></main>;
+  if (!settings) return <main className="enterprise-feature-page"><div className="feature-loading"><LoaderCircle className="spin" size={20} /> Chargement...</div></main>;
+  return <main className="enterprise-feature-page"><div className="enterprise-feature-heading"><div><span className="reference-overline">ENTREPRISE</span><h2>Paramètres</h2><p>Configurez les préférences de votre espace entreprise.</p></div><button className="enterprise-primary" onClick={save} disabled={saving}>{saving ? 'Enregistrement...' : <><Check size={14} /> Enregistrer</>}</button></div><section className="enterprise-feature-panel"><header><div><h3><ShieldCheck size={17} /> Préférences persistées</h3><p>Ces réglages sont enregistrés dans votre compte backend.</p></div></header><label className="connected-setting-select"><span>Langue</span><select value={settings.language} onChange={event => setSettings({ ...settings, language: event.target.value })}><option>Français</option><option>Fon</option><option>English</option></select></label><label className="connected-setting-select"><span>Mode d’affichage</span><select value={settings.displayMode} onChange={event => setSettings({ ...settings, displayMode: event.target.value })}><option>Simplifié</option><option>Avancé</option></select></label><label className="connected-setting-select"><span>Notifications push</span><input type="checkbox" checked={settings.pushEnabled} onChange={event => setSettings({ ...settings, pushEnabled: event.target.checked })} /></label><label className="connected-setting-select"><span>Notifications e-mail</span><input type="checkbox" checked={settings.emailEnabled} onChange={event => setSettings({ ...settings, emailEnabled: event.target.checked })} /></label></section></main>;
+}

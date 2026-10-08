@@ -1,0 +1,969 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleCode {
+  AGRICULTEUR
+  ENTREPRISE
+  MAINTENANCIER
+  ADMINISTRATEUR
+}
+
+enum AccountStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+  ACTIVE
+}
+
+enum VerificationStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+  EXPIRED
+}
+
+enum OtpPurpose {
+  PHONE_VERIFICATION
+  PASSWORD_RESET
+}
+
+enum ListingStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ProductKind {
+  MACHINE
+  PRODUCT
+  INPUT
+}
+
+enum RequestKind {
+  SERVICE
+  REPAIR
+  RENTAL
+  PURCHASE
+}
+
+enum RequestStatus {
+  DRAFT
+  PUBLISHED
+  QUOTED
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum QuoteStatus {
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum PaymentProvider {
+  MTN_MOMO
+  MOOV_MONEY
+  FLOOZ
+  CELTIS_SBIN
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCESS
+  FAILED
+  CANCELLED
+  EXPIRED
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum InterventionStatus {
+  PLANNED
+  CONFIRMED
+  EN_ROUTE
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  UNAVAILABLE
+}
+
+enum ModerationStatus {
+  OPEN
+  IN_REVIEW
+  RESOLVED
+  DISMISSED
+}
+
+enum ModerationTargetType {
+  USER
+  PRODUCT
+}
+
+enum MessageStatus {
+  SENT
+  DELIVERED
+  READ
+  FAILED
+}
+
+enum NotificationType {
+  NEW_MESSAGE
+  NEW_REQUEST
+  QUOTE_RECEIVED
+  QUOTE_ACCEPTED
+  QUOTE_REJECTED
+  PAYMENT_CONFIRMED
+  PAYMENT_FAILED
+  INTERVENTION_SCHEDULED
+  INTERVENTION_COMPLETED
+  ACCOUNT_APPROVED
+  ACCOUNT_SUSPENDED
+  NEW_ORDER
+  NEARBY_REQUEST
+  SYSTEM
+}
+
+enum UploadPurpose {
+  REQUEST_PHOTO
+  PRODUCT_PHOTO
+  DOCUMENT
+  MESSAGE_ATTACHMENT
+  INVOICE
+  PROFILE_DOCUMENT
+}
+
+enum ScrapedSourceStatus {
+  ACTIVE
+  INACTIVE
+  DISABLED
+  BLOCKED
+}
+
+enum ScrapedSourceValidationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ScrapedAuthorizationStatus {
+  PENDING_REVIEW
+  AUTHORIZATION_REQUIRED
+  AUTHORIZED
+  REJECTED
+  DISABLED
+}
+
+enum ScrapedImageReuseStatus {
+  UNCLARIFIED
+  AUTHORIZED
+  NOT_AUTHORIZED
+}
+
+enum ScrapeRunStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  PARTIAL
+  FAILED
+}
+
+model User {
+  id                 String             @id @default(uuid()) @db.Uuid
+  phone              String             @unique @db.VarChar(20)
+  email              String?            @unique @db.VarChar(255)
+  passwordHash       String             @db.VarChar(255)
+  status             AccountStatus      @default(PENDING)
+  phoneVerifiedAt    DateTime?
+  lastLoginAt        DateTime?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  roles              UserRole[]
+  farmerProfile      FarmerProfile?
+  companyProfile     CompanyProfile?
+  technicianProfile  TechnicianProfile?
+  adminProfile       AdminProfile?
+  verifications      Verification[]
+  refreshSessions    RefreshSession[]
+  otpCodes           OtpCode[]
+  requestsCreated   RepairRequest[] @relation("requester")
+  requestsAssigned  RepairRequest[] @relation("assignee")
+  quotes            Quote[]
+  favorites         Favorite[]
+  reviewsAuthored   Review[] @relation("reviewAuthor")
+  reviewsReceived   Review[] @relation("reviewTargetUser")
+  payments          Payment[]
+  ordersPlaced      Order[] @relation("orderBuyer")
+  interventions     Intervention[]
+  auditLogs         AuditLog[] @relation("auditActor")
+  reportsCreated    ModerationReport[] @relation("reporter")
+  reportsTargetingUser ModerationReport[] @relation("reportedUser")
+  conversationMemberships ConversationParticipant[]
+  sentMessages       Message[]          @relation("messageSender")
+  notifications      Notification[]
+  uploads            Upload[]
+  invoices           Invoice[]
+  preferences        UserPreference?
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("users")
+}
+
+model UserPreference {
+  id              String   @id @default(uuid()) @db.Uuid
+  userId          String   @unique @db.Uuid
+  language        String   @default("Français") @db.VarChar(30)
+  displayMode     String   @default("Simplifié") @db.VarChar(30)
+  pushEnabled     Boolean  @default(true)
+  emailEnabled    Boolean  @default(false)
+  profilePublic   Boolean  @default(true)
+  urgentEnabled   Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_preferences")
+}
+
+model Role {
+  id          String     @id @default(uuid()) @db.Uuid
+  code        RoleCode   @unique
+  label       String     @db.VarChar(80)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  users       UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  userId      String   @db.Uuid
+  roleId      String   @db.Uuid
+  assignedAt  DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role        Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@index([roleId])
+  @@map("user_roles")
+}
+
+model FarmerProfile {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @unique @db.Uuid
+  firstName   String   @db.VarChar(100)
+  lastName    String   @db.VarChar(100)
+  city        String?  @db.VarChar(120)
+  region      String?  @db.VarChar(120)
+  activity    String?  @db.VarChar(160)
+  latitude    Decimal? @db.Decimal(10, 7)
+  longitude   Decimal? @db.Decimal(10, 7)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([city, region])
+  @@map("farmer_profiles")
+}
+
+model CompanyProfile {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @unique @db.Uuid
+  legalName      String   @db.VarChar(180)
+  registrationNo String?  @db.VarChar(100)
+  city           String?  @db.VarChar(120)
+  region         String?  @db.VarChar(120)
+  description    String?
+  latitude       Decimal? @db.Decimal(10, 7)
+  longitude      Decimal? @db.Decimal(10, 7)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products       Product[]
+  services       Service[]
+  ordersReceived Order[]
+  quotes         Quote[] @relation("companyQuotes")
+
+  @@index([city, region])
+  @@map("company_profiles")
+}
+
+model TechnicianProfile {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @unique @db.Uuid
+  displayName  String   @db.VarChar(180)
+  skills       String?
+  city         String?  @db.VarChar(120)
+  region       String?  @db.VarChar(120)
+  latitude     Decimal? @db.Decimal(10, 7)
+  longitude    Decimal? @db.Decimal(10, 7)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  services     Service[]
+  zones        TechnicianZone[]
+  availability AvailabilitySlot[]
+
+  @@index([city, region])
+  @@map("technician_profiles")
+}
+
+model AdminProfile {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @unique @db.Uuid
+  displayName String   @db.VarChar(180)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("admin_profiles")
+}
+
+model Verification {
+  id          String             @id @default(uuid()) @db.Uuid
+  userId      String             @db.Uuid
+  status      VerificationStatus @default(PENDING)
+  type        String             @db.VarChar(60)
+  submittedAt DateTime           @default(now())
+  reviewedAt  DateTime?
+  expiresAt   DateTime?
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([type, status])
+  @@map("verifications")
+}
+
+model RefreshSession {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @db.Uuid
+  tokenHash    String   @unique @db.VarChar(128)
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+  @@index([expiresAt])
+  @@map("refresh_sessions")
+}
+
+model OtpCode {
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String    @db.Uuid
+  purpose     OtpPurpose
+  codeHash    String    @db.VarChar(128)
+  attempts    Int       @default(0)
+  expiresAt   DateTime
+  consumedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, purpose, consumedAt])
+  @@index([expiresAt])
+  @@map("otp_codes")
+}
+
+model Category {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String    @db.VarChar(120)
+  slug        String    @unique @db.VarChar(140)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+  services    Service[]
+
+  @@index([name])
+  @@map("categories")
+}
+
+model Product {
+  id          String        @id @default(uuid()) @db.Uuid
+  companyId   String        @db.Uuid
+  categoryId  String?       @db.Uuid
+  title       String        @db.VarChar(180)
+  slug        String        @unique @db.VarChar(220)
+  description String?
+  kind        ProductKind   @default(PRODUCT)
+  status      ListingStatus @default(DRAFT)
+  priceXof    Int?
+  stock       Int            @default(0)
+  city        String?       @db.VarChar(120)
+  region      String?       @db.VarChar(120)
+  latitude    Decimal?      @db.Decimal(10, 7)
+  longitude   Decimal?      @db.Decimal(10, 7)
+  imageUrl    String?       @db.VarChar(500)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  company     CompanyProfile @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  category    Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  favorites   Favorite[]
+  reviews     Review[]
+  orderItems  OrderItem[]
+  moderationReports ModerationReport[]
+
+  @@index([status, kind])
+  @@index([companyId])
+  @@index([categoryId])
+  @@index([city, region])
+  @@map("products")
+}
+
+model Service {
+  id            String        @id @default(uuid()) @db.Uuid
+  companyId     String?       @db.Uuid
+  technicianId  String?       @db.Uuid
+  categoryId    String?       @db.Uuid
+  title         String        @db.VarChar(180)
+  slug          String        @unique @db.VarChar(220)
+  description   String?
+  status        ListingStatus @default(DRAFT)
+  priceXof      Int?
+  city          String?       @db.VarChar(120)
+  region        String?       @db.VarChar(120)
+  latitude      Decimal?      @db.Decimal(10, 7)
+  longitude     Decimal?      @db.Decimal(10, 7)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  company       CompanyProfile? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  technician    TechnicianProfile? @relation(fields: [technicianId], references: [id], onDelete: Cascade)
+  category      Category?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  favorites     Favorite[]
+  reviews       Review[]
+
+  @@index([status])
+  @@index([companyId])
+  @@index([technicianId])
+  @@index([categoryId])
+  @@index([city, region])
+  @@map("services")
+}
+
+model RepairRequest {
+  id            String        @id @default(uuid()) @db.Uuid
+  requesterId   String        @db.Uuid
+  assigneeId    String?       @db.Uuid
+  kind          RequestKind   @default(SERVICE)
+  status        RequestStatus @default(PUBLISHED)
+  title         String        @db.VarChar(180)
+  description   String
+  city          String?       @db.VarChar(120)
+  region        String?       @db.VarChar(120)
+  latitude      Decimal?      @db.Decimal(10, 7)
+  longitude     Decimal?      @db.Decimal(10, 7)
+  budgetXof     Int?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  requester     User          @relation("requester", fields: [requesterId], references: [id], onDelete: Cascade)
+  assignee      User?         @relation("assignee", fields: [assigneeId], references: [id], onDelete: SetNull)
+  quotes        Quote[]
+  payments      Payment[]
+  interventions Intervention[]
+  conversations Conversation[]
+  invoices      Invoice[]
+
+  @@index([requesterId, status])
+  @@index([assigneeId, status])
+  @@index([kind, status])
+  @@index([createdAt])
+  @@map("repair_requests")
+}
+
+model Quote {
+  id          String      @id @default(uuid()) @db.Uuid
+  requestId   String      @db.Uuid
+  authorId    String      @db.Uuid
+  companyId   String?     @db.Uuid
+  status      QuoteStatus @default(SENT)
+  amountXof   Int
+  message     String?
+  expiresAt   DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  request     RepairRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  company     CompanyProfile? @relation("companyQuotes", fields: [companyId], references: [id], onDelete: Cascade)
+  interventions Intervention[]
+  conversations Conversation[]
+
+  @@index([requestId, status])
+  @@index([authorId, status])
+  @@index([companyId, status])
+  @@map("quotes")
+}
+
+model Favorite {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @db.Uuid
+  productId   String?  @db.Uuid
+  serviceId   String?  @db.Uuid
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product     Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  service     Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@unique([userId, serviceId])
+  @@index([userId, createdAt])
+  @@map("favorites")
+}
+
+model Review {
+  id            String   @id @default(uuid()) @db.Uuid
+  authorId      String   @db.Uuid
+  targetUserId  String?  @db.Uuid
+  productId     String?  @db.Uuid
+  serviceId     String?  @db.Uuid
+  rating        Int
+  comment       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  author        User     @relation("reviewAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  targetUser    User?    @relation("reviewTargetUser", fields: [targetUserId], references: [id], onDelete: Cascade)
+  product       Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  service       Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([targetUserId])
+  @@index([productId])
+  @@index([serviceId])
+  @@map("reviews")
+}
+
+model Payment {
+  id                String                 @id @default(uuid()) @db.Uuid
+  userId            String                 @db.Uuid
+  requestId         String?                @db.Uuid
+  reference         String                 @unique @db.VarChar(80)
+  idempotencyKey    String?                @unique @db.VarChar(160)
+  externalReference String?                @db.VarChar(180)
+  provider          PaymentProvider
+  status            PaymentStatus          @default(PENDING)
+  amountXof         Int
+  currency          String                 @default("XOF") @db.VarChar(3)
+  failureReason     String?
+  metadata          Json?
+  expiresAt         DateTime?
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  user              User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request           RepairRequest?         @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  webhookEvents     PaymentWebhookEvent[]
+  invoice           Invoice?
+
+  @@index([userId, status])
+  @@index([requestId])
+  @@index([provider, externalReference])
+  @@index([status, expiresAt])
+  @@map("payments")
+}
+
+model Order {
+  id          String      @id @default(uuid()) @db.Uuid
+  reference   String      @unique @db.VarChar(80)
+  buyerId     String      @db.Uuid
+  companyId   String      @db.Uuid
+  status      OrderStatus @default(PENDING)
+  totalXof    Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  buyer       User        @relation("orderBuyer", fields: [buyerId], references: [id], onDelete: Cascade)
+  company     CompanyProfile @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  items       OrderItem[]
+
+  @@index([buyerId, status])
+  @@index([companyId, status])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(uuid()) @db.Uuid
+  orderId     String   @db.Uuid
+  productId   String   @db.Uuid
+  quantity    Int
+  unitPriceXof Int
+  createdAt   DateTime @default(now())
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+model TechnicianZone {
+  id            String   @id @default(uuid()) @db.Uuid
+  technicianId  String   @db.Uuid
+  name          String   @db.VarChar(120)
+  city          String?  @db.VarChar(120)
+  region        String?  @db.VarChar(120)
+  radiusKm      Int      @default(15)
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  technician    TechnicianProfile @relation(fields: [technicianId], references: [id], onDelete: Cascade)
+
+  @@index([technicianId, active])
+  @@index([city, region])
+  @@map("technician_zones")
+}
+
+model AvailabilitySlot {
+  id            String           @id @default(uuid()) @db.Uuid
+  technicianId  String           @db.Uuid
+  dayOfWeek     Int
+  startTime     String           @db.VarChar(5)
+  endTime       String           @db.VarChar(5)
+  status        AvailabilityStatus @default(AVAILABLE)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  technician    TechnicianProfile @relation(fields: [technicianId], references: [id], onDelete: Cascade)
+
+  @@unique([technicianId, dayOfWeek])
+  @@index([technicianId, status])
+  @@map("availability_slots")
+}
+
+model Intervention {
+  id            String             @id @default(uuid()) @db.Uuid
+  technicianId  String             @db.Uuid
+  requestId     String?            @db.Uuid
+  quoteId       String?            @db.Uuid
+  title         String             @db.VarChar(180)
+  description   String?
+  location      String?            @db.VarChar(240)
+  scheduledAt   DateTime
+  completedAt   DateTime?
+  amountXof     Int?
+  status        InterventionStatus @default(PLANNED)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  technician    User               @relation(fields: [technicianId], references: [id], onDelete: Cascade)
+  request       RepairRequest?     @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  quote         Quote?             @relation(fields: [quoteId], references: [id], onDelete: SetNull)
+
+  @@index([technicianId, status])
+  @@index([scheduledAt])
+  @@index([requestId])
+  @@map("interventions")
+}
+
+model AuditLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  actorId     String   @db.Uuid
+  action      String   @db.VarChar(100)
+  entityType  String   @db.VarChar(80)
+  entityId    String?  @db.VarChar(80)
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  actor       User     @relation("auditActor", fields: [actorId], references: [id], onDelete: Cascade)
+
+  @@index([actorId, createdAt])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model ModerationReport {
+  id              String             @id @default(uuid()) @db.Uuid
+  reporterId      String             @db.Uuid
+  reportedUserId  String?            @db.Uuid
+  productId       String?            @db.Uuid
+  targetType      ModerationTargetType
+  reason          String             @db.VarChar(500)
+  status          ModerationStatus   @default(OPEN)
+  resolutionNote  String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  reporter        User               @relation("reporter", fields: [reporterId], references: [id], onDelete: Cascade)
+  reportedUser    User?              @relation("reportedUser", fields: [reportedUserId], references: [id], onDelete: Cascade)
+  product         Product?           @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([targetType, status])
+  @@index([reportedUserId])
+  @@index([productId])
+  @@map("moderation_reports")
+}
+
+model Conversation {
+  id            String                    @id @default(uuid()) @db.Uuid
+  requestId     String?                   @db.Uuid
+  quoteId       String?                   @db.Uuid
+  lastMessageAt DateTime?
+  createdAt     DateTime                  @default(now())
+  updatedAt     DateTime                  @updatedAt
+  request       RepairRequest?            @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  quote         Quote?                    @relation(fields: [quoteId], references: [id], onDelete: SetNull)
+  participants  ConversationParticipant[]
+  messages      Message[]
+
+  @@index([requestId])
+  @@index([quoteId])
+  @@index([lastMessageAt])
+  @@map("conversations")
+}
+
+model ConversationParticipant {
+  conversationId String       @db.Uuid
+  userId         String       @db.Uuid
+  joinedAt       DateTime     @default(now())
+  lastReadAt     DateTime?
+  archivedAt     DateTime?
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([conversationId, userId])
+  @@index([userId, archivedAt, lastReadAt])
+  @@map("conversation_participants")
+}
+
+model Message {
+  id             String             @id @default(uuid()) @db.Uuid
+  conversationId String             @db.Uuid
+  senderId       String             @db.Uuid
+  body           String?
+  status         MessageStatus      @default(SENT)
+  deliveredAt    DateTime?
+  readAt         DateTime?
+  deletedAt      DateTime?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  conversation   Conversation       @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender         User               @relation("messageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  attachments    MessageAttachment[]
+
+  @@index([conversationId, createdAt])
+  @@index([senderId, createdAt])
+  @@index([status, readAt])
+  @@map("messages")
+}
+
+model MessageAttachment {
+  id           String   @id @default(uuid()) @db.Uuid
+  messageId    String   @db.Uuid
+  storageKey   String   @db.VarChar(500)
+  originalName String   @db.VarChar(255)
+  mimeType     String   @db.VarChar(120)
+  sizeBytes    Int
+  isPrivate    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  message      Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@map("message_attachments")
+}
+
+model Notification {
+  id        String           @id @default(uuid()) @db.Uuid
+  userId    String           @db.Uuid
+  type      NotificationType
+  title     String           @db.VarChar(180)
+  body      String
+  data      Json?
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt, createdAt])
+  @@index([userId, type, createdAt])
+  @@map("notifications")
+}
+
+model Upload {
+  id           String        @id @default(uuid()) @db.Uuid
+  ownerId      String        @db.Uuid
+  purpose      UploadPurpose
+  resourceType String?       @db.VarChar(60)
+  resourceId   String?       @db.VarChar(80)
+  storageKey   String        @unique @db.VarChar(500)
+  originalName String        @db.VarChar(255)
+  mimeType     String        @db.VarChar(120)
+  sizeBytes    Int
+  sha256       String        @db.VarChar(64)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  owner        User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId, createdAt])
+  @@index([resourceType, resourceId])
+  @@index([purpose, createdAt])
+  @@map("uploads")
+}
+
+model PaymentWebhookEvent {
+  id              String          @id @default(uuid()) @db.Uuid
+  provider        PaymentProvider
+  eventId         String          @db.VarChar(180)
+  paymentId       String?         @db.Uuid
+  payload         Json
+  signatureValid  Boolean
+  processedAt     DateTime?
+  createdAt       DateTime        @default(now())
+  payment         Payment?        @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
+  @@unique([provider, eventId])
+  @@index([paymentId, createdAt])
+  @@index([provider, createdAt])
+  @@map("payment_webhook_events")
+}
+
+model Invoice {
+  id                   String          @id @default(uuid()) @db.Uuid
+  paymentId            String          @unique @db.Uuid
+  userId               String          @db.Uuid
+  requestId            String?         @db.Uuid
+  invoiceNumber        String          @unique @db.VarChar(80)
+  transactionReference String          @db.VarChar(180)
+  provider             PaymentProvider
+  description          String          @db.VarChar(500)
+  amountXof            Int
+  currency             String          @default("XOF") @db.VarChar(3)
+  status               PaymentStatus
+  issuedAt             DateTime        @default(now())
+  payment              Payment         @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  user                 User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  request              RepairRequest?  @relation(fields: [requestId], references: [id], onDelete: SetNull)
+
+  @@index([userId, issuedAt])
+  @@index([requestId])
+  @@map("invoices")
+}
+
+model ScrapedSource {
+  id              String             @id @default(uuid()) @db.Uuid
+  name            String             @db.VarChar(160)
+  baseUrl         String             @unique @db.VarChar(500)
+  robotsUrl       String?            @db.VarChar(500)
+  termsUrl        String?            @db.VarChar(500)
+  apiUrl          String?            @db.VarChar(500)
+  status          ScrapedSourceStatus @default(INACTIVE)
+  validationStatus ScrapedSourceValidationStatus @default(PENDING)
+  authorizationStatus ScrapedAuthorizationStatus @default(PENDING_REVIEW)
+  authorizationGrantedAt DateTime?
+  authorizationProofRef String?      @db.VarChar(500)
+  dataExtractionAuthorized Boolean    @default(false)
+  listingReuseAuthorized Boolean      @default(false)
+  imageReuseStatus ScrapedImageReuseStatus @default(UNCLARIFIED)
+  reuseImages     Boolean            @default(false)
+  maxFrequencySeconds Int?
+  maxRequests     Int?
+  attributionRules String?
+  deletionPolicy  String?
+  updatePolicy    String?
+  legalNotes      String?
+  lastPolicyCheckedAt DateTime?
+  validationNotes String?
+  validatedAt     DateTime?
+  validatedById   String?            @db.Uuid
+  enabled         Boolean            @default(false)
+  isFixture       Boolean            @default(false)
+  requestDelayMs  Int                @default(1500)
+  timeoutMs       Int                @default(10000)
+  maxPages        Int                @default(10)
+  maxItems        Int                @default(500)
+  lastScrapedAt   DateTime?
+  nextRunAt       DateTime?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  machines        ScrapedMachine[]
+  runs            ScrapeRun[]
+
+  @@index([status, enabled])
+  @@index([validationStatus, enabled])
+  @@index([authorizationStatus, enabled])
+  @@index([nextRunAt, enabled])
+  @@map("scraped_sources")
+}
+
+model ScrapedMachine {
+  id             String        @id @default(uuid()) @db.Uuid
+  sourceId       String        @db.Uuid
+  externalId     String?       @db.VarChar(240)
+  canonicalKey   String        @db.VarChar(320)
+  sourceUrl      String        @db.VarChar(800)
+  name           String        @db.VarChar(240)
+  brand          String?       @db.VarChar(120)
+  model          String?       @db.VarChar(160)
+  category       String?       @db.VarChar(160)
+  machineType    String?       @db.VarChar(160)
+  description    String?
+  technicalSpecs Json?
+  price          Int?
+  currency       String        @default("XOF") @db.VarChar(3)
+  availability   String?       @db.VarChar(120)
+  location       String?       @db.VarChar(180)
+  imageUrl       String?       @db.VarChar(800)
+  scrapedAt      DateTime
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  source         ScrapedSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceId, canonicalKey])
+  @@unique([sourceId, externalId])
+  @@index([sourceId, sourceUrl])
+  @@index([brand, model])
+  @@index([category])
+  @@index([scrapedAt])
+  @@map("scraped_machines")
+}
+
+model ScrapeRun {
+  id             String          @id @default(uuid()) @db.Uuid
+  sourceId       String          @db.Uuid
+  status         ScrapeRunStatus @default(PENDING)
+  startedAt      DateTime?
+  finishedAt     DateTime?
+  pagesVisited   Int             @default(0)
+  itemsFound     Int             @default(0)
+  itemsCreated   Int             @default(0)
+  itemsUpdated   Int             @default(0)
+  duplicates     Int             @default(0)
+  errorCount     Int             @default(0)
+  errorSummary   String?
+  createdAt      DateTime        @default(now())
+  source         ScrapedSource   @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  errors         ScrapeError[]
+
+  @@index([sourceId, createdAt])
+  @@index([status, createdAt])
+  @@map("scrape_runs")
+}
+
+model ScrapeError {
+  id          String    @id @default(uuid()) @db.Uuid
+  runId       String    @db.Uuid
+  url         String?   @db.VarChar(800)
+  statusCode  Int?
+  errorType   String    @db.VarChar(120)
+  message     String
+  createdAt   DateTime  @default(now())
+  run         ScrapeRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@index([runId, createdAt])
+  @@index([errorType, createdAt])
+  @@map("scrape_errors")
+}

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Avis &amp; Évaluations</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#fbf9f8",
+                    "on-secondary-fixed-variant": "#414b00",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#d9dcda",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#fbf9f8",
+                    "surface-variant": "#e4e2e2",
+                    "primary": "#00542d",
+                    "secondary-container": "#d5ea60",
+                    "outline": "#6f7a70",
+                    "primary-fixed-dim": "#83d89f",
+                    "inverse-primary": "#83d89f",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#191e00",
+                    "on-surface": "#1b1c1c",
+                    "inverse-surface": "#303030",
+                    "surface-container-highest": "#e4e2e2",
+                    "on-primary-fixed-variant": "#00522c",
+                    "surface-container": "#efeded",
+                    "on-tertiary-fixed-variant": "#434846",
+                    "tertiary-container": "#5d6160",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#0d6c3e",
+                    "tertiary-fixed": "#e0e3e1",
+                    "outline-variant": "#bec9be",
+                    "secondary-fixed-dim": "#bcd14a",
+                    "surface-container-low": "#f5f3f3",
+                    "tertiary": "#454948",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#d8ed63",
+                    "surface-container-high": "#eae8e7",
+                    "primary-fixed": "#9ff5b9",
+                    "on-primary-fixed": "#00210e",
+                    "background": "#fbf9f8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#181c1b",
+                    "on-surface-variant": "#3f4941",
+                    "on-primary-container": "#98edb2",
+                    "on-background": "#1b1c1c",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-secondary-container": "#5b6900",
+                    "secondary": "#586400",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#106e3f",
+                    "tertiary-fixed-dim": "#c4c7c5",
+                    "surface-dim": "#dbd9d9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "64px",
+                    "container-padding-mobile": "16px",
+                    "container-padding-desktop": "40px",
+                    "gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Base styles for material icons to ensure consistent sizing */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Hide scrollbar for clean horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased overflow-x-hidden">
+<!-- Shared Component: SideNavBar -->
+<aside class="w-72 h-screen fixed left-0 top-0 shadow-sm dark:shadow-none bg-surface-container-lowest dark:bg-surface flex flex-col h-full py-base z-50">
+<!-- Header / Profile Area -->
+<div class="px-6 py-6 mb-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-surface-variant">
+<img alt="Koffi Agbodan, Agriculteur" class="w-full h-full object-cover" data-alt="A professional headshot of a cheerful African male farmer wearing a straw hat and a green collared shirt. Soft, natural outdoor lighting, high quality portrait suitable for an enterprise agritech platform. Bright light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIpGPQA-dRHPgNQm9e_l0sz121OqQMZDMU-k2iN6XH09nko4AomS9mibRKhR6CSAHYdNFKw3HDdZxhZn7JNeOpE1NutDNJgSb5cwrColoRbe4s42ZCU7TiicP299w6o7R1Gf2n7kS4njOSkGmI7ksasZINhFr2cKUxB9TWVeOh1p168cgNp6G90SgND18jfolc_wYuU6taCTxvg6eAAoxKVwdZ83jViydT3_A9mR830OwtsFjsAG-v"/>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Koffi Agbodan</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Agriculteur</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 overflow-y-auto no-scrollbar pb-6 space-y-1">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">search</span>
+                Rechercher
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">assignment</span>
+                Mes demandes
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">forum</span>
+                Messagerie
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Paiements
+            </a>
+<!-- ACTIVE NAVIGATION -->
+<a class="flex items-center gap-3 bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-xl px-4 py-3 mx-2 font-label-sm text-label-sm shadow-sm scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">star</span>
+                Avis &amp; évaluations
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">favorite</span>
+                Favoris
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">notifications</span>
+                Notifications
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">person</span>
+                Mon profil
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Paramètres
+            </a>
+</nav>
+<!-- CTA Area -->
+<div class="px-6 py-4 mt-auto">
+<button class="w-full flex items-center justify-between px-4 py-3 bg-surface-container rounded-xl text-primary font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+<span>Mode simplifié</span>
+<div class="w-10 h-6 bg-primary rounded-full relative">
+<div class="w-4 h-4 bg-on-primary rounded-full absolute right-1 top-1"></div>
+</div>
+</button>
+</div>
+<!-- Footer Tab -->
+<div class="border-t border-surface-variant/50 pt-4 px-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 rounded-xl hover:bg-surface-container transition-all font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+                Besoin d'aide ?
+            </a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="ml-72 min-h-screen relative flex flex-col">
+<!-- Shared Component: TopAppBar -->
+<header class="fixed top-0 right-0 h-20 bg-transparent flex justify-between items-center w-[calc(100%-18rem)] px-container-desktop py-4 z-40 backdrop-blur-sm">
+<!-- Left: Search -->
+<div class="flex-1 max-w-md relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary">search</span>
+<input class="w-full bg-surface-container-lowest pl-12 pr-4 py-3 rounded-full border-none shadow-[0_2px_12px_rgba(0,0,0,0.04)] focus:ring-1 focus:ring-primary focus:outline-none font-body-md text-on-surface placeholder:text-on-surface-variant/70 transition-shadow" placeholder="Rechercher une machine, un service..." type="text"/>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center gap-2">
+<button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors focus:border-primary focus:ring-1 focus:ring-primary">
+<span class="material-symbols-outlined">mic</span>
+</button>
+<div class="w-px h-6 bg-surface-variant mx-2"></div>
+<button class="flex items-center gap-2 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors font-label-sm text-label-sm focus:border-primary focus:ring-1 focus:ring-primary">
+<span class="material-symbols-outlined text-lg">language</span>
+                    FR
+                </button>
+<button class="w-12 h-12 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors focus:border-primary focus:ring-1 focus:ring-primary relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="ml-4 w-10 h-10 rounded-full overflow-hidden border border-surface-variant shrink-0 cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Small thumbnail profile picture of a male farmer smiling. Bright white background, highly professional corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA9EgaDvtkegwJ7cOv7olzZx8GA1ATAPzGWX54-M7RPKpuJ6t6nSxAaTRM3a3p3Ia-KWdQJw3wpNiacOMc4okVsCb0vjnHnLQgyUd7VRI7ScHLnoDaz-KN8cnHA-11QPUhfTeYzsV1_anWTZ-hOSbln-7XQvEeanacyDHrfVMOjvio-C25DXpaPZb5Wiq0By-m52Xz7MXoty3URdaToBp4EEmp7NQAOD_V597Q0uRYSJb1Wu9IPd4l"/>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="flex-1 px-container-desktop pt-28 pb-16 w-full max-w-[1440px] mx-auto space-y-section-gap">
+<!-- Page Header -->
+<section class="flex flex-col gap-2">
+<h1 class="font-headline-md text-[32px] font-bold text-on-surface leading-tight tracking-tight">Avis &amp; Évaluations</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Évaluez les prestataires avec lesquels vous avez collaboré. Vos retours contribuent à bâtir un écosystème de confiance au sein de la communauté AGRIMAC.</p>
+</section>
+<!-- Stats Overview - Bento Layout -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Stat 1 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-primary/5 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-2xl">pending_actions</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant mb-1">En attente de notation</h3>
+<p class="font-display-lg text-display-lg text-on-surface">3</p>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-secondary-container/20 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container mb-6">
+<span class="material-symbols-outlined text-2xl">star_half</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant mb-1">Moyenne donnée</h3>
+<div class="flex items-baseline gap-2">
+<p class="font-display-lg text-display-lg text-on-surface">4.8</p>
+<span class="text-on-surface-variant font-body-md">/ 5</span>
+</div>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 w-32 h-32 bg-tertiary-container/10 rounded-full transition-transform group-hover:scale-110 duration-500"></div>
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-2xl">reviews</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant mb-1">Avis publiés</h3>
+<p class="font-display-lg text-display-lg text-on-surface">24</p>
+</div>
+</div>
+</section>
+<!-- Main Interactive Content Split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Tasks Pending Rating (Priority) -->
+<section class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-[20px] text-on-surface flex items-center gap-2">
+<span class="w-2 h-6 bg-primary rounded-full inline-block"></span>
+                            À Noter
+                        </h2>
+</div>
+<!-- Interactive Rating Form Card (Expanded State) -->
+<article class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_12px_40px_rgba(0,0,0,0.04)] border border-surface-variant/30 flex flex-col gap-8 transition-all duration-300 relative overflow-hidden">
+<!-- Header / Context -->
+<div class="flex items-start justify-between gap-4">
+<div class="flex gap-4 items-center">
+<div class="w-16 h-16 rounded-2xl overflow-hidden bg-surface-container shrink-0 border border-surface-variant shadow-sm">
+<img alt="Méca-Agri Pro Logo" class="w-full h-full object-cover" data-alt="A clean, modern logo or icon representing an agricultural service provider named 'Méca-Agri Pro'. High resolution, set against a pristine white background. Corporate minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVjw2TPTVtuURXAJmLAeArzsEeH2_FD0T2Sb_iDs-_rDA5FB0iuadDmEhpQ-fkLWCWg31QdOqLxwylJ0vKloLZfPWaHV9oBOc_s3DfHanX8jw0a0oTnLA-3-D7c7tVgMsX8DlCjnXSuuBW52Hl1nb279irrMFKbKm2C0hIGO-uhRfzzYgrXtqI0ChFOTmirpUi_yqHS75Gsrce5yqoM4uaY09A_hipv4yGFdwFn5GdGbTT7UX0rqKx"/>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-1 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-sm text-[11px] uppercase tracking-wider">Réparation</span>
+<span class="text-on-surface-variant text-sm">• Terminé le 12 Oct. 2023</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface">Méca-Agri Pro</h3>
+<p class="font-body-md text-on-surface-variant mt-1">Intervention sur Moissonneuse-batteuse JD9000</p>
+</div>
+</div>
+</div>
+<!-- Divider -->
+<hr class="border-surface-variant/60"/>
+<!-- The Rating Form -->
+<div class="flex flex-col gap-6">
+<!-- Star Selection -->
+<div>
+<label class="block font-label-sm text-on-surface mb-3">Note globale de la prestation</label>
+<div class="flex gap-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface hover:bg-surface-container-high transition-colors text-surface-variant group">
+<span class="material-symbols-outlined text-4xl group-hover:text-[#FADB14] transition-colors">star</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface hover:bg-surface-container-high transition-colors text-surface-variant group">
+<span class="material-symbols-outlined text-4xl group-hover:text-[#FADB14] transition-colors">star</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface hover:bg-surface-container-high transition-colors text-surface-variant group">
+<span class="material-symbols-outlined text-4xl group-hover:text-[#FADB14] transition-colors">star</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface hover:bg-surface-container-high transition-colors text-surface-variant group">
+<span class="material-symbols-outlined text-4xl group-hover:text-[#FADB14] transition-colors">star</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface hover:bg-surface-container-high transition-colors text-surface-variant group">
+<span class="material-symbols-outlined text-4xl group-hover:text-[#FADB14] transition-colors">star</span>
+</button>
+</div>
+</div>
+<!-- Comment Area -->
+<div>
+<label class="block font-label-sm text-on-surface mb-2" for="review-comment">Commentaire détaillé</label>
+<textarea class="w-full bg-[#F9F9F9] rounded-xl border-none focus:ring-1 focus:ring-primary p-4 font-body-md text-on-surface placeholder:text-on-surface-variant/50 resize-none" id="review-comment" placeholder="Décrivez votre expérience avec ce prestataire (qualité, ponctualité, communication)..." rows="4"></textarea>
+</div>
+<!-- Photo Upload (Minimalist Dropzone) -->
+<div>
+<label class="block font-label-sm text-on-surface mb-2">Photos (Optionnel)</label>
+<div class="w-full border-2 border-dashed border-surface-variant rounded-xl p-6 flex flex-col items-center justify-center text-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant mb-3 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined">add_a_photo</span>
+</div>
+<p class="font-body-md text-on-surface mb-1">Cliquez ou glissez une image ici</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant font-normal">PNG, JPG jusqu'à 5MB</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex justify-end gap-4 mt-2">
+<button class="px-6 py-3 rounded-xl border border-surface-variant text-on-surface hover:bg-surface-container font-label-sm transition-colors">Ignorer</button>
+<button class="px-6 py-3 rounded-xl bg-primary text-on-primary hover:bg-surface-tint shadow-sm shadow-primary/20 font-label-sm transition-all active:scale-[0.98]">Publier l'avis</button>
+</div>
+</div>
+</article>
+<!-- Collapsed Pending Rating Item -->
+<article class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-surface-variant/20 flex items-center justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden bg-surface-container shrink-0">
+<img alt="Consultant Profile" class="w-full h-full object-cover" data-alt="A portrait of a male agronomist consultant in a field, smiling, wearing a blue polo shirt. Bright, sunny corporate style photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPW7zPLQxpOs4J0F8FDmvaRQuSPHmelywlNW5FDnXVjP0B-ctcoh31xt5IV1yfFTYBIb0YRl4fkd9AGJMR4QudulsPihZ3JKzXeH9K2dv3GF0BgS1e3tO7cmw12kiqXR7tcCJ9pv6H0F-k8iA2Mo7HdnaC8v9J6NXQPn6q3pLWfm5AJhSgrRdtq3UStg_H2NrrSyzj5KlSQ4yAK74l68wY1-yBxOD4JOcQcWCMrUQG3CcSGwfUTcem"/>
+</div>
+<div>
+<h3 class="font-headline-md text-base text-on-surface group-hover:text-primary transition-colors">Cabinet Agro-Conseil Bénin</h3>
+<div class="flex items-center gap-2 mt-1 font-body-md text-sm text-on-surface-variant">
+<span>Consultation Agronomique</span>
+<span>•</span>
+<span>Le 05 Oct. 2023</span>
+</div>
+</div>
+</div>
+<button class="px-5 py-2.5 rounded-lg border border-primary text-primary hover:bg-primary hover:text-on-primary font-label-sm text-label-sm transition-colors">
+                            Noter
+                        </button>
+</article>
+<article class="bg-surface-container-lowest rounded-[20px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-surface-variant/20 flex items-center justify-between hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-full overflow-hidden bg-surface-container shrink-0 flex items-center justify-center text-on-surface-variant font-bold text-xl">
+                                SA
+                            </div>
+<div>
+<h3 class="font-headline-md text-base text-on-surface group-hover:text-primary transition-colors">Semences Africaines SA</h3>
+<div class="flex items-center gap-2 mt-1 font-body-md text-sm text-on-surface-variant">
+<span>Achat Intrants</span>
+<span>•</span>
+<span>Le 28 Sep. 2023</span>
+</div>
+</div>
+</div>
+<button class="px-5 py-2.5 rounded-lg border border-primary text-primary hover:bg-primary hover:text-on-primary font-label-sm text-label-sm transition-colors">
+                            Noter
+                        </button>
+</article>
+</section>
+<!-- Right Column: History Archive -->
+<aside class="lg:col-span-5 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-[20px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-surface-variant">history</span>
+                            Historique des avis
+                        </h2>
+<a class="text-primary font-label-sm hover:underline" href="#">Voir tout</a>
+</div>
+<div class="bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-surface-variant/20 overflow-hidden flex flex-col">
+<!-- History Item 1 -->
+<div class="p-6 border-b border-surface-variant/40 hover:bg-surface-container/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h4 class="font-label-sm text-on-surface text-sm mb-0.5">LocaTracteur Sarl</h4>
+<p class="text-xs text-on-surface-variant">Location Tracteur 90CV</p>
+</div>
+<div class="flex items-center gap-1 text-[#FADB14]">
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined text-surface-variant text-sm">star</span>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface line-clamp-2">"Matériel en très bon état et livré à l'heure. Le chauffeur était compétent. Seul bémol, la communication un peu lente avant confirmation."</p>
+<div class="mt-3 text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Publié il y a 2 semaines
+                            </div>
+</div>
+<!-- History Item 2 -->
+<div class="p-6 border-b border-surface-variant/40 hover:bg-surface-container/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h4 class="font-label-sm text-on-surface text-sm mb-0.5">Coopérative Les Sillons</h4>
+<p class="text-xs text-on-surface-variant">Transport Récolte</p>
+</div>
+<div class="flex items-center gap-1 text-[#FADB14]">
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface line-clamp-2">"Service impeccable. L'équipe a géré le transport de mes 10 tonnes de maïs avec un grand professionnalisme. Je recommande vivement."</p>
+<div class="mt-3 text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Publié le 15 Sep. 2023
+                            </div>
+</div>
+<!-- History Item 3 -->
+<div class="p-6 hover:bg-surface-container/30 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h4 class="font-label-sm text-on-surface text-sm mb-0.5">Irrigation Pro</h4>
+<p class="text-xs text-on-surface-variant">Installation Système Goutte-à-goutte</p>
+</div>
+<div class="flex items-center gap-1 text-[#FADB14]">
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined text-surface-variant text-sm">star</span>
+<span class="material-symbols-outlined text-surface-variant text-sm">star</span>
+</div>
+</div>
+<p class="font-body-md text-sm text-on-surface line-clamp-2">"L'installation fonctionne, mais les délais n'ont pas été respectés et le chantier a été laissé sale."</p>
+<div class="mt-3 text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Publié le 02 Aou. 2023
+                            </div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>

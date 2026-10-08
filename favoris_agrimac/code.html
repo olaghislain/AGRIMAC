@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Mes Favoris</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e0e3e1",
+                        "inverse-primary": "#83d89f",
+                        "on-tertiary-container": "#d9dcda",
+                        "surface-dim": "#dbd9d9",
+                        "primary-fixed": "#9ff5b9",
+                        "surface-variant": "#e4e2e2",
+                        "outline-variant": "#bec9be",
+                        "on-tertiary-fixed": "#181c1b",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#00210e",
+                        "inverse-surface": "#303030",
+                        "on-surface-variant": "#3f4941",
+                        "tertiary": "#454948",
+                        "on-secondary-container": "#5b6900",
+                        "on-primary-container": "#98edb2",
+                        "secondary": "#586400",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#414b00",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#bcd14a",
+                        "primary": "#00542d",
+                        "primary-container": "#106e3f",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container-low": "#f5f3f3",
+                        "secondary-container": "#d5ea60",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "surface-container": "#efeded",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#191e00",
+                        "primary-fixed-dim": "#83d89f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#00522c",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed": "#d8ed63",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "surface-tint": "#0d6c3e",
+                        "tertiary-container": "#5d6160",
+                        "on-surface": "#1b1c1c",
+                        "surface-bright": "#fbf9f8",
+                        "outline": "#6f7a70",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-desktop": "40px",
+                        "gutter": "24px",
+                        "container-padding-mobile": "16px",
+                        "section-gap": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .card-shadow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); }
+        .hover-card-shadow:hover { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); transform: translateY(-2px); transition: all 0.3s ease; }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="w-72 h-screen fixed left-0 top-0 bg-surface-container-lowest shadow-sm flex flex-col py-base z-50">
+<div class="px-6 py-4 flex items-center gap-4 border-b border-surface-variant">
+<div class="w-12 h-12 rounded-full bg-surface-container-high overflow-hidden shrink-0">
+<img alt="Koffi Agbodan, Agriculteur" class="w-full h-full object-cover" data-alt="A professional studio portrait of an African male farmer in his late 30s. He has a warm, confident smile and wears a clean, modern green canvas work jacket over a crisp white t-shirt. The background is a soft, muted greyish-white gradient to keep the focus on his face. Soft, bright, highly professional corporate lighting creates a modern, premium aesthetic suitable for a high-end agricultural platform profile picture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARrBGOLZxyJAIHIxdbJRm07hZ2S1coWfOFXiNtBpniPg8lswtLS69pQKtneueXBNyiHFb8wSaNMvAPr3s8MnI00RsIjKbroLOI3vEm6BdUGvov-MAwuU3ygmiHm0RmVvII5faazuNOOiMDHU6TyvtbTb148KUafq1OfGdw2rJxSU3Tj1Je8x-qsnjfdUAml0qSj9Q8VxwsxFXUDsv6gteu1q02mp_FHmr73Uv8LUCGbxnKqi1HZiE4"/>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Koffi Agbodan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Agriculteur</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
+<!-- Tabs -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+                Rechercher
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+                Mes demandes
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+                Messagerie
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Paiements
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+                Avis &amp; évaluations
+            </a>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-xl px-4 py-3 mx-2 font-label-sm text-label-sm scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+                Favoris
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                Notifications
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                Mon profil
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 mx-2 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Paramètres
+            </a>
+</div>
+<div class="mt-auto px-4 py-4 border-t border-surface-variant">
+<button class="w-full mb-4 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm py-3 rounded-xl transition-colors">
+                Mode simplifié
+            </button>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 px-4 py-3 rounded-xl font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                Besoin d'aide ?
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-72 flex-1 min-h-screen flex flex-col bg-background">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-container-desktop py-4 bg-transparent sticky top-0 z-40 h-20">
+<div class="flex items-center gap-4 flex-1 max-w-2xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-[#F9F9F9] border-none rounded-xl pl-12 pr-4 py-3 font-body-md text-on-surface focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Rechercher des machines, des services..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-auto">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-8 w-px bg-surface-variant mx-2"></div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-high px-3 py-2 rounded-xl transition-colors">
+                    FR
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="px-container-desktop py-8 flex-1">
+<div class="mb-10 flex items-end justify-between">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-background mb-2">Mes Favoris</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gérez vos équipements et services sauvegardés pour un accès rapide.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-surface-container rounded-xl font-label-sm text-label-sm text-on-surface hover:bg-surface-container-high transition-colors border border-outline-variant">
+                        Machines (8)
+                    </button>
+<button class="px-4 py-2 bg-transparent rounded-xl font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-colors border border-transparent">
+                        Services (3)
+                    </button>
+</div>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter pb-section-gap">
+<!-- Card 1 -->
+<article class="bg-surface-container-lowest rounded-[24px] p-6 card-shadow hover-card-shadow group relative">
+<button class="absolute top-8 right-8 z-10 w-10 h-10 bg-surface-container-lowest/80 backdrop-blur rounded-full flex items-center justify-center text-error hover:bg-error hover:text-on-error transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 relative bg-surface-container">
+<img alt="Tracteur John Deere" class="w-full h-full object-cover" data-alt="A pristine, modern John Deere green tractor parked in a well-lit, minimalist agricultural warehouse. The scene is bright and clean, emphasizing the mechanical perfection of the machinery. Soft natural light filters in from high windows, creating a high-key, professional aesthetic suitable for a premium farming equipment platform. The background is a soft, uncluttered white-grey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSw453pUP-1atxrD-U_cWnnSM5cQMFmnf8vO7v0Yb8q64R0a_FvaGj2yA7kUqxXIttP8okwxlTHk8fQhIsvNnLKSlsCVFjzG9gSuGkMYOkhOTtqMnNM0FKR9ZBewENgvWaiVdAW8_HHyYfc4do64ZaKyayu2YbftMlCqX82ktplapccvF_VJrElBOSqWYbsLmeLL3E3JUvwViAB9OPmOP83Iq5vLJPWHTwTiNjHrUgsANq0Uk3Pv4N"/>
+<div class="absolute bottom-3 left-3 bg-primary-fixed/90 text-on-primary-fixed font-label-sm text-[11px] px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                            Disponible
+                        </div>
+</div>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tracteur</span>
+<div class="flex items-center gap-1 text-on-surface">
+<span class="material-symbols-outlined text-[#F59E0B] text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">4.8</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] leading-[28px] text-on-background mb-1">John Deere 6155M</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Proposé par CUMA de l'Ouest</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant">
+<div>
+<span class="font-headline-md text-[22px] font-bold text-primary">150€</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">/jour</span>
+</div>
+<button class="bg-primary-container text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-xl hover:bg-primary transition-colors">
+                            Réserver
+                        </button>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface-container-lowest rounded-[24px] p-6 card-shadow hover-card-shadow group relative">
+<button class="absolute top-8 right-8 z-10 w-10 h-10 bg-surface-container-lowest/80 backdrop-blur rounded-full flex items-center justify-center text-error hover:bg-error hover:text-on-error transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 relative bg-surface-container">
+<img alt="Moissonneuse" class="w-full h-full object-cover" data-alt="A high-end combine harvester parked in an open, minimalist field setting during early morning light. The golden hour lighting casts long, soft shadows, creating a serene and premium feel. The machinery is spotless, rendered in sharp detail against a clear, soft blue sky. The composition is clean, emphasizing the scale and modern technology of the equipment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjGjJhVnXvAQjuNjWFp6zwk0_4sfqu7VHft19FqGsI0cLhsdSZdxW5GQwN9ccAni3e2w6xAbNQrbymsT1sDQ5IViZ019ZehiOHb0xekp6fRi-rGs40rPeFDWU9XPf1e9AlOQ26j0VaTkY_i2TvjPYWADcHVu8xNhoWuL_N5o7MfvvBO90SuZs8BKhd8Hm_P8R2K8MV4DNwfnXHXIm5H5Jkl5FxV4pMAeauXBVJCF1WcnUsOx1EWW31"/>
+<div class="absolute bottom-3 left-3 bg-error-container/90 text-on-error-container font-label-sm text-[11px] px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">event_busy</span>
+                            Indisponible
+                        </div>
+</div>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Moissonneuse</span>
+<div class="flex items-center gap-1 text-on-surface">
+<span class="material-symbols-outlined text-[#F59E0B] text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">4.9</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] leading-[28px] text-on-background mb-1">Claas Lexion 760</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Proposé par ETA Dupont</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant">
+<div>
+<span class="font-headline-md text-[22px] font-bold text-primary">850€</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">/jour</span>
+</div>
+<button class="border border-outline-variant text-primary font-label-sm text-label-sm px-4 py-2 rounded-xl hover:bg-surface-container transition-colors opacity-50 cursor-not-allowed">
+                            Indisponible
+                        </button>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface-container-lowest rounded-[24px] p-6 card-shadow hover-card-shadow group relative">
+<button class="absolute top-8 right-8 z-10 w-10 h-10 bg-surface-container-lowest/80 backdrop-blur rounded-full flex items-center justify-center text-error hover:bg-error hover:text-on-error transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 relative bg-surface-container">
+<img alt="Drone Agricole" class="w-full h-full object-cover" data-alt="A modern agricultural drone hovering above a pristine, green crop field. The image has a clean, high-tech aesthetic, with bright, soft lighting that highlights the drone's sleek design. The background is a smooth gradient of sky and field, creating a sense of advanced farming technology in a minimalist, premium context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD09S9GlAjbwZXE634efko575FBUeRHF_rDxRFDuvolqYsRZ8FuA3l-Noo14JXdkWpIfB0YyWstJxQFsfSRdrC2izVY3Oxgr0mJHWROPdPayHxgNhtDC1SPBmTUJ60iGMuqA8zyb3x9xd9uZd6m5OZYjL8Bi9ea0w8-ll2zQT3N5uSnJ1x8Uptrlc6tu7-wMDzMZIMtMZxKgK5NV_EatB2UA2tPNQiFYkA0zocM13bCu3uvxt65DTAY"/>
+<div class="absolute bottom-3 left-3 bg-primary-fixed/90 text-on-primary-fixed font-label-sm text-[11px] px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                            Disponible
+                        </div>
+</div>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Haute Tech</span>
+<div class="flex items-center gap-1 text-on-surface">
+<span class="material-symbols-outlined text-[#F59E0B] text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">5.0</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] leading-[28px] text-on-background mb-1">Drone DJI Agras</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Proposé par AgriTech Solutions</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant">
+<div>
+<span class="font-headline-md text-[22px] font-bold text-primary">200€</span>
+<span class="font-body-md text-[14px] text-on-surface-variant">/jour</span>
+</div>
+<button class="bg-primary-container text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-xl hover:bg-primary transition-colors">
+                            Réserver
+                        </button>
+</div>
+</article>
+<!-- Card 4 (Service) -->
+<article class="bg-surface-container-lowest rounded-[24px] p-6 card-shadow hover-card-shadow group relative">
+<button class="absolute top-8 right-8 z-10 w-10 h-10 bg-surface-container-lowest/80 backdrop-blur rounded-full flex items-center justify-center text-error hover:bg-error hover:text-on-error transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 relative bg-surface-container">
+<img alt="Service de réparation" class="w-full h-full object-cover" data-alt="A clean, highly organized, and brightly lit modern agricultural repair workshop. Professional tools are neatly arranged on a clean white wall. In the foreground, a pristine metallic engine part sits on a spotless workbench. The lighting is bright and even, conveying trust, precision, and premium service quality in a minimalist industrial setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzI4-GatTTwcQku3Ou_oaAg5T948X97jy6FnykL6-5GWLD9N998dPBCYScBzhn0yCPr5NdYMnwE8a0FwC7Rm2OdZfwni1llbrymbCeWWQ6q49xzqxdnF8HXlk45-YJ8lIibYT3KFAHqeN4fLJqxnFW8b9bP3sTx_18OeK4NWp1tHtM1E7ebXeEbgjvy9Tslj9QqQ-nm4sR1ctucMUaVh35eikLfjWXUrB_3BG5Hq7rhz53_ou34DUH"/>
+<div class="absolute bottom-3 left-3 bg-secondary-fixed/90 text-on-secondary-fixed font-label-sm text-[11px] px-2 py-1 rounded-full flex items-center gap-1 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">build</span>
+                            Service
+                        </div>
+</div>
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Maintenance</span>
+<div class="flex items-center gap-1 text-on-surface">
+<span class="material-symbols-outlined text-[#F59E0B] text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-sm text-label-sm">4.7</span>
+</div>
+</div>
+<h3 class="font-headline-md text-[20px] leading-[28px] text-on-background mb-1">Révision Complète</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Atelier Méca-Agri 31</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-surface-variant">
+<div>
+<span class="font-headline-md text-[22px] font-bold text-primary">Sur devis</span>
+</div>
+<button class="border border-outline-variant text-primary font-label-sm text-label-sm px-4 py-2 rounded-xl hover:bg-surface-container transition-colors">
+                            Contacter
+                        </button>
+</div>
+</article>
+</div>
+</div>
+</main>
+</body></html>

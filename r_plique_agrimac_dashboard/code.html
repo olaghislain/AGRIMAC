@@ -1,0 +1,608 @@
+<!DOCTYPE html><html lang="fr" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AGRIMAC - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styles">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+    }
+    
+    /* Scrollbar styling for sidebar */
+    .sidebar-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .sidebar-scroll::-webkit-scrollbar-thumb {
+      background-color: #e2e8f0;
+      border-radius: 20px;
+    }
+    
+    /* Chart and map placeholders */
+    .chart-container {
+      background-image: linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+  </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" data-snapdom="injected-import"></head>
+<body class="text-slate-800 antialiased flex h-screen overflow-hidden">
+<!-- BEGIN: Sidebar -->
+<aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full flex-shrink-0 z-20">
+<!-- Logo -->
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-brand-700 rounded text-white flex items-center justify-center">
+<i class="fas fa-leaf"></i>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 leading-tight">AGRIMAC</h1>
+<p class="text-[10px] text-slate-500 font-medium">L'écosystème agricole du Bénin</p>
+</div>
+</div>
+<!-- User Profile -->
+<div class="px-6 mb-6">
+<div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+<img alt="Admin" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA9zTOQ_qICX_yarmRdzUAOadiOKXN2LaRqGj52eO-_if2P64Ngzoo8332WbUGGKH2R-7tWI36cPMgdESBVmDXeOmR3EPpPpFOPBeltwhBmE9_77yIOMTrIXbbmxlP-5d5aagmYQ-pIDDW_PGszg4Rj0RgGZZ7Tlyvo58rTxV_-yypurDNpSlJuQ7kv6vwzAewZl0fYLrrRdAhvdzsNImoc99ttxbE2G6FtQCmIqjnjex8Asfww-oZ">
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-slate-900 truncate">Administrateur</p>
+<p class="text-xs text-brand-600 font-medium bg-brand-50 inline-block px-1.5 py-0.5 rounded mt-0.5">Super Admin</p>
+</div>
+</div>
+<p class="text-xs text-slate-500 mt-2 ml-1 cursor-pointer hover:text-slate-700 flex items-center gap-1">
+        admin@agrimac.bj <i class="fas fa-chevron-down text-[10px]"></i>
+</p>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto sidebar-scroll px-4 pb-4">
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-3 py-2.5 bg-brand-700 text-white rounded-lg mb-6 shadow-sm shadow-brand-700/20" href="#">
+<i class="fas fa-home w-5 text-center"></i>
+<span class="text-sm font-medium">Tableau de bord</span>
+</a>
+<!-- Section: Gestion des utilisateurs -->
+<div class="mb-6">
+<h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Gestion des utilisateurs</h3>
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-user-group w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Utilisateurs</span>
+<span class="text-[10px] text-slate-400">Tous les comptes</span>
+</div>
+</div>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-building w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Entreprises</span>
+<span class="text-[10px] text-slate-400">Comptes à valider</span>
+</div>
+</div>
+<span class="bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">24</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-wrench w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Maintenanciers</span>
+<span class="text-[10px] text-slate-400">Comptes à valider</span>
+</div>
+</div>
+<span class="bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">18</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-user-tractor w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Agriculteurs</span>
+<span class="text-[10px] text-slate-400">Comptes actifs</span>
+</div>
+</div>
+<span class="bg-brand-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">4,892</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Section: Contenu & Annonces -->
+<div class="mb-6">
+<h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Contenu &amp; Annonces</h3>
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-bullhorn w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Annonces &amp; produits</span>
+<span class="text-[10px] text-slate-400">Toutes les publications</span>
+</div>
+</div>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-list w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Catégories</span>
+<span class="text-[10px] text-slate-400">Gérer les catégories</span>
+</div>
+</div>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-flag w-5 text-center text-slate-400 group-hover:text-red-500"></i>
+<div>
+<span class="text-sm font-medium block">Signalements</span>
+<span class="text-[10px] text-slate-400">Contenus signalés</span>
+</div>
+</div>
+<span class="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">12</span>
+</a>
+</li>
+</ul>
+</div><div class="mb-6"><h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Analytiques &amp; Rapports</h3><ul class="space-y-1"><li class=""><a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#"><div class="flex items-center gap-3"><i class="fas fa-chart-simple w-5 text-center text-slate-400 group-hover:text-brand-600"></i><div><span class="text-sm font-medium block">Statistiques globales</span></div></div></a></li><li class=""><a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#"><div class="flex items-center gap-3"><i class="fas fa-file-invoice w-5 text-center text-slate-400 group-hover:text-brand-600"></i><div><span class="text-sm font-medium block">Rapports</span><span class="text-[10px] text-slate-400">Exports &amp; analyses</span></div></div></a></li></ul></div><div class="mb-4"><h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Système</h3><ul class="space-y-1"><li class=""><a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#"><div class="flex items-center gap-3"><i class="fas fa-gear w-5 text-center text-slate-400 group-hover:text-brand-600"></i><div><span class="text-sm font-medium block">Paramètres</span><span class="text-[10px] text-slate-400">Configuration générale</span></div></div></a></li><li class=""><a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#"><div class="flex items-center gap-3"><i class="fas fa-clipboard-list w-5 text-center text-slate-400 group-hover:text-brand-600"></i><div><span class="text-sm font-medium block">Journaux d'activités</span><span class="text-[10px] text-slate-400">Logs &amp; historique</span></div></div></a></li></ul></div>
+<!-- Section: Analytiques & Rapports -->
+<div class="mb-6">
+<h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Analytiques &amp; Rapports</h3>
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-chart-simple w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Statistiques globales</span>
+</div>
+</div>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-file-invoice w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Rapports</span>
+<span class="text-[10px] text-slate-400">Exports &amp; analyses</span>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Section: Système -->
+<div class="mb-4">
+<h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">Système</h3>
+<ul class="space-y-1">
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-gear w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Paramètres</span>
+<span class="text-[10px] text-slate-400">Configuration générale</span>
+</div>
+</div>
+</a>
+</li>
+<li class="">
+<a class="flex items-center justify-between px-3 py-2 text-slate-600 hover:bg-slate-50 rounded-lg group transition-colors" href="#">
+<div class="flex items-center gap-3">
+<i class="fas fa-clipboard-list w-5 text-center text-slate-400 group-hover:text-brand-600"></i>
+<div>
+<span class="text-sm font-medium block">Journaux d'activités</span>
+<span class="text-[10px] text-slate-400">Logs &amp; historique</span>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Bottom Actions -->
+<div class="p-4 mt-auto">
+<div class="bg-brand-900 rounded-xl p-4 text-white mb-4">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<i class="fas fa-shield-halved text-brand-400"></i>
+<span class="text-sm font-medium">Mode simplifié</span>
+</div>
+<!-- Toggle switch -->
+<div class="w-8 h-4 bg-brand-700 rounded-full relative cursor-pointer">
+<div class="absolute left-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<p class="text-[10px] text-brand-200">Interface complète pour administrateur</p>
+</div>
+<a class="flex items-center justify-between p-3 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors" href="#">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+<i class="fas fa-headset"></i>
+</div>
+<div>
+<span class="text-sm font-medium text-slate-700 block">Besoin d'aide ?</span>
+<span class="text-[10px] text-slate-500">Contacter le support technique</span>
+</div>
+</div>
+<i class="fas fa-chevron-right text-slate-400 text-xs"></i>
+</a>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- BEGIN: Header -->
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 py-4 flex items-center justify-between z-10 sticky top-0">
+<div>
+<h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+          Bonjour, Administrateur !
+          <i class="fas fa-circle-check text-brand-600 text-lg"></i>
+</h2>
+<p class="text-sm text-slate-500">Supervisez et gérez votre écosystème AGRIMAC.</p>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search -->
+<div class="relative w-80">
+<input class="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all" placeholder="Rechercher un utilisateur, une entreprise..." type="text">
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+<i class="fas fa-search"></i>
+</button>
+</div>
+<!-- Voice Search -->
+<button class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-brand-700 bg-brand-50 border border-brand-100 rounded-lg hover:bg-brand-100 transition-colors">
+<i class="fas fa-microphone"></i>
+          Recherche vocale
+        </button>
+<!-- Language -->
+<button class="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-slate-700 border border-slate-200 rounded-lg hover:bg-slate-50">
+<i class="fas fa-globe text-slate-400"></i>
+          FR
+          <i class="fas fa-chevron-down text-xs text-slate-400"></i>
+</button>
+<!-- Notifications -->
+<button class="relative p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">
+<i class="far fa-bell text-lg"></i>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center text-[9px] font-bold text-white">8</span>
+</button>
+<!-- Profile Dropdown -->
+<button class="flex items-center gap-2 pl-2">
+<img alt="Admin" class="w-9 h-9 rounded-full border border-slate-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC323Map1ncgqzdxZkaQZtyFirtlqa-3gKLoHz_CRTdLR6P-bhQ7UeXxApGzVDro_iCavcxjnM4pxL-ow4mQnDEmLuRkMfxnQN95T5ORwbaSwVy1aQIJHgre3oqzRA7s2c0aRDbzCPkSl2Qlq_318BVv3pHGI1p_Al2NAZORYh1o5JN6ZVe3KYyzA8Kx0hQZlrL75m8TL9u6LOCPg2tlbDj1zMbAxJMOo44j1F0gFJewnizXYHpOid5">
+<div class="text-left hidden md:block">
+<p class="text-sm font-semibold text-slate-900 leading-none">Administrateur</p>
+<p class="text-[10px] text-brand-600 font-medium">Super Admin</p>
+</div>
+</button>
+</div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8 space-y-6">
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Stat Card 1 -->
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+<i class="fas fa-user"></i>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">5,924</p>
+<p class="text-xs text-slate-500 font-medium">Utilisateurs totaux</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-xs text-emerald-600 font-medium mt-auto">
+<i class="fas fa-arrow-trend-up"></i>
+<span class="">+12.5%</span> <span class="text-slate-400 font-normal">ce mois-ci</span>
+</div>
+<!-- Decorative subtle line -->
+<svg class="absolute bottom-0 left-0 w-full h-8 text-emerald-100 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0 100 C 20 80, 40 90, 60 70 S 80 80, 100 60 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+<i class="fas fa-building"></i>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">256</p>
+<p class="text-xs text-slate-500 font-medium">Entreprises</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-xs text-emerald-600 font-medium mt-auto">
+<i class="fas fa-arrow-trend-up"></i>
+<span class="">+8.3%</span> <span class="text-slate-400 font-normal">ce mois-ci</span>
+</div>
+<svg class="absolute bottom-0 left-0 w-full h-8 text-blue-100 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0 100 C 30 70, 50 85, 70 60 S 90 75, 100 50 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
+<i class="fas fa-wrench"></i>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">412</p>
+<p class="text-xs text-slate-500 font-medium">Maintenanciers</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-xs text-emerald-600 font-medium mt-auto">
+<i class="fas fa-arrow-trend-up"></i>
+<span class="">+9.7%</span> <span class="text-slate-400 font-normal">ce mois-ci</span>
+</div>
+<svg class="absolute bottom-0 left-0 w-full h-8 text-purple-100 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0 100 C 25 90, 45 70, 65 85 S 85 60, 100 70 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-600">
+<i class="fas fa-user-tractor"></i>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">5,256</p>
+<p class="text-xs text-slate-500 font-medium">Agriculteurs</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-xs text-emerald-600 font-medium mt-auto">
+<i class="fas fa-arrow-trend-up"></i>
+<span class="">+13.8%</span> <span class="text-slate-400 font-normal">ce mois-ci</span>
+</div>
+<svg class="absolute bottom-0 left-0 w-full h-8 text-orange-100 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0 100 C 15 65, 35 90, 55 75 S 75 85, 100 65 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+<!-- Stat Card 5 -->
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-600">
+<i class="fas fa-bullhorn"></i>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">1,842</p>
+<p class="text-xs text-slate-500 font-medium">Annonces actives</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-xs text-emerald-600 font-medium mt-auto">
+<i class="fas fa-arrow-trend-up"></i>
+<span class="">+15.2%</span> <span class="text-slate-400 font-normal">ce mois-ci</span>
+</div>
+<svg class="absolute bottom-0 left-0 w-full h-8 text-brand-100 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0 100 C 20 85, 40 65, 60 80 S 80 60, 100 75 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+<!-- Stat Card 6 -->
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+<i class="fas fa-flag"></i>
+</div>
+<div class="text-right">
+<p class="text-2xl font-bold text-slate-900">37</p>
+<p class="text-xs text-slate-500 font-medium">Signalements</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-xs text-red-500 font-medium mt-auto">
+<i class="fas fa-arrow-trend-down"></i>
+<span class="">-5.1%</span> <span class="text-slate-400 font-normal">ce mois-ci</span>
+</div>
+<svg class="absolute bottom-0 left-0 w-full h-8 text-red-100 opacity-50" preserveAspectRatio="none" viewBox="0 0 100 100">
+<path d="M0 100 C 30 80, 50 60, 70 90 S 90 70, 100 85 L 100 100 Z" fill="currentColor"></path>
+</svg>
+</div>
+</div><div class="grid grid-cols-1 lg:grid-cols-3 gap-6"><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col overflow-hidden"><div class="flex items-center justify-between mb-4"><h3 class="text-lg font-bold text-slate-900">Utilisateurs récents</h3><a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Voir tout</a></div><div class="overflow-x-auto flex-1"><table class="w-full text-left border-collapse"><thead><tr class="border-b border-slate-200 text-xs text-slate-500 uppercase tracking-wider"><th class="pb-3 font-medium">Utilisateur</th><th class="pb-3 font-medium">Profil</th><th class="pb-3 font-medium text-right">Statut</th></tr></thead><tbody class="text-sm divide-y divide-slate-100"><tr class="hover:bg-slate-50 transition-colors"><td class="py-3 flex items-center gap-2"><img alt="Koffi" class="w-7 h-7 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlqp6zy6qA3s1cmozui36IWTK_KSHTFbNR1ZfOCsqK4aen1UDlI_4-oY9pab_Lx5Lca9sdLe5CD_jkPWQP3P_ZvFhnYK1p89X2Q_PAxu49c79YfRweWrDz4dvPCld9WkJLLJ2Yp_J4mAIc-J-1MLKS0mzwRh5jyhMeUl23zhzbtg4Snuv9j9pKYI4OsghhsyapnIqmqHHAjbsNlakSYdAX9JWilKWtbi2ka7kXI8ci4upkTYF8zqGq"><span class="font-semibold text-slate-900">Koffi Agbodan</span></td><td class="py-3 text-brand-600 font-medium text-xs">Agriculteur</td><td class="py-3 text-right"><span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded">Actif</span></td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-3 flex items-center gap-2"><img alt="Jean" class="w-7 h-7 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATUnJBeSpT5P21Tvoq3RYYWMs9Cb4XxzsNslfoS8fy0hPZXPWu-q0Hn9EkQgr2wUJvfYD__nt4OBNvhchIIPaFsOf8mxo7WWWqq0fReOxAq761vna8qHsuILYfQH9jDLVvJ-wmRIfQc1rywKaZPTlw6bWLT7Nsr-RwDWNmhmlzWZ8GfQaTSgXLTG_EwnaEFyH_KnZdsb7rdiUpkDyd9MYi8ys56CPZNgeP9s7tqnir_9hcbfjUkBOA"><span class="font-semibold text-slate-900">Jean Hounkpe</span></td><td class="py-3 text-slate-600 font-medium text-xs">Entreprise</td><td class="py-3 text-right"><span class="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded">En attente</span></td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-3 flex items-center gap-2"><img alt="Arsène" class="w-7 h-7 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCng4X4mMBAEyHZf1sojnmXoONIJFmEl_ZzqFko9relbTjeIlQw61bEKyJGkyT16vgH64m51E6sOnPmVfQN_tci44z8dcqzakALsyVwXHdh-6zULG0gJZBLlY1layUr7rudpziOi9TqMX8d-WAwl44EWWvrYFVZMqclSI3Tk5f1LIbuIpAXmTByaWi2bkP7-1CKkhu10XkpyIRuRPew3g9pQCA8jozYiam-y-3b_fYvADEZ17aokoLN"><span class="font-semibold text-slate-900">Arsène Zannou</span></td><td class="py-3 text-slate-600 font-medium text-xs">Maintenancier</td><td class="py-3 text-right"><span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded">Actif</span></td></tr></tbody></table></div></div><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col"><div class="flex items-center justify-between mb-4"><h3 class="text-lg font-bold text-slate-900">Annonces populaires</h3><a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Voir tout</a></div><div class="flex-1"><table class="w-full text-left border-collapse"><thead><tr class="border-b border-slate-200 text-xs text-slate-500 uppercase tracking-wider"><th class="pb-3 font-medium">Annonce</th><th class="pb-3 font-medium text-right">Vues</th></tr></thead><tbody class="text-sm divide-y divide-slate-100"><tr class="hover:bg-slate-50 transition-colors"><td class="py-2.5 flex items-center gap-3"><div class="w-8 h-8 bg-slate-100 rounded flex items-center justify-center"><i class="fas fa-tractor text-slate-400"></i></div><span class="font-semibold text-slate-900 text-xs truncate max-w-[120px]">Tracteur Massey Ferguson 375</span></td><td class="py-2.5 text-right font-semibold text-slate-700 text-xs">2,456</td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-2.5 flex items-center gap-3"><div class="w-8 h-8 bg-slate-100 rounded flex items-center justify-center"><i class="fas fa-cogs text-slate-400"></i></div><span class="font-semibold text-slate-900 text-xs truncate max-w-[120px]">Motopompe Hyundai 3 pouces</span></td><td class="py-2.5 text-right font-semibold text-slate-700 text-xs">1,842</td></tr><tr class="hover:bg-slate-50 transition-colors"><td class="py-2.5 flex items-center gap-3"><div class="w-8 h-8 bg-slate-100 rounded flex items-center justify-center"><i class="fas fa-sack-xmark text-slate-400"></i></div><span class="font-semibold text-slate-900 text-xs truncate max-w-[120px]">Engrais NPK 20-10-10</span></td><td class="py-2.5 text-right font-semibold text-slate-700 text-xs">1,256</td></tr></tbody></table></div></div><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col"><div class="flex items-center justify-between mb-6"><h3 class="text-lg font-bold text-slate-900">Activités système</h3><a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Voir tout</a></div><div class="flex-1 relative"><div class="absolute left-4 top-0 bottom-0 w-px bg-slate-200"></div><div class="space-y-6 relative"><div class="flex gap-4"><div class="w-8 h-8 rounded-full bg-emerald-100 border-2 border-white flex items-center justify-center text-emerald-600 text-xs z-10 shrink-0"><i class="fas fa-check"></i></div><div><p class="text-sm font-bold text-slate-900">Compte validé</p><p class="text-[11px] text-slate-500">MTN Bénin SARL validé</p></div></div><div class="flex gap-4"><div class="w-8 h-8 rounded-full bg-purple-100 border-2 border-white flex items-center justify-center text-purple-600 text-xs z-10 shrink-0"><i class="fas fa-flag"></i></div><div><p class="text-sm font-bold text-slate-900">Nouveau signalement</p><p class="text-[11px] text-slate-500">Contenu signalé (Machines)</p></div></div><div class="flex gap-4"><div class="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-blue-600 text-xs z-10 shrink-0"><i class="fas fa-building"></i></div><div><p class="text-sm font-bold text-slate-900">Nouvelle entreprise</p><p class="text-[11px] text-slate-500">Agri Services Pro inscrite</p></div></div></div></div></div></div>
+<!-- Main Dash Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Activity Chart & Mini Stats -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-slate-900">Vue d'ensemble des activités</h3>
+<div class="relative">
+<select class="appearance-none bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium rounded-lg px-3 py-1.5 pr-8 focus:outline-none focus:ring-2 focus:ring-brand-500/20 cursor-pointer">
+<option>30 derniers jours</option>
+</select>
+<i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] pointer-events-none"></i>
+</div>
+</div>
+<div class="flex items-center gap-6 mb-4 text-xs font-medium text-slate-600">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-brand-600"></span> Inscriptions</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Annonces publiées</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-orange-500"></span> Transactions</div>
+</div>
+<!-- Chart Area Placeholder -->
+<div class="flex-1 chart-container rounded-lg mb-6 relative">
+<!-- Simulated chart lines -->
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+<polyline fill="none" points="0,70 10,65 20,75 30,60 40,55 50,70 60,40 70,55 80,30 90,45 100,20" stroke="#16a34a" stroke-width="0.5"></polyline>
+<polyline fill="none" points="0,85 10,80 20,85 30,75 40,70 50,80 60,65 70,75 80,50 90,60 100,45" stroke="#3b82f6" stroke-width="0.5"></polyline>
+<polyline fill="none" points="0,95 10,92 20,96 30,90 40,88 50,94 60,85 70,90 80,75 90,82 100,70" stroke="#f97316" stroke-width="0.5"></polyline>
+</svg>
+<!-- Y Axis labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] text-slate-400 py-1">
+<span class="">1K4</span><span class="">800</span><span class="">600</span><span class="">400</span><span class="">200</span><span class="">0</span>
+</div>
+<!-- X Axis labels -->
+<div class="absolute bottom-0 left-8 right-0 flex justify-between text-[10px] text-slate-400 pt-2 border-t border-slate-100">
+<span class="">04 Mai</span><span class="">08 Mai</span><span class="">12 Mai</span><span class="">16 Mai</span><span class="">20 Mai</span><span class="">24 Mai</span><span class="">28 Mai</span><span class="">01 Juin</span>
+</div>
+</div><div class="grid grid-cols-4 gap-4 pt-4 border-t border-slate-100"><div><p class="text-xs text-slate-500 mb-1">Inscriptions</p><p class="text-xl font-bold text-slate-900">1,245</p><p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +12.5%</p></div><div><p class="text-xs text-slate-500 mb-1">Annonces</p><p class="text-xl font-bold text-slate-900">892</p><p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +15.3%</p></div><div><p class="text-xs text-slate-500 mb-1">Transactions</p><p class="text-xl font-bold text-slate-900">2,156</p><p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +18.7%</p></div><div><p class="text-xs text-slate-500 mb-1">Revenus générés</p><p class="text-xl font-bold text-slate-900">245,000 <span class="text-sm font-normal text-slate-500">FCFA</span></p><p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +16.2%</p></div></div>
+<!-- Mini Stats below chart -->
+<div class="grid grid-cols-4 gap-4 pt-4 border-t border-slate-100">
+<div>
+<p class="text-xs text-slate-500 mb-1">Inscriptions</p>
+<p class="text-xl font-bold text-slate-900">1,245</p>
+<p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +12.5%</p>
+</div>
+<div>
+<p class="text-xs text-slate-500 mb-1">Annonces</p>
+<p class="text-xl font-bold text-slate-900">892</p>
+<p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +15.3%</p>
+</div>
+<div>
+<p class="text-xs text-slate-500 mb-1">Transactions</p>
+<p class="text-xl font-bold text-slate-900">2,156</p>
+<p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +18.7%</p>
+</div>
+<div>
+<p class="text-xs text-slate-500 mb-1">Revenus générés</p>
+<p class="text-xl font-bold text-slate-900">245,000 <span class="text-sm font-normal text-slate-500">FCFA</span></p>
+<p class="text-[10px] text-emerald-600 font-medium flex items-center gap-1 mt-1"><i class="fas fa-arrow-trend-up"></i> +16.2%</p>
+</div>
+</div>
+</div>
+<!-- Zones Map -->
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-slate-900">Répartition par zones</h3>
+<a class="text-xs font-medium text-brand-600 hover:text-brand-700 px-2 py-1 border border-brand-200 rounded" href="#">Voir la carte</a>
+</div>
+<div class="flex-1 flex items-center justify-between">
+<!-- Map Placeholder -->
+<div class="w-1/2 h-full flex items-center justify-center p-4">
+<svg class="h-48 drop-shadow-md" viewBox="0 0 100 200">
+<!-- Stylized abstract shape resembling Benin -->
+<path d="M40 10 Q 50 5, 60 10 Q 70 30, 65 50 Q 70 70, 80 90 Q 75 120, 85 140 Q 90 160, 70 190 Q 50 195, 40 180 Q 20 160, 25 130 Q 15 100, 20 80 Q 10 50, 25 30 Q 30 15, 40 10 Z" fill="#bbf7d0" stroke="#fff" stroke-width="1"></path>
+<path d="M40 10 Q 50 5, 60 10 Q 70 30, 65 50 Q 50 45, 40 40 Q 25 30, 40 10 Z" fill="#22c55e" stroke="#fff" stroke-width="0.5"></path> <!-- Zou -->
+<path d="M65 50 Q 70 70, 80 90 Q 60 85, 45 75 Q 35 60, 40 40 Q 50 45, 65 50 Z" fill="#3b82f6" stroke="#fff" stroke-width="0.5"></path> <!-- Atlantique -->
+<path d="M80 90 Q 75 120, 85 140 Q 60 130, 40 110 Q 30 90, 45 75 Q 60 85, 80 90 Z" fill="#f97316" stroke="#fff" stroke-width="0.5"></path> <!-- Borgou -->
+<path d="M85 140 Q 90 160, 70 190 Q 50 170, 45 150 Q 35 130, 40 110 Q 60 130, 85 140 Z" fill="#ef4444" stroke="#fff" stroke-width="0.5"></path> <!-- Oueme -->
+</svg>
+</div>
+<!-- Legend -->
+<div class="w-1/2 space-y-4 pl-4 border-l border-slate-100">
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-brand-500"></span> <span class="text-sm font-semibold text-slate-800">Zou</span></div>
+<p class="text-xs text-slate-500 pl-4">1,245 utilisateurs</p>
+</div>
+<span class="text-sm font-bold text-brand-600">21.0%</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> <span class="text-sm font-semibold text-slate-800">Atlantique</span></div>
+<p class="text-xs text-slate-500 pl-4">1,102 utilisateurs</p>
+</div>
+<span class="text-sm font-bold text-brand-600">18.6%</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span> <span class="text-sm font-semibold text-slate-800">Borgou</span></div>
+<p class="text-xs text-slate-500 pl-4">987 utilisateurs</p>
+</div>
+<span class="text-sm font-bold text-brand-600">16.6%</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-red-500"></span> <span class="text-sm font-semibold text-slate-800">Ouémé</span></div>
+<p class="text-xs text-slate-500 pl-4">876 utilisateurs</p>
+</div>
+<span class="text-sm font-bold text-brand-600">14.8%</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-slate-400"></span> <span class="text-sm font-semibold text-slate-800">Collines</span></div>
+<p class="text-xs text-slate-500 pl-4">732 utilisateurs</p>
+</div>
+<span class="text-sm font-bold text-brand-600">12.3%</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 mb-1"><span class="w-2 h-2 rounded-full bg-slate-800"></span> <span class="text-sm font-semibold text-slate-800">Autres</span></div>
+<p class="text-xs text-slate-500 pl-4">982 utilisateurs</p>
+</div>
+<span class="text-sm font-bold text-brand-600">16.7%</span>
+</div>
+</div>
+</div>
+<div class="text-center mt-4 pt-4 border-t border-slate-100">
+<a class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center justify-center gap-1" href="#">Voir le rapport complet <i class="fas fa-arrow-right"></i></a>
+</div>
+</div><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col"><div class="flex items-center justify-between mb-6"><h3 class="text-lg font-bold text-slate-900">Comptes en attente de validation</h3><a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Voir tout</a></div><div class="space-y-4 flex-1"><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-yellow-400 text-slate-900 font-bold flex items-center justify-center text-sm flex-shrink-0">MTN</div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">MTN Bénin SARL</p><span class="text-[10px] font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Entreprise</span></div><p class="text-[11px] text-slate-500 truncate">Entreprise • Inscrit le 02 Juin 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fas fa-building"></i></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">Agri Services Pro</p><span class="text-[10px] font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Entreprise</span></div><p class="text-[11px] text-slate-500 truncate">Entreprise • Inscrit le 01 Juin 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fas fa-wrench"></i></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">Techno Réparation</p><span class="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Maintenancier</span></div><p class="text-[11px] text-slate-500 truncate">Maintenancier • Inscrit le 31 Mai 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div></div><div class="text-center mt-4 pt-4 border-t border-slate-100"><a class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center justify-center gap-1" href="#">Voir tous les comptes en attente <i class="fas fa-arrow-right"></i></a></div></div>
+</div>
+<!-- Secondary Dash Grid -->
+
+<!-- Bottom Bar -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Security Banner -->
+<div class="bg-brand-800 rounded-xl p-6 text-white flex items-center justify-between lg:col-span-1 shadow-md">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-2xl">
+<i class="fas fa-shield-check"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold">Sécurité &amp; conformité</h3>
+<p class="text-xs text-brand-200 mt-1">Surveillez la sécurité de la plateforme<br>et les activités sensibles.</p>
+</div>
+</div>
+<button class="bg-white text-brand-800 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2">
+            Voir les journaux <i class="fas fa-arrow-right"></i>
+</button>
+</div>
+<!-- Quick Actions -->
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:col-span-2 flex flex-col justify-center">
+<h3 class="text-sm font-bold text-slate-900 mb-4">Actions rapides</h3>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors">
+<i class="fas fa-user-plus text-emerald-600"></i> Ajouter un admin
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors">
+<i class="fas fa-paper-plane text-blue-600"></i> Envoyer une notification
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors">
+<i class="fas fa-cloud-arrow-down text-slate-600"></i> Exporter les données
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors">
+<i class="fas fa-database text-slate-800"></i> Sauvegarde DB
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors">
+<i class="fas fa-gear text-slate-500"></i> Paramètres système
+            </button>
+</div>
+</div><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col"><div class="flex items-center justify-between mb-6"><h3 class="text-lg font-bold text-slate-900">Comptes en attente de validation</h3><a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Voir tout</a></div><div class="space-y-4 flex-1"><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-yellow-400 text-slate-900 font-bold flex items-center justify-center text-sm flex-shrink-0">MTN</div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">MTN Bénin SARL</p><span class="text-[10px] font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Entreprise</span></div><p class="text-[11px] text-slate-500 truncate">Entreprise • Inscrit le 02 Juin 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fas fa-building"></i></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">Agri Services Pro</p><span class="text-[10px] font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Entreprise</span></div><p class="text-[11px] text-slate-500 truncate">Entreprise • Inscrit le 01 Juin 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fas fa-wrench"></i></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">Techno Réparation</p><span class="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Maintenancier</span></div><p class="text-[11px] text-slate-500 truncate">Maintenancier • Inscrit le 31 Mai 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div></div><div class="text-center mt-4 pt-4 border-t border-slate-100"><a class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center justify-center gap-1" href="#">Voir tous les comptes en attente <i class="fas fa-arrow-right"></i></a></div></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6"><div class="bg-brand-800 rounded-xl p-6 text-white flex items-center justify-between lg:col-span-1 shadow-md"><div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-2xl"><i class="fas fa-shield-check"></i></div><div><h3 class="text-lg font-bold">Sécurité &amp; conformité</h3><p class="text-xs text-brand-200 mt-1">Surveillez la sécurité de la plateforme<br>et les activités sensibles.</p></div></div><button class="bg-white text-brand-800 hover:bg-slate-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2">Voir les journaux <i class="fas fa-arrow-right"></i></button></div><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 lg:col-span-2 flex flex-col justify-center"><h3 class="text-sm font-bold text-slate-900 mb-4">Actions rapides</h3><div class="flex flex-wrap gap-3"><button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors"><i class="fas fa-user-plus text-emerald-600"></i> Ajouter un admin</button><button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors"><i class="fas fa-paper-plane text-blue-600"></i> Envoyer une notification</button><button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors"><i class="fas fa-cloud-arrow-down text-slate-600"></i> Exporter les données</button><button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors"><i class="fas fa-database text-slate-800"></i> Sauvegarde DB</button><button class="flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 transition-colors"><i class="fas fa-gear text-slate-500"></i> Paramètres système</button></div></div><div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col"><div class="flex items-center justify-between mb-6"><h3 class="text-lg font-bold text-slate-900">Comptes en attente de validation</h3><a class="text-xs font-medium text-brand-600 hover:text-brand-700" href="#">Voir tout</a></div><div class="space-y-4 flex-1"><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-yellow-400 text-slate-900 font-bold flex items-center justify-center text-sm flex-shrink-0">MTN</div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">MTN Bénin SARL</p><span class="text-[10px] font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Entreprise</span></div><p class="text-[11px] text-slate-500 truncate">Entreprise • Inscrit le 02 Juin 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fas fa-building"></i></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">Agri Services Pro</p><span class="text-[10px] font-medium bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Entreprise</span></div><p class="text-[11px] text-slate-500 truncate">Entreprise • Inscrit le 01 Juin 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div><div class="border border-slate-100 rounded-lg p-4 hover:shadow-md transition-shadow bg-slate-50/50"><div class="flex items-start gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm flex-shrink-0"><i class="fas fa-wrench"></i></div><div class="flex-1 min-w-0"><div class="flex items-center justify-between"><p class="text-sm font-bold text-slate-900 truncate">Techno Réparation</p><span class="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded">Maintenancier</span></div><p class="text-[11px] text-slate-500 truncate">Maintenancier • Inscrit le 31 Mai 2025</p></div></div><div class="flex gap-2"><button class="flex-1 py-1.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded border border-red-100 transition-colors flex items-center justify-center gap-1"><i class="fas fa-xmark"></i> Rejeter</button><button class="flex-1 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-100 hover:bg-emerald-200 rounded border border-emerald-200 transition-colors flex items-center justify-center gap-1"><i class="fas fa-check"></i> Valider</button></div></div></div><div class="text-center mt-4 pt-4 border-t border-slate-100"><a class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center justify-center gap-1" href="#">Voir tous les comptes en attente <i class="fas fa-arrow-right"></i></a></div></div></div></div>
+<!-- END: Dashboard Content -->
+</main>
+<!-- END: Main Content -->
+
+
+</body></html>

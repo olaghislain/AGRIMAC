@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Tableau de bord</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#106e3f",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#9ff5b9",
+                        "secondary-container": "#d5ea60",
+                        "on-tertiary-container": "#d9dcda",
+                        "outline": "#6f7a70",
+                        "inverse-surface": "#303030",
+                        "on-secondary-fixed-variant": "#414b00",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#d8ed63",
+                        "outline-variant": "#bec9be",
+                        "surface-container": "#efeded",
+                        "primary": "#00542d",
+                        "on-surface": "#1b1c1c",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "on-tertiary-fixed": "#181c1b",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f2f0f0",
+                        "tertiary": "#454948",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#0d6c3e",
+                        "primary-fixed-dim": "#83d89f",
+                        "background": "#fbf9f8",
+                        "on-secondary-container": "#5b6900",
+                        "surface": "#fbf9f8",
+                        "surface-dim": "#dbd9d9",
+                        "surface-variant": "#e4e2e2",
+                        "on-primary-fixed-variant": "#00522c",
+                        "tertiary-container": "#5d6160",
+                        "on-background": "#1b1c1c",
+                        "surface-container-low": "#f5f3f3",
+                        "on-surface-variant": "#3f4941",
+                        "secondary-fixed-dim": "#bcd14a",
+                        "on-primary-container": "#98edb2",
+                        "inverse-primary": "#83d89f",
+                        "surface-bright": "#fbf9f8",
+                        "on-primary-fixed": "#00210e",
+                        "on-secondary-fixed": "#191e00",
+                        "secondary": "#586400",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#eae8e7",
+                        "tertiary-fixed": "#e0e3e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "section-gap": "64px",
+                        "gutter": "24px",
+                        "container-padding-desktop": "40px",
+                        "container-padding-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #F4F7F5; }
+        .card-shadow { box-shadow: 0px 4px 20px 0px rgba(0,0,0,0.04); }
+        .soft-green-fill { background-color: #E8F5E9; color: #2E7D32; }
+        .soft-red-fill { background-color: #FFEBEE; color: #C62828; }
+        .soft-yellow-fill { background-color: #FFF8E1; color: #F57F17; }
+        .soft-blue-fill { background-color: #E3F2FD; color: #1565C0; }
+        .soft-gray-fill { background-color: #F5F5F5; color: #616161; }
+    </style>
+</head>
+<body class="flex">
+<!-- SideNavBar -->
+<nav class="w-[280px] h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-lowest shadow-sm flex flex-col z-50">
+<div class="p-gutter flex flex-col gap-base">
+<!-- Logo -->
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary-container text-4xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+<div>
+<h1 class="text-primary font-bold text-xl leading-tight">AGRIMAC</h1>
+<p class="text-xs text-outline">L'écosystème agricole du Bénin</p>
+</div>
+</div>
+<!-- Profile Snippet -->
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">MTN</div>
+<div>
+<p class="font-bold text-on-surface text-sm">MTN Bénin SARL</p>
+<p class="text-xs text-primary-container flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">verified</span> Entreprise vérifiée</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-xl font-bold transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Tableau de bord</span>
+</a>
+</li>
+<li class="mt-4 mb-2"><span class="px-4 text-xs font-bold text-outline uppercase tracking-wider">Gestion</span></li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Catalogue</span>
+<span class="text-[11px] text-outline">Machines, pièces &amp; services</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">shopping_cart</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Commandes</span>
+<span class="text-[11px] text-outline">Commandes &amp; réservations</span>
+</div>
+</div>
+<span class="bg-primary-container text-on-primary text-xs font-bold px-2 py-0.5 rounded-full">23</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">description</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Demandes de devis</span>
+<span class="text-[11px] text-outline">Devis reçus</span>
+</div>
+</div>
+<span class="bg-primary-container text-on-primary text-xs font-bold px-2 py-0.5 rounded-full">7</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">chat</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Messages</span>
+<span class="text-[11px] text-outline">Messages clients</span>
+</div>
+</div>
+<span class="bg-primary-container text-on-primary text-xs font-bold px-2 py-0.5 rounded-full">12</span>
+</a>
+</li>
+<li class="mt-4 mb-2"><span class="px-4 text-xs font-bold text-outline uppercase tracking-wider">Analytiques</span></li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Statistiques</span>
+<span class="text-[11px] text-outline">Ventes, vues &amp; performances</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Rapports</span>
+<span class="text-[11px] text-outline">Rapports &amp; exports</span>
+</div>
+</a>
+</li>
+<li class="mt-4 mb-2"><span class="px-4 text-xs font-bold text-outline uppercase tracking-wider">Compte</span></li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">business</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Mon entreprise</span>
+<span class="text-[11px] text-outline">Informations &amp; paramètres</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm">Paramètres</span>
+<span class="text-[11px] text-outline">Préférences de l'app</span>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto p-gutter flex flex-col gap-4">
+<div class="bg-primary-container text-on-primary rounded-xl p-4 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="font-bold text-sm">Mode simplifié</span>
+</div>
+<div class="bg-on-primary w-10 h-5 rounded-full flex items-center px-1 justify-end">
+<div class="w-3.5 h-3.5 bg-primary-container rounded-full"></div>
+</div>
+</div>
+<span class="text-[11px] opacity-80">Interface adaptée à vos besoins</span>
+</div>
+<div class="border border-outline-variant rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-surface-container-low transition">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-outline">headset_mic</span>
+<div class="flex flex-col">
+<span class="font-bold text-sm">Besoin d'aide ?</span>
+<span class="text-[11px] text-outline">Contactez notre support</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] flex-1 min-h-screen pb-12">
+<!-- TopAppBar -->
+<header class="h-20 w-full sticky top-0 z-40 bg-background/80 backdrop-blur-md px-container-padding-desktop py-4 flex justify-between items-center border-b border-surface-container-highest">
+<div class="flex-1 flex items-center gap-4">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-xl text-sm focus:border-primary-container focus:ring-0" placeholder="Rechercher une machine, une commande..." type="text"/>
+</div>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-semibold text-primary-container hover:bg-surface-container-low transition">
+<span class="material-symbols-outlined">mic</span>
+                    Recherche vocale
+                </button>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-1 px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-semibold text-on-surface">
+<span class="material-symbols-outlined text-[18px]">language</span>
+                    FR
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<div class="relative cursor-pointer">
+<span class="material-symbols-outlined text-on-surface text-[24px]">notifications</span>
+<span class="absolute -top-1 -right-1 bg-error text-on-error text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">8</span>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant cursor-pointer">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">MTN</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-on-surface">MTN</span>
+<span class="text-[11px] text-outline">Administrateur</span>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="px-container-padding-desktop pt-8 flex flex-col gap-8">
+<!-- Header -->
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-1">Bonjour, MTN Bénin SARL ! <span class="text-2xl">👋</span></h2>
+<p class="text-on-surface-variant text-sm">Voici un aperçu des activités de votre entreprise.</p>
+</div>
+<!-- KPI Cards Row -->
+<div class="grid grid-cols-5 gap-6">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full soft-green-fill flex items-center justify-center">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<p class="text-sm text-outline mb-1">Ventes totales (mois)</p>
+<h3 class="text-2xl font-bold text-on-surface">24,750,000 <span class="text-sm font-normal text-outline">FCFA</span></h3>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-4 text-xs">
+<span class="material-symbols-outlined text-[14px] text-primary-container">trending_up</span>
+<span class="text-primary-container font-semibold">18.6%</span>
+<span class="text-outline">vs mois dernier</span>
+</div>
+<svg class="w-full h-8 mt-4 text-primary-container" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0,20 L10,15 L20,18 L30,10 L40,12 L50,5 L60,8 L70,2 L80,6 L90,0 L100,4" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full soft-blue-fill flex items-center justify-center">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<div>
+<p class="text-sm text-outline mb-1">Vues catalogue</p>
+<h3 class="text-2xl font-bold text-on-surface">12,543</h3>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-4 text-xs">
+<span class="material-symbols-outlined text-[14px] text-primary-container">trending_up</span>
+<span class="text-primary-container font-semibold">12.4%</span>
+<span class="text-outline">vs mois dernier</span>
+</div>
+<svg class="w-full h-8 mt-4 text-blue-500" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0,15 L15,18 L30,10 L45,14 L60,5 L75,8 L90,2 L100,5" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full soft-yellow-fill flex items-center justify-center">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+<div>
+<p class="text-sm text-outline mb-1">Commandes</p>
+<h3 class="text-2xl font-bold text-on-surface">36</h3>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-4 text-xs">
+<span class="material-symbols-outlined text-[14px] text-primary-container">trending_up</span>
+<span class="text-primary-container font-semibold">9.7%</span>
+<span class="text-outline">vs mois dernier</span>
+</div>
+<svg class="w-full h-8 mt-4 text-yellow-500" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0,18 L20,15 L40,16 L60,8 L80,10 L100,4" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full soft-green-fill flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-sm text-outline mb-1">Devis en attente</p>
+<h3 class="text-2xl font-bold text-on-surface">7</h3>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-4 text-xs">
+<span class="material-symbols-outlined text-[14px] text-primary-container">trending_up</span>
+<span class="text-primary-container font-semibold">16.7%</span>
+<span class="text-outline">vs mois dernier</span>
+</div>
+<svg class="w-full h-8 mt-4 text-purple-500" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0,20 L15,18 L30,19 L45,15 L60,16 L75,10 L90,12 L100,5" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 5 -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full soft-green-fill flex items-center justify-center">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div>
+<p class="text-sm text-outline mb-1">Note moyenne</p>
+<h3 class="text-2xl font-bold text-on-surface">4.7 <span class="text-sm font-normal text-outline">/ 5</span></h3>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-4">
+<span class="material-symbols-outlined text-yellow-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[16px]">star_half</span>
+</div>
+<p class="text-xs text-outline mt-2">(128 avis)</p>
+</div>
+</div>
+<!-- Middle Section Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Sales Statistics -->
+<div class="col-span-6 bg-surface-container-lowest rounded-2xl p-6 card-shadow flex flex-col">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-bold text-on-surface mb-4">Statistiques des ventes</h3>
+<h2 class="text-2xl font-bold text-on-surface">24,750,000 <span class="text-sm font-normal text-outline">FCFA</span></h2>
+<p class="text-sm text-outline mb-2">Chiffre d'affaires</p>
+<div class="flex items-center gap-1 text-xs">
+<span class="material-symbols-outlined text-[14px] text-primary-container">trending_up</span>
+<span class="text-primary-container font-semibold">18.6%</span>
+<span class="text-outline">par rapport aux 30 jours précédents</span>
+</div>
+</div>
+<select class="bg-surface-container border border-outline-variant rounded-lg text-sm px-3 py-1.5 focus:ring-0 focus:border-primary-container text-on-surface">
+<option>30 derniers jours</option>
+</select>
+</div>
+<div class="flex-1 min-h-[200px] w-full relative">
+<!-- Placeholder for Chart -->
+<div class="absolute inset-0 flex items-end">
+<svg class="w-full h-full text-primary-container" preserveaspectratio="none" viewbox="0 0 400 150">
+<path d="M0,130 L40,90 L80,110 L120,100 L160,60 L200,80 L240,50 L280,100 L320,40 L360,90 L400,20" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M0,150 L0,130 L40,90 L80,110 L120,100 L160,60 L200,80 L240,50 L280,100 L320,40 L360,90 L400,20 L400,150 Z" fill="currentColor" fill-opacity="0.1" stroke="none"></path>
+</svg>
+</div>
+<div class="absolute bottom-0 w-full flex justify-between text-[10px] text-outline mt-2 pt-2 border-t border-surface-container-highest">
+<span>04 Mai</span><span>08 Mai</span><span>12 Mai</span><span>16 Mai</span><span>20 Mai</span><span>24 Mai</span><span>28 Mai</span><span>01 Juin</span>
+</div>
+<div class="absolute left-0 h-full flex flex-col justify-between text-[10px] text-outline pb-6 pr-2 bg-surface-container-lowest">
+<span>4M</span><span>3M</span><span>2M</span><span>1M</span><span>0</span>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-4 mt-6">
+<div class="border border-outline-variant rounded-lg p-3">
+<p class="text-xs text-outline mb-1">Ventes réussies</p>
+<p class="font-bold text-on-surface mb-1">32</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center"><span class="material-symbols-outlined text-[12px]">trending_up</span> 8.2%</span>
+</div>
+<div class="border border-outline-variant rounded-lg p-3">
+<p class="text-xs text-outline mb-1">Ventes en attente</p>
+<p class="font-bold text-on-surface mb-1">4</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center"><span class="material-symbols-outlined text-[12px]">trending_up</span> 2.1%</span>
+</div>
+<div class="border border-outline-variant rounded-lg p-3">
+<p class="text-xs text-outline mb-1">Annulées</p>
+<p class="font-bold text-on-surface mb-1">2</p>
+<span class="text-[10px] text-error font-semibold flex items-center"><span class="material-symbols-outlined text-[12px]">trending_down</span> -1.3%</span>
+</div>
+<div class="border border-outline-variant rounded-lg p-3">
+<p class="text-xs text-outline mb-1">Panier moyen</p>
+<p class="font-bold text-on-surface mb-1">773,438 <span class="text-[10px] font-normal">FCFA</span></p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center"><span class="material-symbols-outlined text-[12px]">trending_up</span> 10.4%</span>
+</div>
+</div>
+</div>
+<!-- Top Products -->
+<div class="col-span-3 bg-surface-container-lowest rounded-2xl p-6 card-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-on-surface">Produits les plus consultés</h3>
+<a class="text-xs font-semibold text-primary-container hover:underline" href="#">Voir tout</a>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Product Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 object-contain bg-surface-container rounded-lg p-1" data-alt="Small red agricultural tractor isolated on white background, studio shot, high resolution, industrial product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5_bjGeLbjSSnZlSFX6JT64yrd-Lqwd_lV_1zCGGGB8wCHr9EQ6b-oQ-T7ad0ZxTblok2xOvdR2GvdgSMQ87Ez098uAXC01uWg135iwTT3LrWNDbus1XS-szBaZWzguLDWPcP6lgvvMY5plASSJ2Vyoxx6BLKYygnKOFxG5VHEktIhnP6k1XavcAB5TJHv61otY2u4i29vKfCKd4A62YmJbsWpYoqeJdldJkHCIVPc3ng7uJ_buL48"/>
+<span class="text-sm font-semibold text-on-surface">Tracteur Massey Ferguson 375</span>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">2,456</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center justify-end"><span class="material-symbols-outlined text-[12px]">trending_up</span> 15.2%</span>
+</div>
+</div>
+<!-- Product Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 object-contain bg-surface-container rounded-lg p-1" data-alt="Small portable agricultural water pump with red frame, industrial product photography, white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFX1HwPDY8Vq536V-sXK1dymwgNRy-9SFj22QSBLHjzJPixQLrKT6_kgTi7Hu8DOS-AUfbWiw926dDazWQuQaZIRQLzrLBCRYA_8YNr53BfzNSUOumiRIroPAmzWZDMdkDi1aVpKZJi48EOiqeC8234DAZjbF5Z-4E146hfgnI1-fulE75VPTtjOubij9ahzoMe0Av3YFqpHPKAIb5p4iC9p9iEfA697QRNGIlkc0JkJD7Z14pk2Mj"/>
+<span class="text-sm font-semibold text-on-surface">Motopompe Hyundai 3 pouces</span>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">1,842</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center justify-end"><span class="material-symbols-outlined text-[12px]">trending_up</span> 11.3%</span>
+</div>
+</div>
+<!-- Product Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 object-contain bg-surface-container rounded-lg p-1" data-alt="Brown sack of NPK 20-10-10 agricultural fertilizer, 50kg bag, clear product shot on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx-aKY3t1mf8HJVGn1Q_mmZw9yLR6ZmDdgwg4ni3VnVqmBTYfgzFKquskkMn5lI79g2RKxzEWadS5KJlMM-DDk_7QzLKihlHNu3wos5SG4nmB-zmFX3jWxH0R0X0uHdF6k1q_jIWo9xNbyqoVD2fGrSV0GPjdQ5uMgxyiAc13WRAUUgLgywyxpS1kskElFCQ9JNJKLOMG4TJE_VEoRACNuhqn7L1aN1jw-NNkepI11P6YVxDSsdxgR"/>
+<span class="text-sm font-semibold text-on-surface">Engrais NPK 20-10-10 (50kg)</span>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">1,256</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center justify-end"><span class="material-symbols-outlined text-[12px]">trending_up</span> 8.7%</span>
+</div>
+</div>
+<!-- Product Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 object-contain bg-surface-container rounded-lg p-1" data-alt="Blue agricultural disc harrow implement for tractor, isolated on white background, product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCmv5UkdOX00tog5qMD4Ho2uz_uUhEoFAcr6O7PgSditHrAm7rdQCD2qSSqWGlzBJntirxueBWWgTit32DmSvejrVM1B42-h0U-343_yW6m8xDsomjBdmttdpTGE_SsXh9RoRVyZk_LUwZzrl86vmtCQbss3MkADplrJqN_qpbFAnynWGWLmG_zX7ORIipnnO0Da0IygfMYIRh-Jpam2uzp-8yiPLXqpy-4Ufs3ezbD_wC_i-pZlKF"/>
+<span class="text-sm font-semibold text-on-surface">Herse à disques 18 disques</span>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">1,098</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center justify-end"><span class="material-symbols-outlined text-[12px]">trending_up</span> 7.9%</span>
+</div>
+</div>
+<!-- Product Item -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img class="w-12 h-12 object-contain bg-surface-container rounded-lg p-1" data-alt="Yellow backpack agricultural sprayer, 16L capacity, studio product shot on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDLEoPx-TMZmbqHcTVFP2MjwzM44GtK49IXi7mqUHq_k5N8Sr71LZCh6NpjdaqkyCZn107j48d6kB1x7mjFktE9q2y3FVMagJHZCHVOLOJWtmQ_2x5MKEdKyiJLC_q0GuZvvDjVmk9aWmCM0YcZI0Evo-JVYcyjE3Nxvzzd7EczQZZJ08JDMXjhLbsn_KaVbobo26ey1zWocbi2uERRYwyS3PwtgaGonm71MNI3gKAyrZ35l2On7NN"/>
+<span class="text-sm font-semibold text-on-surface">Pulvérisateur 16L</span>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-on-surface">987</p>
+<span class="text-[10px] text-primary-container font-semibold flex items-center justify-end"><span class="material-symbols-outlined text-[12px]">trending_up</span> 5.6%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Notifications -->
+<div class="col-span-3 bg-surface-container-lowest rounded-2xl p-6 card-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-on-surface">Notifications récentes</h3>
+<a class="text-xs font-semibold text-primary-container hover:underline" href="#">Voir tout</a>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Notification Item -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full soft-green-fill flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Nouveau message</p>
+<p class="text-xs text-outline mb-1">De Koffi Agbodan</p>
+<p class="text-[10px] text-outline">Il y a 10 min</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-primary-container absolute right-0 top-2"></div>
+</div>
+<!-- Notification Item -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full soft-blue-fill flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Nouvelle demande de devis</p>
+<p class="text-xs text-outline mb-1">Pour Motopompe Hyundai</p>
+<p class="text-[10px] text-outline">Il y a 25 min</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-primary-container absolute right-0 top-2"></div>
+</div>
+<!-- Notification Item -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full soft-green-fill flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Nouvelle commande</p>
+<p class="text-xs text-outline mb-1">Commande #CMD-2025-1456</p>
+<p class="text-[10px] text-outline">Il y a 1 heure</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-primary-container absolute right-0 top-2"></div>
+</div>
+<!-- Notification Item -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full soft-yellow-fill flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Nouvel avis client</p>
+<div class="flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-yellow-400 text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-yellow-400 text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-surface-variant text-[12px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-[10px] text-outline ml-1">(4.0)</span>
+</div>
+<p class="text-[10px] text-outline">Il y a 2 heures</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-primary-container absolute right-0 top-2"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Recent Orders Table -->
+<div class="col-span-8 bg-surface-container-lowest rounded-2xl p-6 card-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-bold text-on-surface">Commandes récentes</h3>
+<a class="text-xs font-semibold text-primary-container hover:underline" href="#">Voir tout</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs text-outline border-b border-surface-container-highest">
+<th class="pb-3 font-semibold">Commande</th>
+<th class="pb-3 font-semibold">Client</th>
+<th class="pb-3 font-semibold">Produit</th>
+<th class="pb-3 font-semibold">Montant</th>
+<th class="pb-3 font-semibold">Statut</th>
+<th class="pb-3 font-semibold text-right">Date</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-surface-container-highest last:border-0 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-semibold text-primary-container">#CMD-2025-1456</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant"></div>
+<span class="text-on-surface">Koffi Agbodan</span>
+</td>
+<td class="py-4 text-outline">Tracteur MF 375</td>
+<td class="py-4 font-semibold text-on-surface">8,500,000 FCFA</td>
+<td class="py-4"><span class="px-2 py-1 rounded-md text-[10px] font-bold soft-yellow-fill">En attente</span></td>
+<td class="py-4 text-outline text-right text-xs">01 Juin 2025</td>
+</tr>
+<tr class="border-b border-surface-container-highest last:border-0 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-semibold text-primary-container">#CMD-2025-1455</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant"></div>
+<span class="text-on-surface">Jean Hounkpe</span>
+</td>
+<td class="py-4 text-outline">Motopompe Hyundai</td>
+<td class="py-4 font-semibold text-on-surface">325,000 FCFA</td>
+<td class="py-4"><span class="px-2 py-1 rounded-md text-[10px] font-bold soft-green-fill">Payée</span></td>
+<td class="py-4 text-outline text-right text-xs">01 Juin 2025</td>
+</tr>
+<tr class="border-b border-surface-container-highest last:border-0 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-semibold text-primary-container">#CMD-2025-1454</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant"></div>
+<span class="text-on-surface">Euloge Dossou</span>
+</td>
+<td class="py-4 text-outline">Engrais NPK 20-10-10</td>
+<td class="py-4 font-semibold text-on-surface">45,000 FCFA</td>
+<td class="py-4"><span class="px-2 py-1 rounded-md text-[10px] font-bold soft-blue-fill">Expédiée</span></td>
+<td class="py-4 text-outline text-right text-xs">31 Mai 2025</td>
+</tr>
+<tr class="border-b border-surface-container-highest last:border-0 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-semibold text-primary-container">#CMD-2025-1453</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant"></div>
+<span class="text-on-surface">Mohamed Salami</span>
+</td>
+<td class="py-4 text-outline">Pulvérisateur 16L</td>
+<td class="py-4 font-semibold text-on-surface">28,000 FCFA</td>
+<td class="py-4"><span class="px-2 py-1 rounded-md text-[10px] font-bold soft-green-fill">Livrée</span></td>
+<td class="py-4 text-outline text-right text-xs">30 Mai 2025</td>
+</tr>
+<tr class="border-b border-surface-container-highest last:border-0 hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-semibold text-primary-container">#CMD-2025-1452</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant"></div>
+<span class="text-on-surface">Arsène Zannou</span>
+</td>
+<td class="py-4 text-outline">Herse à disques</td>
+<td class="py-4 font-semibold text-on-surface">1,250,000 FCFA</td>
+<td class="py-4"><span class="px-2 py-1 rounded-md text-[10px] font-bold soft-red-fill">Annulée</span></td>
+<td class="py-4 text-outline text-right text-xs">29 Mai 2025</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Column (Actions & Banner) -->
+<div class="col-span-4 flex flex-col gap-6">
+<!-- Quick Actions -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 card-shadow">
+<h3 class="font-bold text-on-surface mb-4">Actions rapides</h3>
+<div class="grid grid-cols-3 gap-4">
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition">
+<div class="w-10 h-10 rounded-full soft-green-fill flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</div>
+<span class="text-xs text-center font-semibold text-on-surface leading-tight">Ajouter<br/>un produit</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition">
+<div class="w-10 h-10 rounded-full soft-green-fill flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+</div>
+<span class="text-xs text-center font-semibold text-on-surface leading-tight">Voir<br/>catalogue</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition">
+<div class="w-10 h-10 rounded-full soft-blue-fill flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">description</span>
+</div>
+<span class="text-xs text-center font-semibold text-on-surface leading-tight">Demandes<br/>de devis</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition">
+<div class="w-10 h-10 rounded-full soft-yellow-fill flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+</div>
+<span class="text-xs text-center font-semibold text-on-surface leading-tight">Nouvelle<br/>annonce</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-xl hover:bg-surface-container-low transition">
+<div class="w-10 h-10 rounded-full soft-gray-fill flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">bar_chart</span>
+</div>
+<span class="text-xs text-center font-semibold text-on-surface leading-tight">Rapport<br/>de ventes</span>
+</button>
+</div>
+</div>
+<!-- Promo Banner -->
+<div class="bg-primary rounded-2xl p-6 relative overflow-hidden flex-1 flex flex-col justify-center">
+<div class="relative z-10 w-2/3">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed mb-4">MTN</div>
+<h3 class="text-xl font-bold text-on-primary mb-2">Développez votre activité</h3>
+<p class="text-sm text-primary-fixed-dim mb-6">Touchez plus d'agriculteurs et augmentez vos ventes</p>
+<button class="bg-surface-container-lowest text-primary-container font-semibold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 hover:bg-surface-container-high transition w-max">
+                                Booster mon entreprise
+                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<img class="absolute right-[-40px] bottom-[-20px] w-64 h-auto object-contain z-0 opacity-90" data-alt="A modern green agricultural tractor parked on a subtle background, high quality 3d render or photograph used for an advertising banner in a software dashboard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-2MB0guuGe0o8AoIRi0EVSJJEuJk2CvBkF0BkpGPFnbyYiqJrEsF5IA21-EYHam8F9H9_Bk1KDyTwxV7yzF844SaQ6k-8EfWLJKpsKl6AWAiU9Aj2R9A0zdfyqg4f5KSk10kJsbttP-R0V4Uy0BPw3toZDZgliO27KO-PRHWV4whHenhqCbsBy5b0lnubKNOvpiFVgOKYV8pIcbGSD0RrlA0KOe1EEJmO7CvTeZl-TSE1DFsiA_lw"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

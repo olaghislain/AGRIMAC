@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Disponibilités et Zones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#00522c",
+                        "tertiary-container": "#5d6160",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#bcd14a",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#d9dcda",
+                        "secondary": "#586400",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#414b00",
+                        "surface-tint": "#0d6c3e",
+                        "on-surface": "#1b1c1c",
+                        "tertiary-fixed": "#e0e3e1",
+                        "on-primary-fixed": "#00210e",
+                        "on-primary-container": "#98edb2",
+                        "inverse-primary": "#83d89f",
+                        "surface-variant": "#e4e2e2",
+                        "primary": "#00542d",
+                        "surface-container-high": "#eae8e7",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#9ff5b9",
+                        "on-error": "#ffffff",
+                        "surface-container": "#efeded",
+                        "surface-dim": "#dbd9d9",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f3f3",
+                        "surface-container-highest": "#e4e2e2",
+                        "tertiary": "#454948",
+                        "on-tertiary-fixed": "#181c1b",
+                        "outline": "#6f7a70",
+                        "outline-variant": "#bec9be",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#106e3f",
+                        "inverse-on-surface": "#f2f0f0",
+                        "inverse-surface": "#303030",
+                        "on-surface-variant": "#3f4941",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "background": "#fbf9f8",
+                        "secondary-fixed": "#d8ed63",
+                        "on-background": "#1b1c1c",
+                        "surface": "#fbf9f8",
+                        "on-secondary-container": "#5b6900",
+                        "secondary-container": "#d5ea60",
+                        "surface-bright": "#fbf9f8",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "primary-fixed-dim": "#83d89f",
+                        "on-secondary-fixed": "#191e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "container-padding-desktop": "40px",
+                        "container-padding-mobile": "16px",
+                        "section-gap": "64px",
+                        "base": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "display-lg-mobile": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "title-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #fbf9f8; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container-lowest dark:bg-inverse-surface w-64 h-screen fixed left-0 top-0 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col py-6 px-4 gap-4 border-r border-outline-variant dark:border-outline z-50">
+<!-- Header -->
+<div class="flex items-center gap-3 mb-6 px-2">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl">A</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">AGRIMAC Ops</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Maintenance Central</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto hide-scrollbar flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="build">build</span>
+                Maintenance
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="tractor">cloud_download</span>
+                Fleet
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                Inventory
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+                Tasks
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="troubleshoot">troubleshoot</span>
+                Diagnostics
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                Schedule
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Reports
+            </a>
+<!-- Active Tab: Agromaps (Mapping to Zones/Availability) -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-primary dark:text-primary-fixed-dim font-bold bg-surface-container dark:bg-surface-container-highest transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="map" data-weight="fill" style="font-variation-settings: 'FILL' 1;">map</span>
+                Agromaps
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+                Telemetry
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-xl text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out font-label-sm text-label-sm mb-4" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                Archive
+            </a>
+</div>
+<!-- CTA -->
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2 mt-auto">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Work Order
+        </button>
+<!-- Footer -->
+<div class="pt-4 border-t border-outline-variant dark:border-outline flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Help
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low transition-colors font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-dim w-full h-16 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex justify-between items-center px-gutter sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">AGRIMAC</span>
+</div>
+<div class="flex-1 max-w-xl mx-8">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full focus:ring-2 focus:ring-primary font-body-md text-body-md text-on-surface outline-none" placeholder="Rechercher une zone, un client..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="p-2 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<div class="relative">
+<button class="p-2 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-error rounded-full border-2 border-surface"></span>
+</div>
+<button class="p-2 text-on-surface-variant dark:text-on-tertiary-fixed-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full transition-colors cursor-pointer active:scale-95 mr-2">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="Technician Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant cursor-pointer" data-alt="A small, circular profile picture of an agricultural technician wearing a green cap, smiling confidently against a bright, modern agricultural background with a light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3TNxIfbxkLq81BtQarbFAjAQFHe6zcGjf6II_vi9BjAQ0kDF-cFEiBKT4gdt-aXyobffUrK2KVTNwu8RCcrut2drb19Wbvz-3fzAroj_3JTzYgedzYCDoLwffCqyaDo-5Q_CsMBB6SEAg94fcVYJ-KJgbPU_7A1L56m9lD2D820xN8o1UTxb1b1eQ9ywPjPhP9Ng54ItFEdK-b4CZAplILa-NPKIUE2hRXU9OaeqL2lsTylx8FGsL"/>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-container-desktop flex-1">
+<div class="max-w-[1440px] mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">Disponibilités &amp; Zones</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Gérez vos zones d'intervention et configurez vos horaires.</p>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-2 rounded-lg border border-outline-variant text-primary font-label-sm text-label-sm flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">tune</span>
+                            Filtrer
+                        </button>
+<button class="px-6 py-2 rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm flex items-center gap-2 hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add_location_alt</span>
+                            Ajouter une zone
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Map Section (Spans 8 columns) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-8 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Zones Actives</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary-container text-on-primary-container rounded-full font-label-sm text-[11px] flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                    Haute Densité
+                                </span>
+</div>
+</div>
+<div class="relative w-full h-[500px] rounded-xl overflow-hidden bg-surface-variant border border-outline-variant group">
+<!-- Simulated Map Image -->
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist vector map of a coastal agricultural region (Cotonou, Abomey-Calavi) with light mode colors, soft roads, and gentle blue water. Several vibrant green map pin icons indicate active service zones. High-end modern UI style." data-location="Cotonou" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNKXXfEAoVQo20YhUNJk8WcRi--ZkooCicR3zrJVjBAUFLmt3Kg9oKBbQIHkCn31peXMhK6OKB3OHr1Q9dgVYSLt9FyaJoGLE8s5zT6Uyaj1yjY7XwUmvEJdDxq4qN2SZX5nqcHUkOXNyxJhfRB2hy7x62xWBaiGLHIP7ah0lCOOXzC7FOgkg7flK_E_Vwigy33Qsb6nDNQFrN9PfXK6e__RGsxbxNxO254hhzf9d2puagEU7JBIzV"/>
+<!-- Map Overlay Controls -->
+<div class="absolute bottom-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="w-10 h-10 bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-center text-on-surface hover:bg-surface-container-low">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-center text-on-surface hover:bg-surface-container-low">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-lowest rounded-lg shadow-sm flex items-center justify-center text-primary mt-2 hover:bg-surface-container-low">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+<!-- Quick Stats below map -->
+<div class="grid grid-cols-3 gap-4 mt-6">
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-1">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Rayon d'action</span>
+<span class="text-on-surface font-headline-md text-headline-md">45 km</span>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-1">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Temps de trajet moy.</span>
+<span class="text-on-surface font-headline-md text-headline-md">32 min</span>
+</div>
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-1">
+<span class="text-on-surface-variant font-label-sm text-label-sm">Demandes en zone</span>
+<span class="text-primary font-headline-md text-headline-md">18 actives</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Schedule & Config (Spans 4 columns) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Availability Schedule -->
+<div class="bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-md text-title-md text-on-surface">Horaires de Disponibilité</h3>
+<button class="text-primary hover:bg-primary-container p-1 rounded-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Day Row -->
+<div class="flex items-center justify-between py-2 border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface font-medium w-12">Lun</span>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 rounded-md text-on-surface-variant font-label-sm text-[12px]">
+                                        08:00 - 17:00
+                                    </div>
+<!-- Toggle Switch (Active) -->
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface font-medium w-12">Mar</span>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 rounded-md text-on-surface-variant font-label-sm text-[12px]">
+                                        08:00 - 17:00
+                                    </div>
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-surface-variant">
+<span class="font-body-md text-body-md text-on-surface font-medium w-12">Mer</span>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 rounded-md text-on-surface-variant font-label-sm text-[12px]">
+                                        08:00 - 12:00
+                                    </div>
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-surface-variant opacity-60">
+<span class="font-body-md text-body-md text-on-surface font-medium w-12">Jeu</span>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-[12px] italic">
+                                        Indisponible
+                                    </div>
+<!-- Toggle Switch (Inactive) -->
+<div class="w-9 h-5 bg-surface-variant rounded-full relative cursor-pointer">
+<div class="absolute left-1 top-1 w-3 h-3 bg-outline rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<span class="font-body-md text-body-md text-on-surface font-medium w-12">Ven</span>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 rounded-md text-on-surface-variant font-label-sm text-[12px]">
+                                        08:00 - 16:00
+                                    </div>
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Current Location & Preferences -->
+<div class="bg-primary-container rounded-2xl p-6 relative overflow-hidden group cursor-pointer hover:bg-primary-fixed-dim transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+<h3 class="font-title-md text-title-md text-on-primary-container mb-4 relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">directions_car</span>
+                                Véhicule Actuel
+                            </h3>
+<div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 mb-4 relative z-10">
+<p class="text-on-primary-container font-label-sm text-label-sm opacity-80">Assigné</p>
+<p class="text-on-primary-fixed font-headline-sm text-headline-sm mt-1">Toyota Hilux 4x4</p>
+<p class="text-on-primary-container font-label-sm text-[11px] mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">local_gas_station</span> Plein
+                                </p>
+</div>
+<div class="flex justify-between items-center relative z-10">
+<span class="text-on-primary-container font-label-sm text-label-sm">Changer de flotte</span>
+<span class="material-symbols-outlined text-on-primary-container">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom List Section: Detailed Zones -->
+<div class="mt-gutter bg-surface-container-lowest rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-8">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-6">Détails des Zones d'Intervention</h3>
+<div class="w-full">
+<div class="grid grid-cols-4 gap-4 px-4 py-3 border-b border-surface-variant text-on-surface-variant font-label-sm text-[12px] uppercase tracking-wider">
+<div class="col-span-1">Localité</div>
+<div class="col-span-1">Statut</div>
+<div class="col-span-1">Priorité</div>
+<div class="col-span-1 text-right">Actions</div>
+</div>
+<!-- List Item 1 -->
+<div class="grid grid-cols-4 gap-4 px-4 py-5 border-b border-surface-variant items-center hover:bg-surface-container-low transition-colors rounded-lg group cursor-pointer">
+<div class="col-span-1 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Abomey-Calavi</p>
+<p class="font-label-sm text-[12px] text-on-surface-variant">Zone Centrale</p>
+</div>
+</div>
+<div class="col-span-1">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-container text-on-primary-container">
+                                    Actif
+                                </span>
+</div>
+<div class="col-span-1">
+<span class="text-on-surface-variant font-body-md text-[14px]">Haute</span>
+</div>
+<div class="col-span-1 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-md"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-md"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="grid grid-cols-4 gap-4 px-4 py-5 border-b border-surface-variant items-center hover:bg-surface-container-low transition-colors rounded-lg group cursor-pointer">
+<div class="col-span-1 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Cotonou</p>
+<p class="font-label-sm text-[12px] text-on-surface-variant">Zone Portuaire</p>
+</div>
+</div>
+<div class="col-span-1">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-container text-on-primary-container">
+                                    Actif
+                                </span>
+</div>
+<div class="col-span-1">
+<span class="text-on-surface-variant font-body-md text-[14px]">Moyenne</span>
+</div>
+<div class="col-span-1 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-md"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-md"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+<!-- List Item 3 (Inactive) -->
+<div class="grid grid-cols-4 gap-4 px-4 py-5 items-center hover:bg-surface-container-low transition-colors rounded-lg group cursor-pointer opacity-70">
+<div class="col-span-1 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">location_off</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Porto-Novo</p>
+<p class="font-label-sm text-[12px] text-on-surface-variant">Périphérie</p>
+</div>
+</div>
+<div class="col-span-1">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant">
+                                    Inactif
+                                </span>
+</div>
+<div class="col-span-1">
+<span class="text-on-surface-variant font-body-md text-[14px]">-</span>
+</div>
+<div class="col-span-1 flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-md"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-2 text-error hover:bg-error-container hover:text-on-error-container rounded-md"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Tableau de bord Maintenancier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#0f6b3b',
+              light: '#e6f4ed',
+              dark: '#0a4a29',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styles">@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+body {
+    background-color: #f8fafc;
+    font-family: "Inter", sans-serif
+    }
+.sidebar-scroll::-webkit-scrollbar {
+    width: 4px
+    }
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px
+    }
+.map-bg {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDM3HdncP7Gcj9_veH2TYoxujyZRmJepgeudOOG8ze6saDr4MsNtYWo8AKpxfU-3XhBdKml7tj-bleeJyrJukxkTI5FpBrC3UVzh6rvTJikkJ6AfvKZRlvKnllW0ltnFJrSk5Xz6vLJsYvl1_cOpR3pNwTTfDksi4HCD0me49VBVAQszEbDACdoda5HJo-kNTmJgr8Y9n5H_0BvupNV4RM3xiA-5I666XOgZydhKSdH7STgWkdyHuB-);
+    background-size: cover;
+    background-position: center
+    }</style>
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800">
+<!-- BEGIN: Left Sidebar -->
+<aside class="w-72 bg-white border-r border-slate-200 flex flex-col h-full z-20">
+<!-- Logo & Profile -->
+<div class="p-6 border-b border-slate-100 shrink-0">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-brand-light rounded-lg flex items-center justify-center text-brand text-2xl font-bold">
+<i class="fa-solid fa-leaf"></i>
+</div>
+<div>
+<h1 class="text-2xl font-bold text-slate-900 leading-tight">AGRIMAC</h1>
+<p class="text-[10px] text-slate-500 font-medium">L'écosystème agricole du Bénin</p>
+</div>
+</div>
+<div class="bg-slate-50 rounded-xl p-4 flex items-center gap-3 border border-slate-100">
+<img alt="Arsène Zannou" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWOibxKPW92_NWtKhsZkuHh3lXBk05n2mOBNV6jyxXxvOUzsMngcnU8-Su-9PQKYkRgd43DPub-JECkUUTi9ArzbkzuSOw_UKcMN6auOSku-Flv7_et26r6khZZxLQgwnUQjkFTqdt8sItX77-R5Amft2fG5OrZzBHldysXZz_k_3fZVLgDfcnu_UJvTaA953oGXH3pwYGv9hxKP7UIrCFnunuQX5GFODQmAzMuFXwHtze014BbmXE"/>
+<div>
+<h2 class="font-bold text-slate-900 text-sm">Arsène Zannou</h2>
+<div class="flex items-center gap-1 text-xs text-slate-600 mt-0.5">
+<span>Maintenancier</span>
+<i class="fa-solid fa-circle-check text-brand text-[10px]"></i>
+</div>
+<div class="flex items-center gap-1 text-xs text-slate-500 mt-1">
+<i class="fa-solid fa-star text-amber-400"></i>
+<span class="font-medium text-slate-700">4.7</span> <span class="text-[10px]">/5 (128 avis)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto sidebar-scroll p-4 space-y-6">
+<!-- Main Nav -->
+<div>
+<a class="flex items-center gap-3 px-4 py-3 bg-brand text-white rounded-lg font-medium shadow-sm shadow-brand/20" href="#">
+<i class="fa-solid fa-house w-5 text-center"></i>
+<span>Tableau de bord</span>
+</a>
+</div>
+<!-- Demandes -->
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-4">Demandes</h3>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-file-lines w-5 text-center"></i>
+<span>Demandes en attente</span>
+</div>
+<span class="bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full">12</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-file-invoice w-5 text-center"></i>
+<span>Mes devis</span>
+</div>
+<span class="bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full">8</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-calendar-check w-5 text-center"></i>
+<span>Interventions planifiées</span>
+</div>
+<span class="bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-circle-check w-5 text-center"></i>
+<span>Interventions terminées</span>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Activité -->
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-4">Activité</h3>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-briefcase w-5 text-center"></i>
+<span>Mes interventions</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-clock-rotate-left w-5 text-center"></i>
+<span>Historique</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-star w-5 text-center"></i>
+<span>Avis &amp; évaluations</span>
+</div>
+<span class="bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full">23</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Outils -->
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-4">Outils</h3>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-message w-5 text-center"></i>
+<span>Messagerie</span>
+</div>
+<span class="bg-brand text-white text-[10px] font-bold px-2 py-0.5 rounded-full">7</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-calendar w-5 text-center"></i>
+<span>Disponibilités</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-map-location-dot w-5 text-center"></i>
+<span>Zones d'intervention</span>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<!-- Compte -->
+<div>
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 px-4">Compte</h3>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-regular fa-user w-5 text-center"></i>
+<span>Mon profil</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-brand rounded-lg transition-colors font-medium" href="#">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-gear w-5 text-center"></i>
+<span>Paramètres</span>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Bottom Actions -->
+<div class="p-4 border-t border-slate-100 shrink-0 space-y-3">
+<div class="bg-brand-dark rounded-xl p-4 text-white">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-shield-halved text-sm"></i>
+<span class="text-sm font-bold">Mode simplifié</span>
+</div>
+<!-- Toggle Switch -->
+<div class="w-8 h-4 bg-brand rounded-full relative cursor-pointer border border-white/20">
+<div class="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<p class="text-[10px] text-brand-light/80">Interface adaptée à vos besoins</p>
+</div>
+<a class="flex items-center justify-between px-4 py-3 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors" href="#">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-brand-light rounded-full flex items-center justify-center text-brand">
+<i class="fa-solid fa-headset text-sm"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-800">Besoin d'aide ?</h4>
+<p class="text-[10px] text-slate-500">Assistance vocale</p>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-slate-400 text-xs"></i>
+</a>
+</div>
+</aside>
+<!-- END: Left Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col h-full bg-[#f8fafc] overflow-hidden relative">
+<!-- Top Header -->
+<header class="bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 py-4 flex items-center justify-between sticky top-0 z-10 shrink-0">
+<div>
+<h1 class="text-2xl font-bold text-slate-900">Bonjour, Arsène ! 👋</h1>
+<p class="text-sm text-slate-500 mt-1">Voici un aperçu de vos interventions et demandes.</p>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search -->
+<div class="relative w-80">
+<input class="w-full pl-4 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand transition-all placeholder-slate-400" placeholder="Rechercher une demande, un client..." type="text"/>
+<i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+</div>
+<!-- Voice Search -->
+<button class="flex items-center gap-2 px-4 py-2.5 bg-brand-light text-brand rounded-xl font-medium text-sm hover:bg-brand-light/80 transition-colors border border-brand/10">
+<i class="fa-solid fa-microphone"></i>
+<span>Recherche vocale</span>
+</button>
+<div class="w-px h-8 bg-slate-200 mx-2"></div>
+<!-- Language -->
+<button class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-lg border border-slate-200">
+<i class="fa-solid fa-globe text-slate-400"></i>
+<span>FR</span>
+<i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+</button>
+<!-- Notifications -->
+<button class="relative w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-50 rounded-full border border-slate-200">
+<i class="fa-regular fa-bell text-lg"></i>
+<span class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">6</span>
+</button>
+<!-- Profile Dropdown Trigger -->
+<button class="flex items-center gap-2 pl-2">
+<div class="relative">
+<img alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe78lTHqR5HwNQ4JOWpvCeAtrRfSOSgiX4ELG8x9bG7a2tnVFVMcZJsRAYEz5fSpmwW7exaKylwIWQAkyUeBFUcgOVsDzzXsQkljUw6KCOH0oLDCButC90wkZqhMfhDibqRVTdx57axJ8ajxarNZfGp2LVyBthu7IOUDFR3gqC2d0EK8BKAN8SnmZRAqCuq_3qcQHKLwKZF-YUqIvnSwFme8oTiHL4kpjOymRMl5a21cLPOf5EMYWU"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-brand rounded-full border-2 border-white"></div>
+</div>
+<i class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-8 space-y-6">
+<!-- Stats Row -->
+<div class="grid grid-cols-5 gap-6">
+<!-- Stat Card 1 -->
+<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 shrink-0">
+<i class="fa-solid fa-wrench text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-slate-900 leading-none">12</h3>
+<p class="text-sm font-semibold text-slate-700 mt-1">Demandes en attente</p>
+<p class="text-xs text-slate-500 mt-1">Nouvelles demandes</p>
+</div>
+</div>
+<a class="text-sm text-brand font-medium hover:underline mt-4 inline-flex items-center gap-1" href="#">Voir les demandes <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center text-amber-500 shrink-0">
+<i class="fa-solid fa-file-invoice text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-slate-900 leading-none">8</h3>
+<p class="text-sm font-semibold text-slate-700 mt-1">Devis envoyés</p>
+<p class="text-xs text-slate-500 mt-1">En attente de réponse</p>
+</div>
+</div>
+<a class="text-sm text-brand font-medium hover:underline mt-4 inline-flex items-center gap-1" href="#">Voir mes devis <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 shrink-0">
+<i class="fa-solid fa-calendar-day text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-slate-900 leading-none">5</h3>
+<p class="text-sm font-semibold text-slate-700 mt-1">Interventions planifiées</p>
+<p class="text-xs text-slate-500 mt-1">Cette semaine</p>
+</div>
+</div>
+<a class="text-sm text-brand font-medium hover:underline mt-4 inline-flex items-center gap-1" href="#">Voir le planning <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-white shrink-0 shadow-sm">
+<i class="fa-solid fa-check text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-slate-900 leading-none">28</h3>
+<p class="text-sm font-semibold text-slate-700 mt-1">Interventions terminées</p>
+<p class="text-xs text-slate-500 mt-1">Ce mois-ci</p>
+</div>
+</div>
+<a class="text-sm text-brand font-medium hover:underline mt-4 inline-flex items-center gap-1" href="#">Voir l'historique <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+<!-- Stat Card 5 -->
+<div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center text-purple-600 shrink-0">
+<i class="fa-solid fa-star text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-slate-900 leading-none flex items-end gap-1">4.7 <span class="text-sm text-slate-500 font-medium pb-0.5">/5</span></h3>
+<p class="text-sm font-semibold text-slate-700 mt-1">Note moyenne</p>
+<div class="flex text-amber-400 text-xs mt-1">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+</div>
+<p class="text-xs text-slate-500 mt-1">128 avis reçus</p>
+</div>
+</div>
+<a class="text-sm text-brand font-medium hover:underline mt-4 inline-flex items-center gap-1" href="#">Voir mes avis <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+</div>
+<!-- Middle Row: Map, Requests List, Notifications -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Map Section (Cols 1-7) -->
+<div class="col-span-12 lg:col-span-8 xl:col-span-7 bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col">
+<div class="p-5 border-b border-slate-100 flex items-center justify-between">
+<div>
+<h2 class="text-lg font-bold text-slate-900">Demandes proches de votre zone</h2>
+<p class="text-sm text-brand font-medium mt-0.5">Géolocalisation intelligente</p>
+</div>
+<button class="px-4 py-2 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors">Voir sur la carte</button>
+</div>
+<div class="flex-1 p-5 relative min-h-[300px]">
+<!-- Map Placeholder with rounded corners -->
+<div class="absolute inset-5 bg-slate-100 rounded-xl overflow-hidden map-bg shadow-inner border border-slate-200">
+<!-- Map Markers (Simulated) -->
+<div class="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-8 h-8 bg-brand text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md border-2 border-white z-10">2</div>
+<div class="w-1 h-3 bg-brand/50 mt-1"></div>
+</div>
+<div class="absolute top-1/3 right-1/3 transform translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-8 h-8 bg-brand text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md border-2 border-white z-10">3</div>
+<div class="w-1 h-3 bg-brand/50 mt-1"></div>
+</div>
+<div class="absolute bottom-1/4 left-1/4 transform translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-8 h-8 bg-brand text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md border-2 border-white z-10">3</div>
+<div class="w-1 h-3 bg-brand/50 mt-1"></div>
+</div>
+<!-- Current Location Marker -->
+<div class="absolute top-[45%] left-[45%] transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+<div class="w-12 h-12 bg-blue-500/20 rounded-full absolute animate-pulse"></div>
+<div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-sm z-10 relative"></div>
+</div>
+<!-- Labels (Simulated) -->
+<span class="absolute top-1/4 left-1/4 text-sm font-medium text-slate-700 drop-shadow-md">Abomey-Calavi</span>
+<span class="absolute top-1/3 right-1/4 text-sm font-medium text-slate-700 drop-shadow-md">Sô-Ava</span>
+<span class="absolute bottom-1/3 right-1/4 text-sm font-bold text-slate-900 drop-shadow-md">Cotonou</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="px-5 pb-5 flex items-center gap-6 mt-2">
+<div class="flex items-center gap-2 text-sm text-slate-600">
+<span class="w-3 h-3 rounded-full bg-brand"></span>
+<span>Très proche (0-5 km)</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600">
+<span class="w-3 h-3 rounded-full bg-lime-500"></span>
+<span>Proche (5-15 km)</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600">
+<span class="w-3 h-3 rounded-full bg-amber-500"></span>
+<span>Moyen (15+ km)</span>
+</div>
+</div>
+</div>
+<!-- Requests List & Notifications (Cols 8-12) -->
+<div class="col-span-12 lg:col-span-4 xl:col-span-5 grid grid-cols-1 xl:grid-cols-2 gap-6">
+<!-- Demandes en attente -->
+<div class="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col h-full">
+<div class="p-5 border-b border-slate-100 flex items-center justify-between">
+<h2 class="text-base font-bold text-slate-900">Demandes en attente</h2>
+<a class="text-sm text-brand font-medium hover:underline" href="#">Voir tout</a>
+</div>
+<div class="p-5 flex-1 space-y-4">
+<!-- Item 1 -->
+<div class="flex gap-4">
+<img alt="Tracteur" class="w-14 h-14 rounded-xl object-cover bg-slate-100 shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmoD6W85wcylJdPEtKDa6QxcE6MsCrgAMOMBKAVRXTBH6cDykCRx6NEgS49g_IxyWAPkMUX71vLqlCS56iGwQ4RExt56jv5mbLKeGvZR04AA-Cnd9PCE-uaxWJZiac-w9P_OSt9RUTNUtMqtwpvQKaZ5zOwoVJtE-eEzwBv34jYYSj01n7PdceIAlt-2WEYbvPwm2dZ4W3cT4krilkDTJ-UfPpb2d-58ZB1yV5B61g9M0NtEneUE5z"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-slate-900 truncate">Réparation tracteur John Deere 5090</h4>
+<span class="text-xs font-semibold text-slate-500 ml-2 shrink-0">2.4 km</span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Calavi, Abomey-Calavi</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-[10px] text-slate-400">Il y a 25 min</span>
+<span class="px-2 py-0.5 bg-red-50 text-red-600 rounded text-[10px] font-bold">Haute</span>
+</div>
+</div>
+</div>
+<hr class="border-slate-100"/>
+<!-- Item 2 -->
+<div class="flex gap-4">
+<img alt="Motoculteur" class="w-14 h-14 rounded-xl object-cover bg-slate-100 shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGahUXcu33grTWtRlZRsJZowub6Jq1ec60dROyQEr8S5AmYhHJsBejekTAfPCDtFCjsEM5WlXl7IIi_iUL8Lhv7ht6vY9UlLCS279kt8hM49w2E74bsuOFBVeHYt0yq8sI7xyVKQWjPjgxpDVybERKSUBojEH1tcxlJ0kuIL7h_JtCutKoI_LrYYkFS01pP0z1pAR92MnuRVkGbHtZlme2nXqIbSGgAa9vfgfnNeXc_MKvTcIGfvpy"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-slate-900 truncate">Entretien motoculteur Honda F720</h4>
+<span class="text-xs font-semibold text-slate-500 ml-2 shrink-0">4.7 km</span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Godomey, Abomey-Calavi</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-[10px] text-slate-400">Il y a 1 heure</span>
+<span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded text-[10px] font-bold">Moyenne</span>
+</div>
+</div>
+</div>
+<hr class="border-slate-100"/>
+<!-- Item 3 -->
+<div class="flex gap-4">
+<img alt="Pompe" class="w-14 h-14 rounded-xl object-cover bg-slate-100 shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClR7pL4jq7r7gcw0gAAMvkX7cvHTgRFnszM5XqxYYv6qXZSlJByNgVDvLwzNqZgMaYZ8sntgN2u2XVkLpEkkXMaeqeRp3PFy4npQxL1n14c_FpvTjDkg1XesV4rssf4T5qFXud9TBmUeNt-3Kw6To1T1mT6QDxKLZJPJ9_Je2e9VXN3phVbFJvPqZmgHCnE3EqcJ1DBBLUd5k_Quk1TW9BENgaKmgFV3y2liTA5J7AImnkdgJ6vLD7"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-slate-900 truncate">Réparation pompe à eau</h4>
+<span class="text-xs font-semibold text-slate-500 ml-2 shrink-0">6.1 km</span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Hévié, Abomey-Calavi</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-[10px] text-slate-400">Il y a 2 heures</span>
+<span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded text-[10px] font-bold">Basse</span>
+</div>
+</div>
+</div>
+<hr class="border-slate-100"/>
+<!-- Item 4 -->
+<div class="flex gap-4">
+<img alt="Générateur" class="w-14 h-14 rounded-xl object-cover bg-slate-100 shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxHVn3b2onjouWamwy3FUtGX40xpnijEuLSf_V9gpfpJjkhEkVAiVSsQciJDuKJZMJmAdQU_r7qLl5k7EXnw_R_W-3Py9tTqvQK-sol3uMIGf1I3ETs6IEtDV4-5SBzfOKO4RjHjvLzgBga3tOi66dejuDW7UjNAifGc_yVHcOg8e6Z11ZLxTDR7nMBznCp1ihWpr9XzUZW-sIH2KU6pF6QLzGqSMXjOL7SP0_T1rlzkFh6G34wlJp"/>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="text-sm font-bold text-slate-900 truncate">Entretien générateur 5KVA</h4>
+<span class="text-xs font-semibold text-slate-500 ml-2 shrink-0">12.8 km</span>
+</div>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Akassato, Cotonou</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-[10px] text-slate-400">Il y a 3 heures</span>
+<span class="px-2 py-0.5 bg-amber-50 text-amber-600 rounded text-[10px] font-bold">Moyenne</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-slate-100 text-center mt-auto">
+<a class="text-sm text-brand font-medium hover:underline inline-flex items-center gap-1" href="#">Voir toutes les demandes <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+</div>
+<!-- Notifications -->
+<div class="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col h-full">
+<div class="p-5 border-b border-slate-100 flex items-center justify-between">
+<h2 class="text-base font-bold text-slate-900">Notifications récentes</h2>
+<a class="text-sm text-brand font-medium hover:underline" href="#">Voir tout</a>
+</div>
+<div class="p-5 flex-1 space-y-5">
+<!-- Notif 1 -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-comment-dots"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">Nouvel message</h4>
+<p class="text-xs text-slate-600 mt-0.5">De MTN Bénin SARL</p>
+<p class="text-[10px] text-slate-400 mt-1">Il y a 10 min</p>
+</div>
+<div class="absolute right-0 top-2 w-2 h-2 bg-brand rounded-full"></div>
+</div>
+<!-- Notif 2 -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-file-invoice"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">Nouveau devis accepté</h4>
+<p class="text-xs text-slate-600 mt-0.5">Par Jean Hounkpe</p>
+<p class="text-[10px] text-slate-400 mt-1">Il y a 30 min</p>
+</div>
+<div class="absolute right-0 top-2 w-2 h-2 bg-brand rounded-full"></div>
+</div>
+<!-- Notif 3 -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center shrink-0">
+<i class="fa-regular fa-calendar"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">Intervention planifiée</h4>
+<p class="text-xs text-slate-600 mt-0.5">Demain à 09:00</p>
+<p class="text-[10px] text-slate-400 mt-1">Il y a 1 heure</p>
+</div>
+<div class="absolute right-0 top-2 w-2 h-2 bg-brand rounded-full"></div>
+</div>
+<!-- Notif 4 -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+<i class="fa-solid fa-star"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">Nouvel avis reçu</h4>
+<div class="flex items-center gap-1 text-[10px] text-amber-400 mt-0.5">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+<span class="text-slate-600 ml-1">(5.0)</span>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">Il y a 2 heures</p>
+</div>
+<div class="absolute right-0 top-2 w-2 h-2 bg-brand rounded-full"></div>
+</div>
+<!-- Notif 5 -->
+<div class="flex gap-3 relative">
+<div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0">
+<i class="fa-solid fa-check"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">Intervention terminée</h4>
+<p class="text-xs text-slate-600 mt-0.5">Hévié, Abomey-Calavi</p>
+<p class="text-[10px] text-slate-400 mt-1">Il y a 3 heures</p>
+</div>
+<div class="absolute right-0 top-2 w-2 h-2 bg-brand rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Agenda -->
+<div class="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col">
+<div class="p-5 border-b border-slate-100 flex items-center justify-between">
+<h2 class="text-lg font-bold text-slate-900">Mon agenda</h2>
+<a class="text-sm text-brand font-medium hover:underline" href="#">Voir tout</a>
+</div>
+<div class="p-5 space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center gap-4">
+<div class="w-12 text-center shrink-0">
+<span class="block text-lg font-bold text-slate-900 leading-none">16</span>
+<span class="block text-[10px] font-bold text-slate-400 uppercase mt-1">Mai</span>
+</div>
+<div class="flex-1 min-w-0 border-l-2 border-blue-200 pl-4 py-1">
+<h4 class="text-sm font-bold text-slate-900 truncate">Réparation tracteur 5090</h4>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Calavi, Abomey-Calavi</p>
+</div>
+<div class="text-right shrink-0">
+<span class="block text-sm font-medium text-slate-900">09:00</span>
+<span class="inline-block mt-1 px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">Planifié</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical px-2"></i></button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4">
+<div class="w-12 text-center shrink-0">
+<span class="block text-lg font-bold text-slate-900 leading-none">16</span>
+<span class="block text-[10px] font-bold text-slate-400 uppercase mt-1">Mai</span>
+</div>
+<div class="flex-1 min-w-0 border-l-2 border-blue-200 pl-4 py-1">
+<h4 class="text-sm font-bold text-slate-900 truncate">Entretien motoculteur F720</h4>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Godomey, Abomey-Calavi</p>
+</div>
+<div class="text-right shrink-0">
+<span class="block text-sm font-medium text-slate-900">14:00</span>
+<span class="inline-block mt-1 px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">Planifié</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical px-2"></i></button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-4">
+<div class="w-12 text-center shrink-0">
+<span class="block text-lg font-bold text-slate-900 leading-none">17</span>
+<span class="block text-[10px] font-bold text-slate-400 uppercase mt-1">Mai</span>
+</div>
+<div class="flex-1 min-w-0 border-l-2 border-blue-200 pl-4 py-1">
+<h4 class="text-sm font-bold text-slate-900 truncate">Réparation pompe à eau</h4>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Hévié, Abomey-Calavi</p>
+</div>
+<div class="text-right shrink-0">
+<span class="block text-sm font-medium text-slate-900">09:30</span>
+<span class="inline-block mt-1 px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">Planifié</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical px-2"></i></button>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center gap-4">
+<div class="w-12 text-center shrink-0">
+<span class="block text-lg font-bold text-slate-900 leading-none">18</span>
+<span class="block text-[10px] font-bold text-slate-400 uppercase mt-1">Mai</span>
+</div>
+<div class="flex-1 min-w-0 border-l-2 border-blue-200 pl-4 py-1">
+<h4 class="text-sm font-bold text-slate-900 truncate">Entretien générateur</h4>
+<p class="text-xs text-slate-500 mt-0.5 truncate">Akassato, Cotonou</p>
+</div>
+<div class="text-right shrink-0">
+<span class="block text-sm font-medium text-slate-900">11:00</span>
+<span class="inline-block mt-1 px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[10px] font-bold">Planifié</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-ellipsis-vertical px-2"></i></button>
+</div>
+</div>
+</div>
+<!-- Performances -->
+<div class="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col">
+<div class="p-5 border-b border-slate-100 flex items-center justify-between">
+<h2 class="text-lg font-bold text-slate-900">Mes performances</h2>
+<button class="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 bg-slate-50 rounded-lg border border-slate-200">
+<span>Ce mois-ci</span>
+<i class="fa-solid fa-chevron-down text-[10px] text-slate-400"></i>
+</button>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex items-center gap-6 mb-6">
+<!-- Circular Progress Placeholder -->
+<div class="relative w-32 h-32 flex items-center justify-center shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#f1f5f9" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#10b981" stroke-dasharray="251.2" stroke-dashoffset="37.68" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<i class="fa-solid fa-arrow-down text-brand text-xs mb-1"></i>
+<span class="text-2xl font-bold text-slate-900">85%</span>
+<span class="text-[10px] text-slate-500 font-medium">Taux de complétion</span>
+</div>
+</div>
+<!-- Stats List -->
+<div class="flex-1 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+<span class="text-sm text-slate-600">Interventions terminées</span>
+</div>
+<span class="text-sm font-bold text-slate-900">28</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-lime-500"></div>
+<span class="text-sm text-slate-600">Interventions planifiées</span>
+</div>
+<span class="text-sm font-bold text-slate-900">5</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-amber-500"></div>
+<span class="text-sm text-slate-600">Devis acceptés</span>
+</div>
+<span class="text-sm font-bold text-slate-900">15</span>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
+<span class="text-sm text-slate-600">Taux de satisfaction</span>
+</div>
+<span class="text-sm font-bold text-slate-900">4.7 <span class="text-xs text-slate-500 font-normal">/ 5</span></span>
+</div>
+</div>
+</div>
+<div class="text-center mt-auto pt-4 border-t border-slate-100">
+<a class="text-sm text-brand font-medium hover:underline inline-flex items-center gap-1" href="#">Voir toutes mes statistiques <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+</div>
+</div>
+</div>
+<!-- Zones d'intervention -->
+<div class="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col">
+<div class="p-5 border-b border-slate-100 flex items-center justify-between">
+<h2 class="text-lg font-bold text-slate-900">Mes zones d'intervention</h2>
+<a class="text-sm text-brand font-medium hover:underline" href="#">Gérer</a>
+</div>
+<div class="p-5 space-y-4 flex-1">
+<div class="flex items-center justify-between pb-3 border-b border-slate-50">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-location-dot text-slate-400"></i>
+<span class="text-sm font-medium text-slate-700">Abomey-Calavi</span>
+</div>
+<span class="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-lg">Actif</span>
+</div>
+<div class="flex items-center justify-between pb-3 border-b border-slate-50">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-location-dot text-slate-400"></i>
+<span class="text-sm font-medium text-slate-700">Cotonou</span>
+</div>
+<span class="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-lg">Actif</span>
+</div>
+<div class="flex items-center justify-between pb-3 border-b border-slate-50">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-location-dot text-slate-400"></i>
+<span class="text-sm font-medium text-slate-700">Ouidah</span>
+</div>
+<span class="px-2 py-1 bg-emerald-50 text-emerald-700 text-xs font-medium rounded-lg">Actif</span>
+</div>
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-3">
+<i class="fa-solid fa-location-dot text-slate-300"></i>
+<span class="text-sm font-medium text-slate-400">Porto-Novo</span>
+</div>
+<span class="px-2 py-1 bg-slate-100 text-slate-500 text-xs font-medium rounded-lg">Inactif</span>
+</div>
+</div>
+<div class="p-5 pt-0">
+<button class="w-full py-3 bg-brand text-white rounded-xl text-sm font-bold hover:bg-brand-dark transition-colors flex items-center justify-center gap-2">
+<i class="fa-solid fa-plus"></i>
+               Ajouter une zone
+             </button>
+</div>
+</div>
+</div>
+<!-- Bottom Banner CTA -->
+<div class="bg-brand-dark rounded-2xl p-6 flex items-center justify-between text-white relative overflow-hidden">
+<div class="relative z-10 flex items-center gap-6">
+<img alt="Support Worker" class="w-20 h-20 rounded-full object-cover border-2 border-white/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUWwX35E1oVeNSmRZhhf7UjZL4DpMZ1JkI1JZqzmE-SGCPzzIvg1LxkX0j5EuvsLT6HFAc9cduBPlnEHEcInZ5Gtsn2iiBPWvySZFxoLpiEU9eOmNn6Lkms4a7dbuVbO3XDztEM-ReDFacK7s1RPdNmZlZzA_nHxe85thBt2WnY7y08_IWAgkWA6W1hhKtdyr3JptLwyIdL7vTkLt8XLO_5u40KWMQQ4ZZm9YK2bzpbDI0NAAxij_y"/>
+<div>
+<h2 class="text-xl font-bold mb-1">Besoin d'assistance ou d'outils professionnels ?</h2>
+<p class="text-sm text-brand-light/90 max-w-2xl">Accédez à nos guides de réparation, outils techniques et support pour mieux servir vos clients.</p>
+</div>
+</div>
+<button class="relative z-10 flex items-center gap-2 px-6 py-3 bg-white text-brand-dark rounded-xl font-bold text-sm hover:bg-brand-light transition-colors shadow-sm">
+<i class="fa-solid fa-microphone"></i>
+<span>Assistance vocale</span>
+<i class="fa-solid fa-arrow-right ml-2"></i>
+</button>
+<!-- Background Pattern (Subtle) -->
+<div class="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-brand to-transparent opacity-50"></div>
+</div>
+</div>
+</main>
+<!-- END: Main Content Area -->
+</body></html>

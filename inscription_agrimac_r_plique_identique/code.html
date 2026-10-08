@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inscription AGRIMAC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#106e3f',
+            'primary-dark': '#0d5a33',
+            'primary-light': '#e8f3ee',
+            surface: '#fbf9f8',
+            'surface-dim': '#dbd9d9',
+            'surface-container-low': '#f5f3f3',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styles">
+    body {
+      background-color: #fbf9f8;
+      color: #1f2937;
+    }
+    .custom-shadow {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+    .step-line {
+      position: absolute;
+      top: 50%;
+      left: 2rem;
+      right: 2rem;
+      height: 1px;
+      background-color: #e5e7eb;
+      z-index: 0;
+      border-top: 1px dashed #d1d5db;
+    }
+    .password-strength-bar {
+      height: 4px;
+      border-radius: 2px;
+      flex: 1;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- BEGIN: MainContent -->
+<main class="flex-grow container mx-auto px-4 py-8 max-w-7xl">
+<div class="flex flex-col lg:flex-row gap-8 lg:gap-16">
+<!-- BEGIN: Left Column - Information -->
+<div class="w-full lg:w-5/12 flex flex-col" data-purpose="info-column">
+<!-- Logo and Intro -->
+<div class="mb-8 text-center lg:text-left">
+<div class="flex items-center justify-center lg:justify-start gap-3 mb-2">
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="fa-solid fa-leaf text-primary text-2xl"></i>
+</div>
+<h1 class="text-4xl font-bold text-primary tracking-tight">AGRIMAC</h1>
+</div>
+<p class="text-gray-600 text-sm">L'écosystème agricole du Bénin</p>
+</div>
+<h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          Rejoignez AGRIMAC <span class="text-primary block mt-1">aujourd'hui.</span>
+</h2>
+<p class="text-gray-600 mb-8 text-lg">
+          Construisez l'avenir de l'agriculture béninoise avec une plateforme moderne, intelligente et sécurisée.
+        </p>
+<!-- Features List -->
+<div class="space-y-6 mb-10">
+<!-- Feature 1 -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0 text-primary">
+<i class="fa-solid fa-users text-xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900 text-lg">Plus de 4 profils métiers</h3>
+<p class="text-gray-600 text-sm mt-1">Agriculteur, Entreprise, Maintenancier, Administrateur</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0 text-primary">
+<i class="fa-solid fa-location-dot text-xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900 text-lg">Géolocalisation intelligente</h3>
+<p class="text-gray-600 text-sm mt-1">Trouvez les services et machines proches de vous.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0 text-primary">
+<i class="fa-solid fa-mobile-screen-button text-xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900 text-lg">Paiement Mobile Money</h3>
+<p class="text-gray-600 text-sm mt-1">Payez et recevez via MTN, Moov et Flooz en toute sécurité.</p>
+</div>
+</div>
+<!-- Feature 4 -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0 text-primary">
+<i class="fa-solid fa-microphone text-xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900 text-lg">Assistance vocale</h3>
+<p class="text-gray-600 text-sm mt-1">Utilisez votre voix pour naviguer facilement.</p>
+</div>
+</div>
+<!-- Feature 5 -->
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-light flex items-center justify-center flex-shrink-0 text-primary">
+<i class="fa-solid fa-cloud-arrow-down text-xl"></i>
+</div>
+<div>
+<h3 class="font-semibold text-gray-900 text-lg">Fonctionnement hors connexion</h3>
+<p class="text-gray-600 text-sm mt-1">Accédez à vos données même sans Internet et synchronisez plus tard.</p>
+</div>
+</div>
+</div>
+<!-- Illustration & Trust Badge -->
+<div class="mt-auto relative rounded-2xl overflow-hidden h-64 lg:h-80 shadow-lg">
+<img alt="Agriculteur utilisant l'application" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJHPvxTwk5KgLSPw1RziWlypfWKzc0zsMoI3qJZaTaIOzwi-of30LZg-S8Gz3n3Aeuy-kYOP143pZFRkJQ90dqcW0VXs1xEvT1Og3fC5dWEcOvksPkCm-cVusk1MpN5_YXu313jcKxwZKbrLinHrbt20tfFO97006IxIEPDX3qcNZKtOUsEhAA8uZO6dxpAp1f84UBPOvXg9pg2eLxo0GWSARx9yqmTlRQoi6wFqrXp45BmkCdztrW"/>
+<div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-sm text-white p-4 rounded-xl flex items-center gap-4 max-w-sm">
+<i class="fa-solid fa-user-group text-2xl"></i>
+<div>
+<div class="font-semibold">Plus de 5 000 utilisateurs</div>
+<div class="text-sm opacity-90">font confiance à AGRIMAC.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Left Column -->
+<!-- BEGIN: Right Column - Registration Form -->
+<div class="w-full lg:w-7/12" data-purpose="form-column">
+<div class="bg-white rounded-3xl custom-shadow p-6 sm:p-10 border border-gray-100">
+<!-- Tabs -->
+<div class="flex border-b border-gray-200 mb-8 relative">
+<a class="w-1/2 py-4 text-center font-medium text-gray-500 hover:text-gray-700 transition-colors" href="#">Se connecter</a>
+<a class="w-1/2 py-4 text-center font-semibold text-primary relative" href="#">
+              S'inscrire
+              <div class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-t-md"></div>
+</a>
+</div>
+<!-- Progress Steps -->
+<div class="relative flex justify-between items-center mb-10 px-4">
+<div class="step-line"></div>
+<div class="relative z-10 flex flex-col items-center bg-white px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-sm mb-2 shadow-md">1</div>
+<span class="text-xs font-medium text-gray-900">Profil</span>
+</div>
+<div class="relative z-10 flex flex-col items-center bg-white px-2">
+<div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold text-sm mb-2">2</div>
+<span class="text-xs font-medium text-gray-500">Informations</span>
+</div>
+<div class="relative z-10 flex flex-col items-center bg-white px-2">
+<div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold text-sm mb-2">3</div>
+<span class="text-xs font-medium text-gray-500">Vérification</span>
+</div>
+</div>
+<!-- Form Header -->
+<div class="text-center mb-8">
+<h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Créer votre compte <span class="text-primary">AGRIMAC</span></h2>
+<p class="text-gray-600 text-sm">Inscrivez-vous gratuitement et choisissez votre profil.</p>
+</div>
+<form action="#" class="space-y-8" method="POST">
+<!-- Section 1: Choose Profile -->
+<section data-purpose="profile-selection">
+<h3 class="font-semibold text-gray-900 mb-4 text-lg">1. Choisissez votre profil</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Agriculteur (Selected) -->
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="profile" type="radio" value="agriculteur"/>
+<div class="p-4 border-2 border-primary bg-primary-light/30 rounded-2xl text-center h-full flex flex-col items-center transition-all">
+<div class="absolute top-2 right-2 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white text-xs">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-primary mb-3 shadow-sm">
+<i class="fa-solid fa-leaf text-xl"></i>
+</div>
+<div class="font-semibold text-primary mb-1">Agriculteur</div>
+<div class="text-xs text-gray-600">Achetez, louez et trouvez des réparateurs.</div>
+</div>
+</label>
+<!-- Entreprise -->
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="profile" type="radio" value="entreprise"/>
+<div class="p-4 border border-gray-200 rounded-2xl text-center h-full flex flex-col items-center hover:border-primary/50 transition-all peer-checked:border-2 peer-checked:border-primary peer-checked:bg-primary-light/30">
+<div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-600 mb-3 group-hover:text-primary transition-colors">
+<i class="fa-solid fa-building text-xl"></i>
+</div>
+<div class="font-semibold text-gray-900 mb-1">Entreprise</div>
+<div class="text-xs text-gray-500">Vendez des machines, pièces et services.</div>
+</div>
+</label>
+<!-- Maintenancier -->
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="profile" type="radio" value="maintenancier"/>
+<div class="p-4 border border-gray-200 rounded-2xl text-center h-full flex flex-col items-center hover:border-primary/50 transition-all peer-checked:border-2 peer-checked:border-primary peer-checked:bg-primary-light/30">
+<div class="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center text-gray-600 mb-3">
+<i class="fa-solid fa-wrench text-xl"></i>
+</div>
+<div class="font-semibold text-gray-900 mb-1">Maintenancier</div>
+<div class="text-xs text-gray-500">Recevez des demandes de réparation.</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Section 2: Personal Information -->
+<section data-purpose="personal-info">
+<h3 class="font-semibold text-gray-900 mb-4 text-lg">2. Informations personnelles</h3>
+<div class="space-y-4">
+<!-- Full Name -->
+<div>
+<div class="relative flex items-center border border-gray-300 rounded-xl px-4 py-3 bg-white focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-shadow">
+<i class="fa-regular fa-user text-gray-400 mr-3"></i>
+<div class="flex-grow flex flex-col">
+<label class="text-xs text-gray-500 font-medium mb-1" for="fullname">Nom complet</label>
+<input class="border-none p-0 focus:ring-0 text-sm text-gray-900 placeholder-gray-400 bg-transparent w-full" id="fullname" name="fullname" placeholder="Entrez votre nom complet" type="text"/>
+</div>
+</div>
+</div>
+<!-- Phone -->
+<div>
+<div class="relative flex items-center border border-gray-300 rounded-xl px-4 py-3 bg-white focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-shadow">
+<i class="fa-solid fa-phone text-gray-400 mr-3"></i>
+<div class="flex-grow flex flex-col">
+<label class="text-xs text-gray-500 font-medium mb-1" for="phone">Numéro de téléphone</label>
+<div class="flex items-center">
+<div class="flex items-center gap-1 border-r border-gray-200 pr-3 mr-3 cursor-pointer">
+<img alt="Bénin" class="w-5 h-auto rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD46Vo2trA84y8j59RqKeINFhbUmM87eyGDt9dTEvneK76E-DkqPX9lOiEPdNHBi2jxrgSaBq5zB4_csSyX7NSWDVISE-ngpTSmvBVkcisg2yZq1rcAq1-VpOcze9RV0UBh277yLVcC4xa_0CZk9cfC-QmuW441zWrx4kv-SpJqNkH09e5nz_xSHp8aI5aM9OdPizRwX-04NSOyT_nk2Kv0jFitc7e4J4pu6wQFc4Ac_XrmGwuD7lcB"/>
+<span class="text-sm font-medium text-gray-700">+229</span>
+<i class="fa-solid fa-chevron-down text-gray-400 text-xs ml-1"></i>
+</div>
+<input class="border-none p-0 focus:ring-0 text-sm text-gray-900 placeholder-gray-400 bg-transparent w-full" id="phone" name="phone" placeholder="Ex : 97 12 34 56" type="tel"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Password -->
+<div>
+<div class="relative flex flex-col border border-gray-300 rounded-xl px-4 py-3 bg-white focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-shadow mb-1">
+<div class="flex items-center w-full">
+<i class="fa-solid fa-lock text-gray-400 mr-3"></i>
+<div class="flex-grow flex flex-col">
+<label class="text-xs text-gray-500 font-medium mb-1" for="password">Mot de passe</label>
+<input class="border-none p-0 focus:ring-0 text-sm text-gray-900 placeholder-gray-400 bg-transparent w-full" id="password" name="password" placeholder="Entrez votre mot de passe" type="password"/>
+</div>
+<button class="text-gray-400 hover:text-gray-600 focus:outline-none" type="button">
+<i class="fa-regular fa-eye"></i>
+</button>
+</div>
+<!-- Password Strength -->
+<div class="w-full flex gap-1 mt-3">
+<div class="password-strength-bar bg-red-500"></div>
+<div class="password-strength-bar bg-yellow-400"></div>
+<div class="password-strength-bar bg-gray-200"></div>
+</div>
+<div class="flex justify-between w-full text-[10px] text-gray-500 mt-1 px-1">
+<span>Faible</span>
+<span>Moyen</span>
+<span>Fort</span>
+</div>
+</div>
+</div>
+<!-- Confirm Password -->
+<div>
+<div class="relative flex items-center border border-gray-300 rounded-xl px-4 py-3 bg-white focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-shadow">
+<i class="fa-solid fa-lock text-gray-400 mr-3"></i>
+<div class="flex-grow flex flex-col">
+<label class="text-xs text-gray-500 font-medium mb-1" for="confirm_password">Confirmer le mot de passe</label>
+<input class="border-none p-0 focus:ring-0 text-sm text-gray-900 placeholder-gray-400 bg-transparent w-full" id="confirm_password" name="confirm_password" placeholder="Confirmez votre mot de passe" type="password"/>
+</div>
+<button class="text-gray-400 hover:text-gray-600 focus:outline-none" type="button">
+<i class="fa-regular fa-eye"></i>
+</button>
+</div>
+</div>
+<!-- Voice Fill Button -->
+<button class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-primary-light/50 hover:bg-primary-light text-primary rounded-xl border border-primary/20 transition-colors" type="button">
+<i class="fa-solid fa-microphone text-lg"></i>
+<div class="text-left leading-tight">
+<div class="font-semibold text-sm">Remplir avec la voix</div>
+<div class="text-xs opacity-80">Dictée vocale</div>
+</div>
+</button>
+</div>
+</section>
+<!-- Section 3: Usage Mode -->
+<section data-purpose="usage-mode">
+<h3 class="font-semibold text-gray-900 mb-4 text-lg">3. Choisissez votre mode d'utilisation</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Mode simplifié (Selected) -->
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="mode" type="radio" value="simplifie"/>
+<div class="p-4 border-2 border-primary bg-primary-light/30 rounded-2xl flex items-center gap-4 transition-all">
+<div class="absolute top-2 right-2 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white text-xs">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="w-14 h-14 bg-white rounded-xl flex flex-wrap gap-1 p-2 items-center justify-center text-primary shadow-sm">
+<div class="w-4 h-4 bg-primary/20 rounded-sm"></div>
+<div class="w-4 h-4 bg-primary rounded-sm"></div>
+<div class="w-4 h-4 bg-primary rounded-sm"></div>
+<div class="w-4 h-4 bg-primary/20 rounded-sm"></div>
+</div>
+<div>
+<div class="font-semibold text-gray-900 text-sm mb-1">Mode simplifié</div>
+<ul class="text-xs text-gray-600 space-y-0.5">
+<li>Grandes icônes</li>
+<li>Texte plus gros</li>
+<li>Navigation guidée</li>
+</ul>
+</div>
+</div>
+</label>
+<!-- Mode avancé -->
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="mode" type="radio" value="avance"/>
+<div class="p-4 border border-gray-200 rounded-2xl flex items-center gap-4 hover:border-primary/50 transition-all peer-checked:border-2 peer-checked:border-primary peer-checked:bg-primary-light/30">
+<div class="w-14 h-14 bg-gray-50 rounded-xl flex flex-wrap gap-0.5 p-1.5 items-center justify-center text-gray-400">
+<div class="w-3 h-3 bg-gray-300 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-400 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-300 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-400 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-300 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-400 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-400 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-300 rounded-sm"></div>
+<div class="w-3 h-3 bg-gray-400 rounded-sm"></div>
+</div>
+<div>
+<div class="font-semibold text-gray-900 text-sm mb-1">Mode avancé</div>
+<ul class="text-xs text-gray-500 space-y-0.5">
+<li>Plus de fonctionnalités</li>
+<li>Interface complète</li>
+<li>Plus d'options</li>
+</ul>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Terms -->
+<div class="flex items-start">
+<div class="flex items-center h-5">
+<input class="focus:ring-primary h-4 w-4 text-primary border-gray-300 rounded" id="terms" name="terms" type="checkbox"/>
+</div>
+<div class="ml-3 text-sm">
+<label class="font-medium text-gray-700" for="terms">J'accepte les <a class="text-primary hover:underline" href="#">Conditions d'utilisation</a> et la <a class="text-primary hover:underline" href="#">Politique de confidentialité</a>.</label>
+</div>
+</div>
+<!-- Submit Buttons -->
+<div class="space-y-4">
+<button class="w-full flex justify-between items-center py-4 px-6 border border-transparent rounded-xl shadow-sm text-base font-semibold text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors" type="submit">
+<span>Créer mon compte</span>
+<i class="fa-solid fa-arrow-right"></i>
+</button>
+<div class="relative">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-gray-200"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-2 bg-white text-gray-500 font-medium">ou</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-300 rounded-xl shadow-sm bg-white text-gray-700 hover:bg-gray-50 transition-colors" type="button">
+<i class="fa-solid fa-microphone text-primary text-xl"></i>
+<div class="text-left leading-tight">
+<div class="font-semibold text-sm">Créer avec la voix</div>
+<div class="text-xs text-gray-500">Commande vocale</div>
+</div>
+</button>
+</div>
+<!-- Verification Notice -->
+<div class="bg-gray-50 rounded-xl p-4 flex gap-4 items-start border border-gray-100">
+<div class="text-primary mt-0.5">
+<i class="fa-solid fa-shield-check text-xl"></i>
+</div>
+<p class="text-xs text-gray-600 leading-relaxed">
+                Si vous choisissez le profil <span class="font-semibold text-gray-900">Entreprise</span> ou <span class="font-semibold text-gray-900">Maintenancier</span>, votre compte sera vérifié par un administrateur avant son activation.
+              </p>
+</div>
+<!-- Login Link -->
+<div class="text-center text-sm">
+<span class="text-gray-600">Déjà un compte ?</span>
+<a class="font-semibold text-primary hover:underline ml-1" href="#">Se connecter</a>
+</div>
+</form>
+</div>
+</div>
+<!-- END: Right Column -->
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: Footer -->
+<footer class="bg-white border-t border-gray-200 mt-12 py-8 w-full" data-purpose="site-footer">
+<div class="container mx-auto px-4 max-w-7xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- Feature 1 -->
+<div class="flex items-center gap-3">
+<div class="text-primary text-2xl w-10 h-10 flex items-center justify-center">
+<i class="fa-solid fa-globe"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 text-sm">Multilingue</h4>
+<p class="text-xs text-gray-500">Français, Fon et Yoruba</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex items-center gap-3">
+<div class="text-primary text-2xl w-10 h-10 flex items-center justify-center">
+<i class="fa-solid fa-cloud-arrow-down"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 text-sm">Fonctionne hors ligne</h4>
+<p class="text-xs text-gray-500">Accédez à vos données même sans connexion</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex items-center gap-3">
+<div class="text-primary text-2xl w-10 h-10 flex items-center justify-center">
+<i class="fa-solid fa-headset"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 text-sm">Assistance vocale</h4>
+<p class="text-xs text-gray-500">Utilisez votre voix pour naviguer facilement</p>
+</div>
+</div>
+<!-- Feature 4 -->
+<div class="flex items-center gap-3">
+<div class="text-primary text-2xl w-10 h-10 flex items-center justify-center">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 text-sm">Sécurisé</h4>
+<p class="text-xs text-gray-500">Vos données sont protégées</p>
+</div>
+</div>
+</div>
+<div class="text-center text-xs text-gray-400 border-t border-gray-100 pt-6">
+        © 2025 AGRIMAC. Tous droits réservés.
+      </div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

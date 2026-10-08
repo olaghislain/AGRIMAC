@@ -1,0 +1,1 @@
+ALTER TYPE "ScrapedSourceStatus" ADD VALUE IF NOT EXISTS 'DISABLED';

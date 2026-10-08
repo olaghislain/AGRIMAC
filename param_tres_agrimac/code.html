@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Paramètres</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e0e3e1",
+                        "inverse-primary": "#83d89f",
+                        "on-tertiary-container": "#d9dcda",
+                        "surface-dim": "#dbd9d9",
+                        "primary-fixed": "#9ff5b9",
+                        "surface-variant": "#e4e2e2",
+                        "outline-variant": "#bec9be",
+                        "on-tertiary-fixed": "#181c1b",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "on-background": "#1b1c1c",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#00210e",
+                        "inverse-surface": "#303030",
+                        "on-surface-variant": "#3f4941",
+                        "tertiary": "#454948",
+                        "on-secondary-container": "#5b6900",
+                        "on-primary-container": "#98edb2",
+                        "secondary": "#586400",
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#414b00",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#bcd14a",
+                        "primary": "#00542d",
+                        "primary-container": "#106e3f",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "surface-container-low": "#f5f3f3",
+                        "secondary-container": "#d5ea60",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "surface-container": "#efeded",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#191e00",
+                        "primary-fixed-dim": "#83d89f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#00522c",
+                        "surface-container-highest": "#e4e2e2",
+                        "secondary-fixed": "#d8ed63",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#eae8e7",
+                        "surface-tint": "#0d6c3e",
+                        "tertiary-container": "#5d6160",
+                        "on-surface": "#1b1c1c",
+                        "surface-bright": "#fbf9f8",
+                        "outline": "#6f7a70",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-desktop": "40px",
+                        "gutter": "24px",
+                        "container-padding-mobile": "16px",
+                        "section-gap": "64px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex w-72 h-screen fixed left-0 top-0 shadow-sm dark:shadow-none bg-surface-container-lowest dark:bg-surface flex-col py-base z-50">
+<!-- Brand/Header -->
+<div class="px-6 py-6 mb-4">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">AGRIMAC</h1>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Rechercher</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-sm text-label-sm">Mes demandes</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-label-sm text-label-sm">Messagerie</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm">Paiements</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="star">star</span>
+<span class="font-label-sm text-label-sm">Avis &amp; évaluations</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-label-sm text-label-sm">Favoris</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-sm text-label-sm">Notifications</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 mx-2 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Mon profil</span>
+</a>
+<a class="flex items-center gap-3 bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-xl px-4 py-3 mx-2 transition-transform duration-200 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined filled" data-icon="settings" data-weight="fill" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-sm text-label-sm">Paramètres</span>
+</a>
+</div>
+<!-- Footer / User Info -->
+<div class="mt-auto px-4 pt-4 border-t border-surface-container-high/20">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed px-4 py-3 hover:bg-surface-container dark:hover:bg-surface-container-high transition-all duration-200 rounded-xl mb-4" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm text-label-sm">Besoin d'aide ?</span>
+</a>
+<div class="flex items-center gap-3 p-2 bg-surface-container-lowest rounded-xl">
+<img alt="Koffi Agbodan, Agriculteur" class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="A high-quality, professional headshot of a modern African farmer, Koffi Agbodan. He is wearing a clean, durable collared shirt, set against a bright, out-of-focus background of a well-maintained, high-tech agricultural field. The lighting is soft and natural, emphasizing a trustworthy and experienced persona suitable for an enterprise dashboard profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7ck6wmbIA2qgkM4S4sW62ogchLyr8B4Req6S7whKuWDuTs2Efhcdu4VpyqqiS4TWsgo9yjk9e0e6HKfdYMXEzEJsEpem5AHX4fqhAdfM0Yz75y2E0Lc1kY0pNRklGOGjGnsbTlgJIM66l0m4KfdH4VHVDN9QKNPTZ7_qZDfcP8Y2kXqKKyjUKHK4qMUPs3RuKRfRJYqhQ9cJebuGQ-B2QuMnH2rJoKYaWXSegJZZ7TpyABGO_sI3Q"/>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface">Koffi Agbodan</span>
+<span class="text-xs text-on-surface-variant">Agriculteur</span>
+</div>
+</div>
+<button class="w-full mt-4 py-2 px-4 bg-surface-container text-primary font-label-sm text-label-sm rounded-lg hover:bg-surface-container-high transition-colors">Mode simplifié</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-72 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-container-padding-mobile md:px-container-padding-desktop py-4 bg-transparent docked top-0 h-20 z-40">
+<div class="flex items-center md:hidden">
+<h1 class="text-headline-md font-headline-md font-bold text-primary tracking-tight">AGRIMAC</h1>
+</div>
+<div class="hidden md:flex items-center gap-4">
+<h2 class="font-display-lg text-display-lg text-on-background">Paramètres</h2>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors focus:outline-none focus:ring-1 focus:ring-primary">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors focus:outline-none focus:ring-1 focus:ring-primary">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors focus:outline-none focus:ring-1 focus:ring-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<span class="font-label-sm text-label-sm text-primary font-semibold ml-2">FR</span>
+</div>
+</header>
+<!-- Settings Canvas -->
+<div class="flex-1 p-container-padding-mobile md:p-container-padding-desktop overflow-y-auto">
+<div class="max-w-4xl mx-auto space-y-section-gap pb-12">
+<!-- Account & Security Section -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+                        Compte et Sécurité
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Bento Card 1 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col justify-between group hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow">
+<div>
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface mb-2">Informations Personnelles</h4>
+<p class="text-sm text-on-surface-variant">Gérez votre nom, numéro de téléphone et adresse e-mail associés à votre compte professionnel.</p>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="text-primary font-label-sm text-label-sm hover:underline">Modifier</button>
+</div>
+</div>
+<!-- Bento Card 2 -->
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col justify-between group hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-shadow">
+<div>
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined">password</span>
+</div>
+<h4 class="font-label-sm text-label-sm text-on-surface mb-2">Mot de passe &amp; Authentification</h4>
+<p class="text-sm text-on-surface-variant">Modifiez votre mot de passe et configurez l'authentification à deux facteurs (2FA) pour sécuriser vos données agricoles.</p>
+</div>
+<div class="mt-6 flex justify-end">
+<button class="text-primary font-label-sm text-label-sm hover:underline">Gérer la sécurité</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Preferences Section (Language & Display) -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+                        Préférences &amp; Affichage
+                    </h3>
+<div class="bg-surface-container-lowest rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden">
+<!-- Language Setting -->
+<div class="p-8 border-b border-surface-variant flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+<div class="flex-1">
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px;">translate</span>
+                                    Langue de l'interface
+                                </h4>
+<p class="text-sm text-on-surface-variant">Sélectionnez la langue principale pour votre tableau de bord et vos communications.</p>
+</div>
+<div class="w-full sm:w-64">
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border-none rounded-lg py-3 pl-4 pr-10 text-on-surface focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-colors font-body-md">
+<option selected="" value="fr">Français</option>
+<option value="fon">Fon</option>
+<option value="yo">Yoruba</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Mode Toggle -->
+<div class="p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+<div class="flex-1">
+<h4 class="font-label-sm text-label-sm text-on-surface mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant" style="font-size: 20px;">space_dashboard</span>
+                                    Mode d'utilisation
+                                </h4>
+<p class="text-sm text-on-surface-variant">Basculez entre le Mode Simplifié pour les tâches essentielles et le Mode Avancé pour une gestion complète.</p>
+</div>
+<div class="flex items-center bg-surface-container rounded-lg p-1">
+<button class="px-4 py-2 rounded-md font-label-sm text-label-sm bg-surface-container-lowest shadow-sm text-on-surface transition-all">
+                                    Simplifié
+                                </button>
+<button class="px-4 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all">
+                                    Avancé
+                                </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Notifications & Privacy Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Notifications -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+                            Notifications
+                        </h3>
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.04)] space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface">Notifications Push</h4>
+<p class="text-sm text-on-surface-variant mt-1">Alertes immédiates sur cet appareil.</p>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<hr class="border-surface-variant"/>
+<div class="flex items-center justify-between">
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface">Notifications par Email</h4>
+<p class="text-sm text-on-surface-variant mt-1">Rapports et alertes importantes par courriel.</p>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Privacy -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-background mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="policy">policy</span>
+                            Confidentialité
+                        </h3>
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-[0_4px_20px_rgba(0,0,0,0.04)] h-[calc(100%-56px)] flex flex-col">
+<div class="flex-1">
+<p class="text-body-md text-on-surface-variant mb-6">
+                                    Gérez comment vos données d'exploitation sont partagées au sein du réseau AGRIMAC. Vos données de récolte et statistiques financières restent privées par défaut.
+                                </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" style="font-size: 20px;">check_circle</span>
+<span class="text-sm text-on-surface">Visibilité du profil public</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" style="font-size: 20px;">check_circle</span>
+<span class="text-sm text-on-surface">Partage des données agronomiques</span>
+</li>
+</ul>
+</div>
+<button class="mt-6 w-full py-3 px-4 border border-outline-variant text-primary rounded-xl font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+                                Gérer les autorisations
+                            </button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,6 @@
+node_modules/
+postgres-data/
+dist/
+coverage/
+.env
+*.log

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AGRIMAC - Tableau de bord Agriculteur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'agri-green': '#106e3f',
+            'agri-light-green': '#e6f4ea',
+            'agri-gray-bg': '#f3f4f6',
+            'agri-text-dark': '#1f2937',
+            'agri-text-light': '#6b7280',
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+          },
+          borderRadius: {
+            'xl': '0.75rem',
+            '2xl': '1rem',
+          },
+          boxShadow: {
+            'soft': '0 2px 10px rgba(0, 0, 0, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    /* Hide scrollbar for sidebar */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="flex h-screen overflow-hidden text-gray-800">
+<!-- BEGIN: Sidebar -->
+<aside class="w-72 bg-white flex flex-col h-full border-r border-gray-100 shadow-sm z-20">
+<!-- Logo -->
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 bg-agri-green rounded-lg flex items-center justify-center">
+<i class="fa-solid fa-leaf text-white text-xl"></i>
+</div>
+<div>
+<h1 class="text-xl font-bold text-gray-900 leading-tight">AGRIMAC</h1>
+<p class="text-[10px] text-gray-500">L'écosystème agricole du Bénin</p>
+</div>
+</div>
+<!-- User Profile Header -->
+<div class="px-6 pb-6">
+<div class="flex items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-100">
+<div class="relative">
+<img alt="Koffi Agbodan" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArfxb4uISDOT0UqU6_9eFQv2StEFrYdR9-BEd4eag1j7DD_rF_7LDEGnaDDd_4UT6375M-XnxwYClaZ19QW9T2VY24bTdvyp9coiuC18L20D5shmKXJmmGXdX8XAr8fAkGW_FL4wLS-RE7zGa_nNa8NoSY-y2blArbyIvFnLnBNpkA-TUf3rfXKRZx1dCLU3oYR_wJ5TakOkNxkqLxKLHwj6E_E42MNwB3MFgxvxpzWsI8VEyohp31"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></div>
+</div>
+<div>
+<h2 class="text-sm font-semibold text-gray-900">Koffi Agbodan</h2>
+<p class="text-xs text-gray-500 flex items-center gap-1">
+            Agriculteur <i class="fa-solid fa-circle-check text-green-500 text-[10px]"></i>
+</p>
+</div>
+</div>
+</div>
+<!-- Navigation Menu -->
+<nav class="flex-1 overflow-y-auto no-scrollbar px-4 pb-4 space-y-1">
+<!-- Active Item -->
+<a class="flex items-center gap-3 px-4 py-3 bg-agri-green text-white rounded-xl" href="#">
+<i class="fa-solid fa-border-all w-5 text-center"></i>
+<div class="flex-1">
+<span class="text-sm font-medium">Tableau de bord</span>
+</div>
+</a>
+<!-- Menu Items -->
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-solid fa-magnifying-glass w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Rechercher</span>
+<span class="text-xs text-gray-400">Machines &amp; services</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-file-lines w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Mes demandes</span>
+<span class="text-xs text-gray-400">Devis, réparations</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-comment-dots w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Messagerie</span>
+</div>
+<span class="bg-agri-green text-white text-[10px] font-bold px-2 py-0.5 rounded-full">8</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-credit-card w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Paiements</span>
+<span class="text-xs text-gray-400">Transactions &amp; factures</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-star w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Avis &amp; évaluations</span>
+<span class="text-xs text-gray-400">Mes avis et notations</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-heart w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Favoris</span>
+<span class="text-xs text-gray-400">Prestataires &amp; machines</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-bell w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Notifications</span>
+</div>
+<span class="bg-agri-green text-white text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-regular fa-user w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Mon profil</span>
+<span class="text-xs text-gray-400">Informations personnelles</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" href="#">
+<i class="fa-solid fa-gear w-5 text-center text-gray-400"></i>
+<div class="flex-1">
+<span class="text-sm font-medium block text-gray-700">Paramètres</span>
+<span class="text-xs text-gray-400">Préférences de l'app</span>
+</div>
+</a>
+</nav>
+<!-- Sidebar Footer -->
+<div class="p-4 border-t border-gray-100 space-y-3">
+<!-- Mode simplifié toggle -->
+<div class="bg-agri-green rounded-xl p-3 text-white flex justify-between items-center cursor-pointer shadow-md">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-shield-halved"></i>
+<div>
+<span class="text-sm font-semibold block">Mode simplifié</span>
+<span class="text-xs text-green-200">Changer de mode</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<div class="w-8 h-4 bg-white/30 rounded-full relative">
+<div class="w-3 h-3 bg-white rounded-full absolute right-0.5 top-0.5"></div>
+</div>
+<span class="text-[10px] text-green-200">Activé</span>
+</div>
+</div>
+<!-- Assistance -->
+<a class="flex items-center justify-between p-3 rounded-xl border border-gray-200 hover:bg-gray-50" href="#">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-agri-green">
+<i class="fa-solid fa-headset"></i>
+</div>
+<div>
+<span class="text-sm font-medium block text-gray-800">Besoin d'aide ?</span>
+<span class="text-xs text-gray-500">Assistance vocale</span>
+</div>
+</div>
+<i class="fa-solid fa-chevron-right text-gray-400 text-xs"></i>
+</a>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#f8fafc]">
+<!-- BEGIN: Topbar -->
+<header class="h-20 bg-white/80 backdrop-blur-md border-b border-gray-100 flex items-center justify-between px-8 z-10 sticky top-0">
+<!-- Welcome Text -->
+<div>
+<h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+          Bonjour, Koffi ! <span class="text-2xl">👋</span>
+</h2>
+<p class="text-sm text-gray-500">Bienvenue sur AGRIMAC, votre écosystème agricole.</p>
+</div>
+<!-- Search & Actions -->
+<div class="flex items-center gap-4">
+<!-- Search Bar -->
+<div class="relative w-80">
+<input class="w-full pl-4 pr-10 py-2.5 bg-gray-50 border-none rounded-full text-sm focus:ring-2 focus:ring-agri-green/20 outline-none" placeholder="Rechercher une machine, un service..." type="text"/>
+<i class="fa-solid fa-magnifying-glass absolute right-4 top-3 text-gray-400"></i>
+</div>
+<!-- Voice Search Button -->
+<button class="flex items-center gap-2 px-4 py-2.5 bg-green-50 text-agri-green rounded-full text-sm font-medium hover:bg-green-100 transition-colors">
+<i class="fa-solid fa-microphone"></i>
+          Recherche vocale
+        </button>
+<!-- Language Selector -->
+<button class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50">
+<i class="fa-solid fa-globe text-gray-400"></i>
+          FR
+          <i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+</button>
+<!-- Notification Icon -->
+<button class="relative p-2 text-gray-400 hover:text-gray-600">
+<i class="fa-regular fa-bell text-xl"></i>
+<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 border-2 border-white rounded-full"></span>
+</button>
+<!-- Top Avatar -->
+<button class="flex items-center gap-2 pl-2">
+<img alt="Profile" class="w-9 h-9 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7-hguYMb7ZdRzF8T4fX1uCmaSsK4-X7FT6HEZW3rk6pQuIkF5iQXr2xciDzugAWiDfkyGin2QBjh7-ManBlPh0aX7ZUV9tNFX1LWDAtdH3-RYoAuK534WRbDIWsSRxEpzNp5DgB5gau3uy_mcOKIQrXb_G9ArtyF_a5ZH2VwYEquz7AtBtt2THJYmkLmmlXZ8UwtkKaA3PyStMvRez871GsO-XVHsbwnwM39ZpGz2uvKH4zcqims7"/>
+<i class="fa-solid fa-chevron-down text-gray-400 text-xs"></i>
+</button>
+</div>
+</header>
+<!-- END: Topbar -->
+<!-- BEGIN: Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8 no-scrollbar">
+<div class="max-w-[1400px] mx-auto space-y-6">
+<!-- BEGIN: KPIs & Weather -->
+<section class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<!-- KPI 1 -->
+<div class="bg-white rounded-2xl p-5 shadow-soft border border-gray-50 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-agri-green shrink-0">
+<i class="fa-solid fa-tractor text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900">12</h3>
+<p class="text-sm font-medium text-gray-700">Demandes envoyées</p>
+<p class="text-xs text-gray-400 mt-1">Ce mois-ci</p>
+</div>
+</div>
+<!-- Fake Sparkline -->
+<svg class="w-full h-8 mt-4 text-green-400" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0 15 Q 10 5, 20 10 T 40 15 T 60 5 T 80 15 T 100 10" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 2 -->
+<div class="bg-white rounded-2xl p-5 shadow-soft border border-gray-50 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-agri-green shrink-0">
+<i class="fa-solid fa-comment-dots text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900">8</h3>
+<p class="text-sm font-medium text-gray-700">Messages non lus</p>
+<p class="text-xs text-gray-400 mt-1">Nouveaux messages</p>
+</div>
+</div>
+<svg class="w-full h-8 mt-4 text-green-400" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0 10 Q 15 20, 30 10 T 60 15 T 80 5 T 100 10" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 3 -->
+<div class="bg-white rounded-2xl p-5 shadow-soft border border-gray-50 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-agri-green shrink-0">
+<i class="fa-solid fa-wallet text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900">245 000 <span class="text-sm font-normal text-gray-500">FCFA</span></h3>
+<p class="text-sm font-medium text-gray-700">Total dépensé</p>
+<p class="text-xs text-gray-400 mt-1">Ce mois-ci</p>
+</div>
+</div>
+<svg class="w-full h-8 mt-4 text-green-400" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0 15 Q 10 15, 20 10 T 40 5 T 60 15 T 80 10 T 100 5" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 4 -->
+<div class="bg-white rounded-2xl p-5 shadow-soft border border-gray-50 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-agri-green shrink-0">
+<i class="fa-solid fa-star text-xl"></i>
+</div>
+<div>
+<h3 class="text-2xl font-bold text-gray-900">4.6 <span class="text-sm font-normal text-gray-500">/5</span></h3>
+<p class="text-sm font-medium text-gray-700">Ma note moyenne</p>
+<p class="text-xs text-gray-400 mt-1">Basée sur 18 avis</p>
+</div>
+</div>
+<svg class="w-full h-8 mt-4 text-green-400" preserveaspectratio="none" viewbox="0 0 100 20">
+<path d="M0 5 Q 20 15, 40 10 T 70 15 T 100 5" fill="none" stroke="currentColor" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Weather Widget -->
+<div class="bg-white rounded-2xl p-5 shadow-soft border border-gray-50 flex flex-col items-center justify-center text-center">
+<i class="fa-solid fa-cloud-sun text-4xl text-yellow-400 mb-2"></i>
+<h3 class="text-2xl font-bold text-gray-900">28°C</h3>
+<p class="text-sm text-gray-500 mt-1">Cotonou, Bénin</p>
+</div>
+</section>
+<!-- END: KPIs & Weather -->
+<!-- BEGIN: Middle Section (Map, Providers, Notifications) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Map & Providers Container (Left/Center) -->
+<div class="lg:col-span-8 bg-white rounded-2xl p-6 shadow-soft border border-gray-50">
+<h3 class="text-lg font-bold text-gray-900 mb-1">Trouver des prestataires proches de vous</h3>
+<p class="text-sm text-green-600 font-medium mb-4">Géolocalisation intelligente</p>
+<div class="flex flex-col md:flex-row gap-6">
+<!-- Map Area -->
+<div class="flex-1 relative rounded-xl overflow-hidden bg-blue-50 h-[300px] border border-gray-100">
+<!-- Placeholder for actual map image -->
+<img alt="Carte" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApW1St7yRdxNHXi80J74bYs_-7gnu5_EJ7jcuXPTG1Lv42fFEeDnDDuqJ7Pe4xa2L-zpn0yfgamzmQQUa9cO0v95PGi-vJgzOKRVhjhPRSl0E6LQMpVlWA8xsdhlUrPdQGm2zkbJ3iS-2SysScE3Dwa15ovcH7uHJmZYgqDWbK9BAi-idPoYgXSp99S7o2YzwJOmwNSunIer1_A5NZtyh2PKg7t3cU-VkHQ-EWQEeblC_u6X3t-776"/>
+<!-- Map Markers (Fake) -->
+<div class="absolute top-1/3 left-1/4 text-agri-green text-3xl"><i class="fa-solid fa-location-dot drop-shadow-md"></i></div>
+<div class="absolute top-1/4 right-1/3 text-agri-green text-3xl"><i class="fa-solid fa-location-dot drop-shadow-md"></i></div>
+<div class="absolute bottom-1/3 right-1/4 text-agri-green text-3xl"><i class="fa-solid fa-location-dot drop-shadow-md"></i></div>
+<!-- User Location Marker -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
+<div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-sm"></div>
+</div>
+<!-- Map Button -->
+<button class="absolute bottom-4 left-4 bg-white px-4 py-2 rounded-lg shadow-md text-sm font-medium flex items-center gap-2 text-gray-700">
+<i class="fa-solid fa-crosshairs text-agri-green"></i> Ma position
+                </button>
+</div>
+<!-- Providers List -->
+<div class="w-full md:w-72 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h4 class="font-semibold text-gray-900 text-sm">Prestataires à proximité</h4>
+<a class="text-xs text-agri-green font-medium" href="#">Voir tout</a>
+</div>
+<div class="space-y-3 flex-1">
+<!-- Provider 1 -->
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-colors">
+<img alt="Provider" class="w-10 h-10 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPFgcmgbYIojEvwoWDXGeymeOyUilB30IyZnOA3Ol4tYIH9AGqv1RrYARV-RxJwtkXyFzhp6ldGZJ1kbwA84a86F6nKbUEQuAbd3VMPA9Vvbc4-4pcs4SUydtS-fn0jZx_-WNHyvaWl6z0akiHMt1Kw0b-sSl6ZJqrKYdg6C5pHMqyg__-T7cfUXerYJuVRAF-9EYJmU63DMI05n0hAMUsRHkwRAKWze1qIK9qXANAqWFvKYwHv3TN"/>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-semibold text-gray-900 truncate">Agri Services Bénin</h5>
+<p class="text-xs text-gray-500">Vente &amp; location</p>
+<div class="flex items-center gap-1 mt-0.5">
+<i class="fa-solid fa-star text-yellow-400 text-[10px]"></i>
+<span class="text-xs font-medium text-gray-700">4.8</span>
+</div>
+</div>
+<span class="text-xs text-green-600 font-medium">1.2 km</span>
+</div>
+<!-- Provider 2 -->
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-colors">
+<img alt="Provider" class="w-10 h-10 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX59G3Y4exo7shOeEpcIHC5ilcZznE929MT-Anv0ug7ZpCKCuTdC5avC4UA38jIkT_ffYe0w3PEpqE_TWA6_i1HgmPDegtFzT-k75Pqw0-e-UR4bkXkHu4HkreoJLSRuOWdm8HV_aA2IZszu9A3jpNFeF-MbEf2bustJlfGvLCIpOZwgU_-LW47nrpJUpvVxY07qK5CeKgtBvK9HuTwlFh5DhpqTLcZNwCSOKFrxKnHIsxQkrO5BGK"/>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-semibold text-gray-900 truncate">Mécano Pro SARL</h5>
+<p class="text-xs text-gray-500">Réparation</p>
+<div class="flex items-center gap-1 mt-0.5">
+<i class="fa-solid fa-star text-yellow-400 text-[10px]"></i>
+<span class="text-xs font-medium text-gray-700">4.6</span>
+</div>
+</div>
+<span class="text-xs text-green-600 font-medium">1.8 km</span>
+</div>
+<!-- Provider 3 -->
+<div class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-colors">
+<img alt="Provider" class="w-10 h-10 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwK3Nr7V3vU_Q7akiibY9-h4lBiSxHzs9KKTF0Lvx6JM3gaPCXoXkSOGy7AYo1NhNjmSt5fy-SPqojtBC_6-LitzRhM9wSnIJOmmgVap9W-p6IwxQDIC6suawmtJhdksyGOqAsA19hf_Qu9C--wH61clSkcl5sFxFmUv2ZyLB4cz8qqSpzZ1wv45kBTGk5DgMMDKOsW91xwFHOwEYO53KAtA4qZ3kcDFH1cYXetmGks_Gt2VtBkZJ2"/>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-semibold text-gray-900 truncate">Farm Equipement</h5>
+<p class="text-xs text-gray-500">Pièces détachées</p>
+<div class="flex items-center gap-1 mt-0.5">
+<i class="fa-solid fa-star text-yellow-400 text-[10px]"></i>
+<span class="text-xs font-medium text-gray-700">4.5</span>
+</div>
+</div>
+<span class="text-xs text-green-600 font-medium">2.3 km</span>
+</div>
+</div>
+<button class="w-full mt-4 bg-agri-green text-white py-2.5 rounded-xl text-sm font-medium hover:bg-green-700 transition-colors flex items-center justify-center gap-2">
+<i class="fa-regular fa-map"></i> Voir sur la carte
+                </button>
+</div>
+</div>
+</div>
+<!-- Notifications Column (Right) -->
+<div class="lg:col-span-4 bg-white rounded-2xl p-6 shadow-soft border border-gray-50 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-gray-900">Notifications récentes</h3>
+<a class="text-sm text-agri-green font-medium" href="#">Voir tout</a>
+</div>
+<div class="space-y-5 flex-1 overflow-y-auto pr-2 no-scrollbar">
+<!-- Notification 1 -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green shrink-0 mt-1">
+<i class="fa-solid fa-comment-dots"></i>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="text-sm font-semibold text-gray-900 leading-tight">Nouveau message de<br/>Agri Services Bénin</h5>
+<div class="w-2 h-2 bg-green-500 rounded-full mt-1"></div>
+</div>
+<p class="text-xs text-gray-400 mt-1">Il y a 10 min</p>
+</div>
+</div>
+<!-- Notification 2 -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 shrink-0 mt-1">
+<i class="fa-solid fa-file-invoice"></i>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="text-sm font-semibold text-gray-900 leading-tight">Devis reçu de Mécano Pro SARL</h5>
+<div class="w-2 h-2 bg-green-500 rounded-full mt-1"></div>
+</div>
+<p class="text-xs text-gray-500 mt-1">Montant : 85 000 FCFA</p>
+<p class="text-xs text-gray-400 mt-1">Il y a 35 min</p>
+</div>
+</div>
+<!-- Notification 3 -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0 mt-1">
+<i class="fa-solid fa-check"></i>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="text-sm font-semibold text-gray-900 leading-tight">Paiement confirmé<br/>à Farm Equipement</h5>
+<div class="w-2 h-2 bg-green-500 rounded-full mt-1"></div>
+</div>
+<p class="text-xs text-gray-400 mt-1">Il y a 1 heure</p>
+</div>
+</div>
+<!-- Notification 4 -->
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 shrink-0 mt-1">
+<i class="fa-solid fa-wrench"></i>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h5 class="text-sm font-semibold text-gray-900 leading-tight">Intervention planifiée<br/>Demain à 09:00</h5>
+<div class="w-2 h-2 bg-green-500 rounded-full mt-1"></div>
+</div>
+<p class="text-xs text-gray-400 mt-1">Il y a 2 heures</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Middle Section -->
+<!-- BEGIN: Bottom Section (Quick Actions & Recent Requests) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Quick Actions & Banner Container (Left/Center) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Quick Actions -->
+<div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-50">
+<h3 class="text-lg font-bold text-gray-900 mb-4">Actions rapides</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 hover:border-green-200 transition-all group">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-tractor"></i>
+</div>
+<span class="text-xs font-medium text-gray-700 text-center leading-tight">Acheter<br/>une machine</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 hover:border-green-200 transition-all group">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-key"></i>
+</div>
+<span class="text-xs font-medium text-gray-700 text-center leading-tight">Louer<br/>une machine</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 hover:border-green-200 transition-all group">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-wrench"></i>
+</div>
+<span class="text-xs font-medium text-gray-700 text-center leading-tight">Réparer<br/>une machine</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 hover:border-green-200 transition-all group">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-file-signature"></i>
+</div>
+<span class="text-xs font-medium text-gray-700 text-center leading-tight">Demander<br/>un devis</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 hover:border-green-200 transition-all group">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-mobile-screen"></i>
+</div>
+<span class="text-xs font-medium text-gray-700 text-center leading-tight">Payer avec<br/>Mobile Money</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 hover:border-green-200 transition-all group">
+<div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-agri-green group-hover:scale-110 transition-transform">
+<i class="fa-solid fa-location-dot"></i>
+</div>
+<span class="text-xs font-medium text-gray-700 text-center leading-tight">Trouver près<br/>de moi</span>
+</button>
+</div>
+</div>
+<!-- Support Banner -->
+<div class="bg-gradient-to-r from-agri-green to-[#0d5c34] rounded-2xl p-6 text-white flex items-center justify-between relative overflow-hidden h-32">
+<div class="z-10 w-2/3">
+<h3 class="text-xl font-bold mb-2">Besoin d'aide ou d'assistance ?</h3>
+<p class="text-sm text-green-100 mb-4">Utilisez notre assistance vocale pour naviguer facilement ou contactez notre support.</p>
+<button class="bg-white text-agri-green px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2 hover:bg-green-50 transition-colors w-max">
+<i class="fa-solid fa-microphone"></i> Assistance vocale <i class="fa-solid fa-arrow-right text-xs ml-1"></i>
+</button>
+</div>
+<!-- Banner Image Background -->
+<div class="absolute right-0 bottom-0 h-[150%] w-1/2 opacity-90 pointer-events-none transform translate-x-10 translate-y-4">
+<img alt="Agriculteur" class="w-full h-full object-cover object-left-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_UYKPhN9Ve13YGvlUjtLGOxR-_6xQvDEGHgnJoRzwVXDQFvojV9f1l7TRxdGU0DhYseVyFf6dG3MEunk8XRcH7UDfYIgv_E80WgvgW4wLmKmPetf7SohOQelvWHjk4VyWIDsSPnekJDzmuqzOmTU3e7ngNZbKyfE8fH3eW79VZVZTxfOyRy3SY74BSTVkpwhvNUNZkvcNsADZCjemY9DWDQj81E-H0J4ohHRERlLGNOwRq3W4HtB5zj63OzuNzsis2g" style="clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);"/>
+</div>
+</div>
+</div>
+<!-- Recent Requests (Right) -->
+<div class="lg:col-span-4 bg-white rounded-2xl p-6 shadow-soft border border-gray-50">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-gray-900">Mes demandes récentes</h3>
+<a class="text-sm text-agri-green font-medium" href="#">Voir tout</a>
+</div>
+<div class="space-y-4">
+<!-- Request 1 -->
+<div class="flex items-center gap-4 p-3 rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
+<img alt="Tracteur" class="w-14 h-14 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW0LsbQKwe7QgR3kzm6LjE-jY9i1TtAxpUrF2b93rK1mfI5qtZszGt3EBzAOx993fdxac0nibhm3uZLZdsIGjcEJyOe8pI2Y6J08SoqeGVo_8pNgdoGreM1JHXqLeV2PSg0hQDAuivzx_E9uCPhCCSLNLsQusFLx6U1XI3gSNrm1pOoQJHDi8RyWioIqgVlajcA6wt38K9LwyqEMmkR1CFYvA8hnwyIP9sZ5zZo0QTmQDK3fVHr5J6"/>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-semibold text-gray-900 truncate">Location tracteur 90 CV</h5>
+<p class="text-xs text-gray-500 mt-1">Demandé le 04 Mai 2025</p>
+</div>
+<span class="bg-blue-50 text-blue-600 text-xs font-semibold px-2.5 py-1 rounded-md whitespace-nowrap">En attente</span>
+</div>
+<!-- Request 2 -->
+<div class="flex items-center gap-4 p-3 rounded-xl border border-gray-100 hover:shadow-sm transition-shadow">
+<img alt="Moissonneuse" class="w-14 h-14 rounded-lg object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-xOHYKPQ8wQQ6DIpyKnsGAXYHqI1dlTMDZATm8PbxNg1Rrx2Bm43zzAF5Ud5k7E3AvqEoHOeAKWbcmyoKY4lohM7YsBP7utKvGNUrsA9Ai79IyCg7soE-kfougs4hiCkKz6-Jni_TklDA-KaIuao5nnVJ0gSAoEqZL4jd4lVydzJ3TAhvizf4MvpLIeRkIS9n6joXUiYI4qhDNKP2VFTjX52UbCggAdrZBxAKNWzGPUYsbzZzwNWk"/>
+<div class="flex-1 min-w-0">
+<h5 class="text-sm font-semibold text-gray-900 truncate">Réparation moissonneuse</h5>
+<p class="text-xs text-gray-500 mt-1">Demandé le 02 Mai 2025</p>
+</div>
+<span class="bg-green-50 text-green-600 text-xs font-semibold px-2.5 py-1 rounded-md whitespace-nowrap">Devis reçu</span>
+</div>
+</div>
+</div>
+</div>
+<!-- END: Bottom Section -->
+</div>
+</div>
+<!-- END: Dashboard Content -->
+</main>
+<!-- END: Main Content Area -->
+</body></html>

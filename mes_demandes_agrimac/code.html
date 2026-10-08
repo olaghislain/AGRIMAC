@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Demandes - AGRIMAC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#fbf9f8",
+                        "on-secondary-fixed-variant": "#414b00",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#d9dcda",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fbf9f8",
+                        "surface-variant": "#e4e2e2",
+                        "primary": "#00542d",
+                        "secondary-container": "#d5ea60",
+                        "outline": "#6f7a70",
+                        "primary-fixed-dim": "#83d89f",
+                        "inverse-primary": "#83d89f",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#191e00",
+                        "on-surface": "#1b1c1c",
+                        "inverse-surface": "#303030",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-fixed-variant": "#00522c",
+                        "surface-container": "#efeded",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "tertiary-container": "#5d6160",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0d6c3e",
+                        "tertiary-fixed": "#e0e3e1",
+                        "outline-variant": "#bec9be",
+                        "secondary-fixed-dim": "#bcd14a",
+                        "surface-container-low": "#f5f3f3",
+                        "tertiary": "#454948",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#d8ed63",
+                        "surface-container-high": "#eae8e7",
+                        "primary-fixed": "#9ff5b9",
+                        "on-primary-fixed": "#00210e",
+                        "background": "#fbf9f8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#181c1b",
+                        "on-surface-variant": "#3f4941",
+                        "on-primary-container": "#98edb2",
+                        "on-background": "#1b1c1c",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary-container": "#5b6900",
+                        "secondary": "#586400",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#106e3f",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "surface-dim": "#dbd9d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1.5rem"
+                    },
+                    "spacing": {
+                        "section-gap": "64px",
+                        "container-padding-mobile": "16px",
+                        "container-padding-desktop": "40px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["13px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    },
+                    boxShadow: {
+                        'level-1': '0 4px 20px rgba(0, 0, 0, 0.04)',
+                        'level-2': '0 12px 40px rgba(0, 0, 0, 0.08)'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col w-72 h-screen fixed left-0 top-0 bg-surface-container-lowest shadow-sm z-50 py-base">
+<div class="px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined fill-icon text-primary text-3xl">agriculture</span>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">AGRIMAC</h1>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">L'écosystème agricole du Bénin</p>
+</div>
+</div>
+<div class="px-6 py-4 mb-4 flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm" data-alt="Portrait d'un agriculteur souriant, portant un chapeau de paille, dans un champ ensoleillé. Éclairage naturel, ambiance chaleureuse et professionnelle. Minimaliste." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2F5I-T0cL76i5-hoIpiKg00ixngHvH_MvjIBSte9e64QbZcdGYi4n6h1uOZazKfN3Y5LIrPYWFjG3Jp4VMM8i6U5yhej5tS-Gxvt3OY33yGaJzqYGW3Hght0W-iJn3RU0O1dREJ7ZDlQenIRD-kNPiHCQ_T9zpSBecINfb43rWr6uAVAmm3BI_35DqSn1Oy62BdpZebo-tetGe73b_ZOvF81S7_WCwF2Sf8sO-ZMJKbnXQyaVWedz"/>
+<div>
+<h2 class="font-headline-md text-[16px] font-bold">Koffi Agbodan</h2>
+<p class="text-label-sm text-on-surface-variant flex items-center gap-1">
+                    Agriculteur <span class="material-symbols-outlined text-primary text-[14px] fill-icon">verified</span>
+</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm">Rechercher</span>
+</a>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-xl px-4 py-3 mx-2 scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined fill-icon">assignment</span>
+<span class="font-label-sm">Mes demandes</span>
+</a>
+<a class="flex items-center justify-between text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-sm">Messagerie</span>
+</div>
+<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full">8</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm">Paiements</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">star</span>
+<span class="font-label-sm">Avis &amp; évaluations</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-label-sm">Favoris</span>
+</a>
+<a class="flex items-center justify-between text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-sm">Notifications</span>
+</div>
+<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 rounded-full">5</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm">Mon profil</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 mx-2 hover:bg-surface-container rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm">Paramètres</span>
+</a>
+</div>
+<div class="px-4 mt-auto">
+<div class="bg-primary-container text-on-primary rounded-xl p-4 flex justify-between items-center cursor-pointer mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-sm">Mode simplifié</span>
+</div>
+<div class="w-8 h-4 bg-primary-fixed-dim rounded-full relative">
+<div class="absolute right-1 top-0.5 w-3 h-3 bg-white rounded-full"></div>
+</div>
+</div>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-primary px-4 py-3 hover:bg-surface-container rounded-xl transition-all duration-200 border border-outline-variant" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm">Besoin d'aide ?</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-72 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center w-full px-container-desktop py-4 h-20 bg-transparent z-40 sticky top-0 backdrop-blur-sm">
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface">Mes demandes</h1>
+<p class="text-body-md text-on-surface-variant">Suivi de vos devis et réparations</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative focus-within:ring-1 focus-within:ring-primary rounded-full bg-surface-container-lowest px-4 py-2 flex items-center shadow-level-1 w-96">
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-on-surface-variant/50" placeholder="Rechercher une demande..." type="text"/>
+<button class="text-on-surface-variant hover:text-primary p-1"><span class="material-symbols-outlined">search</span></button>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors flex items-center gap-2 bg-surface-container-lowest shadow-level-1">
+<span class="material-symbols-outlined">mic</span>
+<span class="font-label-sm pr-2">Recherche vocale</span>
+</button>
+<div class="flex items-center gap-2 ml-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors"><span class="material-symbols-outlined">language</span></button>
+<span class="font-label-sm">FR</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-container-mobile md:p-container-desktop pt-4 flex-1">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: Request List -->
+<div class="lg:col-span-1 flex flex-col gap-4">
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full font-label-sm whitespace-nowrap shadow-sm">Toutes</button>
+<button class="px-4 py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant hover:bg-surface-container rounded-full font-label-sm whitespace-nowrap transition-colors">En attente</button>
+<button class="px-4 py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant hover:bg-surface-container rounded-full font-label-sm whitespace-nowrap transition-colors">En cours</button>
+<button class="px-4 py-2 bg-surface-container-lowest text-on-surface-variant border border-outline-variant hover:bg-surface-container rounded-full font-label-sm whitespace-nowrap transition-colors">Terminées</button>
+</div>
+<!-- List Items -->
+<div class="space-y-4">
+<!-- Item 1 (Active) -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-level-1 cursor-pointer border-l-4 border-primary hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[11px] font-bold uppercase tracking-wider">Devis reçu</span>
+<span class="text-[12px] text-on-surface-variant">04 Mai 2025</span>
+</div>
+<h3 class="font-headline-md text-[16px] font-semibold mb-1">Réparation Moissonneuse</h3>
+<p class="text-body-md text-on-surface-variant text-sm mb-3">Mécano Pro SARL</p>
+<div class="flex items-center gap-4 text-sm">
+<span class="flex items-center gap-1 font-semibold"><span class="material-symbols-outlined text-[16px] text-primary">sell</span> 85 000 FCFA</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-level-1 cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded text-[11px] font-bold uppercase tracking-wider">En attente</span>
+<span class="text-[12px] text-on-surface-variant">04 Mai 2025</span>
+</div>
+<h3 class="font-headline-md text-[16px] font-semibold mb-1">Location tracteur 90 CV</h3>
+<p class="text-body-md text-on-surface-variant text-sm mb-3">Agri Services Bénin</p>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">schedule</span> 2 jours</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-level-1 cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-primary-fixed text-on-primary-fixed px-2 py-1 rounded text-[11px] font-bold uppercase tracking-wider">En cours</span>
+<span class="text-[12px] text-on-surface-variant">02 Mai 2025</span>
+</div>
+<h3 class="font-headline-md text-[16px] font-semibold mb-1">Intervention système d'irrigation</h3>
+<p class="text-body-md text-on-surface-variant text-sm mb-3">Farm Equipement</p>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Detail View (Bento Grid Style) -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Header Card -->
+<div class="bg-surface-container-lowest rounded-[24px] p-8 shadow-level-1 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">build</span>
+<span class="text-label-sm text-on-surface-variant uppercase tracking-widest">Demande #REQ-8472</span>
+</div>
+<h2 class="text-headline-md font-headline-md text-3xl font-bold mb-2">Réparation Moissonneuse</h2>
+<p class="text-body-lg text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">store</span> Mécano Pro SARL
+                                <span class="material-symbols-outlined text-[18px] ml-2 text-primary">verified</span>
+</p>
+</div>
+<div class="flex flex-col items-end gap-3 w-full md:w-auto">
+<div class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">drafts</span> Devis reçu
+                            </div>
+<div class="flex gap-2">
+<button class="px-6 py-3 bg-surface-container-highest text-on-surface rounded-xl font-label-sm hover:bg-surface-variant transition-colors">Refuser</button>
+<button class="px-6 py-3 bg-primary text-on-primary rounded-xl font-label-sm hover:bg-surface-tint transition-colors shadow-sm">Accepter &amp; Payer</button>
+</div>
+</div>
+</div>
+<!-- Bento Grid Middle Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Timeline -->
+<div class="md:col-span-1 bg-surface-container-lowest rounded-[24px] p-6 shadow-level-1">
+<h3 class="font-headline-md font-semibold mb-6 flex items-center gap-2"><span class="material-symbols-outlined text-primary">timeline</span> Avancement</h3>
+<div class="relative border-l-2 border-surface-container ml-3 space-y-6">
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="font-label-sm font-bold">Devis proposé</p>
+<p class="text-[12px] text-on-surface-variant">Aujourd'hui, 10:30</p>
+</div>
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="font-label-sm">Diagnostic sur place</p>
+<p class="text-[12px] text-on-surface-variant">Hier, 14:00</p>
+</div>
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></div>
+<p class="font-label-sm">Demande envoyée</p>
+<p class="text-[12px] text-on-surface-variant">04 Mai 2025</p>
+</div>
+<div class="relative pl-6 opacity-40">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-variant ring-4 ring-white"></div>
+<p class="font-label-sm">Réparation terminée</p>
+<p class="text-[12px] text-on-surface-variant">En attente</p>
+</div>
+</div>
+</div>
+<!-- Details & Documents -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-[24px] p-6 shadow-level-1 flex flex-col">
+<h3 class="font-headline-md font-semibold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">description</span> Détails du devis</h3>
+<div class="bg-surface-container-low rounded-xl p-4 mb-4">
+<div class="flex justify-between items-center border-b border-surface-variant pb-2 mb-2">
+<span class="text-body-md text-on-surface-variant">Pièces de rechange (Courroie)</span>
+<span class="font-semibold">35 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2 mb-2">
+<span class="text-body-md text-on-surface-variant">Main d'œuvre (Diagnostic + Réparation)</span>
+<span class="font-semibold">40 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center border-b border-surface-variant pb-2 mb-2">
+<span class="text-body-md text-on-surface-variant">Frais de déplacement</span>
+<span class="font-semibold">10 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center pt-2">
+<span class="font-headline-md font-bold text-lg">Total TTC</span>
+<span class="font-headline-md font-bold text-lg text-primary">85 000 FCFA</span>
+</div>
+</div>
+<h4 class="font-label-sm text-on-surface-variant mb-2 uppercase tracking-wide">Documents joints</h4>
+<div class="flex gap-4">
+<div class="flex items-center gap-3 border border-outline-variant rounded-lg p-3 hover:bg-surface-container cursor-pointer transition-colors w-fit">
+<span class="material-symbols-outlined text-error">picture_as_pdf</span>
+<div>
+<p class="font-label-sm font-semibold">Devis_MecanoPro_089.pdf</p>
+<p class="text-[11px] text-on-surface-variant">1.2 MB</p>
+</div>
+</div>
+<div class="flex items-center gap-3 border border-outline-variant rounded-lg p-3 hover:bg-surface-container cursor-pointer transition-colors w-fit">
+<span class="material-symbols-outlined text-primary">image</span>
+<div>
+<p class="font-label-sm font-semibold">Photo_diagnostic.jpg</p>
+<p class="text-[11px] text-on-surface-variant">2.4 MB</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Integrated Chat -->
+<div class="bg-surface-container-lowest rounded-[24px] p-6 shadow-level-1 flex flex-col h-80">
+<h3 class="font-headline-md font-semibold mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-primary">chat</span> Échanges</h3>
+<div class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 scrollbar-hide">
+<!-- Message from Provider -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm">store</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl rounded-tl-none max-w-[80%]">
+<p class="text-body-md text-sm">Bonjour M. Agbodan, suite à notre diagnostic, la courroie de transmission est bien endommagée. Je vous ai envoyé le devis détaillé.</p>
+<p class="text-[10px] text-on-surface-variant mt-1 text-right">10:32</p>
+</div>
+</div>
+<!-- Message from User -->
+<div class="flex gap-3 justify-end">
+<div class="bg-primary-container text-on-primary-container p-3 rounded-2xl rounded-tr-none max-w-[80%]">
+<p class="text-body-md text-sm">Merci. Si j'accepte le devis aujourd'hui, quand pourrez-vous effectuer la réparation ?</p>
+<p class="text-[10px] opacity-70 mt-1 text-right">10:45</p>
+</div>
+</div>
+<!-- Message from Provider -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm">store</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-2xl rounded-tl-none max-w-[80%] border-l-2 border-primary">
+<p class="text-body-md text-sm">Nous pouvons intervenir demain matin à la première heure si vous validez avant 16h.</p>
+<p class="text-[10px] text-on-surface-variant mt-1 text-right">10:48</p>
+</div>
+</div>
+</div>
+<!-- Chat Input -->
+<div class="flex items-center gap-2 mt-auto">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">attach_file</span></button>
+<input class="flex-1 bg-surface-container-low border-none rounded-full px-4 py-3 text-body-md focus:ring-1 focus:ring-primary" placeholder="Écrivez votre message..." type="text"/>
+<button class="p-3 bg-primary text-on-primary rounded-full hover:bg-surface-tint transition-colors shadow-sm flex items-center justify-center"><span class="material-symbols-outlined text-sm">send</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest flex justify-around items-center h-16 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Tableau</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined fill-icon bg-primary/10 px-4 py-1 rounded-full">assignment</span>
+<span class="text-[10px] font-bold">Demandes</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors p-2 relative" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="absolute top-1 right-2 w-2 h-2 bg-primary rounded-full"></span>
+<span class="text-[10px] font-medium">Messages</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profil</span>
+</a>
+</nav>
+</body></html>

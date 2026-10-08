@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: agrimac-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-agrimac_dev}
+      POSTGRES_USER: ${POSTGRES_USER:-agrimac_dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agrimac_dev_password}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - agrimac-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agrimac_dev} -d ${POSTGRES_DB:-agrimac_dev}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  agrimac-postgres-data:
